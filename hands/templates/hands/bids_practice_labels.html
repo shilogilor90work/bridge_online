@@ -2577,7 +2577,11 @@
         // Function to display hands by label
         function displayHands(filterLabel) {
             quizContainer.innerHTML = ''; // Clear the current hands
-            shuffledHands.filter(hand => hand.label === filterLabel).forEach((hand, index) => {
+            shuffledHands.filter(hand =>
+        hand.label === filterLabel &&
+        hand.correctAnswer.trim() !== "" &&
+        !/shilo/i.test(hand.correctAnswer)
+    ).forEach((hand, index) => {
                 const handDiv = document.createElement('div');
                 handDiv.classList.add('hand');
                 handDiv.innerHTML = `
@@ -2634,7 +2638,7 @@
 
     function checkAnswer(index, answer) {
         const resultDiv = document.getElementById(`result-${index}`);
-        const correctAnswer = hands[index].correctAnswer;
+        const correctAnswer = shuffledHands[index].correctAnswer;
         if (correctAnswer.startsWith(answer)) {
             correctCount++;
         }
