@@ -21,6 +21,7 @@ from . import settings, views
 
 urlpatterns = [
     path('hands/', include('hands.urls')),
+    path('manage/', include('manage.urls')),
     path('admin/', admin.site.urls),
     path('', views.index)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
