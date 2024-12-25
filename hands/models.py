@@ -10,4 +10,4 @@ class Hand(models.Model):
     correct_answer = models.CharField(max_length=300)
 
     def __str__(self):
-        return self.title
+        return self.subject
