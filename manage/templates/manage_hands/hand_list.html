@@ -7,18 +7,129 @@
             <pre>Hand #{{ hand.id }} Subject {{ hand.subject }}</pre>
             <pre>{{ hand.cards|color_suits|safe }}</pre>
             <pre>{{ hand.bids|color_suits|safe }}</pre>
+            <div class="options">
+                        <div>
+                            <button onclick="checkAnswer({{ hand.id }}, 'Pass', '{{ hand.correct_answer }}')">Pass</button>
+                            <button onclick="checkAnswer({{ hand.id }}, 'DBL' '{{ hand.correct_answer }}')">DBL</button>
+                            <button onclick="checkAnswer({{ hand.id }}, 'RDBL' '{{ hand.correct_answer }}')">RDBL</button>
+                        </div>
+                        <div>
+                           <button onclick="selectNumber({{ hand.id }}, 1)">1</button>
+                            <button onclick="selectNumber({{ hand.id }}, 2)">2</button>
+                           <button onclick="selectNumber({{ hand.id }}, 3)">3</button>
+                           <button onclick="selectNumber({{ hand.id }}, 4)">4</button>
+                           <button onclick="selectNumber({{ hand.id }}, 5)">5</button>
+                           <button onclick="selectNumber({{ hand.id }}, 6)">6</button>
+                           <button onclick="selectNumber({{ hand.id }}, 7)">7</button>
+
+                        </div>
+                        <div id="suits-{{ hand.id }}">
+                            <button onclick="selectSuit({{ hand.id }}, '♣', '{{ hand.correct_answer }}')" class="club">♣</button>
+                            <button onclick="selectSuit({{ hand.id }}, '♦', '{{ hand.correct_answer }}')" class="diamond">♦</button>
+                            <button onclick="selectSuit({{ hand.id }}, '♥', '{{ hand.correct_answer }}')" class="heart">♥</button>
+                            <button onclick="selectSuit({{ hand.id }}, '♠', '{{ hand.correct_answer }}')" class="spade">♠</button>
+                            <button onclick="selectSuit({{ hand.id }}, 'NT', '{{ hand.correct_answer }}')">NT</button>
+                        </div>
+                    </div>
             <div class="result" id="result-{{ hand.id }}"></div>
-            Correct Answer: {{ hand.correct_answer }}
             <a href="{% url 'manage:update_hand' hand.id %}">Edit</a>
             <a href="{% url 'manage:delete_hand' hand.id %}">Delete</a>
-
-            <!-- Embed hand data in a div -->
-            <div id="hand-{{ hand.id }}"
-                 data-cards="{{ hand.cards }}"
-                 data-bids="{{ hand.bids }}"
-                 data-correct-answer="{{ hand.correct_answer }}">
-            </div>
         </li>
     {% endfor %}
 </ul>
 <a href="{% url 'manage:create_hand' %}">Add New Hand</a>
+
+
+ <script>
+
+        let correctCount = 0;
+        let wrongCount = 0;
+
+        function selectNumber(index, number) {
+            const suitDiv = document.getElementById(`suits-${index}`);
+            suitDiv.setAttribute('data-number', number);
+        }
+
+        function selectSuit(index, suit, correctAnswer) {
+            const suitDiv = document.getElementById(`suits-${index}`);
+            const number = suitDiv.getAttribute('data-number');
+            if (number) {
+                checkAnswer(index, `${number}${suit}`, correctAnswer);
+            }
+        }
+        function colorSuits(text) {
+            return text.replace(/♠/g, '<span class="spade">♠</span>')
+                       .replace(/♥/g, '<span class="heart">♥</span>')
+                       .replace(/♦/g, '<span class="diamond">♦</span>')
+                       .replace(/♣/g, '<span class="club">♣</span>');
+        }
+
+    function checkAnswer(index, answer, correctAnswer) {
+        const resultDiv = document.getElementById(`result-${index}`);
+        if (correctAnswer.startsWith(answer)) {
+            correctCount++;
+        }
+        else {
+            wrongCount++;
+        }
+
+        resultDiv.innerHTML = `Correct Answer: ${colorSuits(correctAnswer)} <br> Your Answer: ${colorSuits(answer)} <br> Success Rate: ${(correctCount / (correctCount + wrongCount) * 100).toFixed(1)}%`;
+    }
+    </script>
+
+
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            font-size: 20px;
+        }
+        .options button {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            background-color: lightgray;
+            color: black;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .hand {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+        .heart {
+            color: red !important;
+        }
+        .diamond {
+            color: orange !important;
+        }
+        .club {
+            color: green !important;
+        }
+        .spade {
+            color: black !important;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .options div {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .options button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
