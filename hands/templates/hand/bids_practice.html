@@ -1,0 +1,1055 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Bridge Bidding Quiz</title><style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            font-size: 20px;
+        }
+        .hand {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+        .heart {
+            color: red;
+        }
+        .diamond {
+            color: orange;
+        }
+        .club {
+            color: green;
+        }
+        .spade {
+            color: black; /* Default color for spades */
+        }.options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .options div {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+        }
+        .options button {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            background-color: lightgray;
+            color: black;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .options button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+</style></head><body><h1>Bridge Bidding Quiz</h1><p>For each hand, click the number and then the suit. When you pause, remember the hand number for continuation. The success rate will not be saved.</p><div id="quiz-container"><!-- Hands will be inserted here by JavaScript --></div><script>
+    const hands = [
+    {
+        cards: "♠: A T 9 8 7 6\n♥: 9 6\n♦: A 3\n♣: J 8 3\n9 HCP",
+        bids: "1♥ P 1♠ P\n2♠ P ?",
+        correctAnswer: "3♠"
+    },
+    {
+        cards: "♠: A 6\n♥: 6 3\n♦: K Q J T 4 3\n♣: A Q 5\n16 HCP",
+        bids: "1♦ P 1♥ P\n2♦ P 2♥ P\n?",
+        correctAnswer: "3♣"
+    },
+    {
+        cards: "♠: T 5\n♥: 9 7 2\n♦: A K Q 9 6 5\n♣: Q 3\n11 HCP",
+        bids: "P P ?",
+        correctAnswer: "2♦"
+    },
+    {
+        cards: "♠: A K 9 2\n♥: J 8\n♦: K 9 6\n♣: A K T 2\n18 HCP",
+        bids: "P P P 1♣\nP 1NT P ?",
+        correctAnswer: "3NT"
+    },
+    {
+        cards: "♠: Q T 5\n♥: A T 2\n♦: Q 7\n♣: A K 9 8 7\n15 HCP",
+        bids: "P 2♣ P 2♠\nP ?",
+        correctAnswer: "3♦ -> 3♥ -> 3♠"
+    },
+    {
+        cards: "\n♠: K J 9\n♥: K J 8 4\n♦: 8 4 2\n♣: T 7 4",
+        bids: "8 HCP\nP P P 1♣\nP ?",
+        correctAnswer: "1NT"
+    },
+    {
+        cards: "♠: Q T 9\n♥: A Q T\n♦: 7 6 2\n♣: J T 7 5\n9 HCP",
+        bids: "P P P 1♦\nP ?",
+        correctAnswer: "2♦"
+    },
+    {
+        cards: "♠: A Q 9 6\n♥: K 4 2\n♦: J\n♣: 8 6 9 5 4\n10 HCP",
+        bids: "P 1♦ 2♣ 2♦\n?",
+        correctAnswer: "DBL"
+    },
+    {
+        cards: "♠: A J 6\n♥: A K 4\n♦: K J\n♣: A Q T 6 3\n22 HCP",
+        bids: "P P P 1♣\nP 1♦ P ?",
+        correctAnswer: "2NT"
+    },
+    {
+        cards: "♠: A K Q J 2\n♥: T 9\n♦: T 7 3\n♣: J 6 4\n11 HCP",
+        bids: "P P P ?",
+        correctAnswer: "Pass"
+    },
+    {
+        cards: "♠: Q 6\n♥: 6\n♦: A Q J T 7 6\n♣: Q T 8 4\n11 HCP",
+        bids: "1♣ 2♥ P ?",
+        correctAnswer: "Pass"
+    },
+    {
+        cards: "♠:\n♥: A 2\n♦: A Q J T 9 8 7 \n♣: 5 4 3 2\n11 HCP",
+        bids: "1♠ ?",
+        correctAnswer: "2♦"
+    },
+    {
+        cards: "♠: K Q 2\n♥: A K Q T 8 7 5\n♦: Q 4\n♣: K\n19 HCP",
+        bids: "P 1♣ P 3♠\nP 4♣ P 4NT\nP ?",
+        correctAnswer: "6NT"
+    },
+    {
+        cards: "♠: Q J T 4\n♥: A 9 5\n♦: 7\n♣: A Q T 4 2\n13 HCP",
+        bids: "1♦ 2♣ P ?",
+        correctAnswer: "2♠ - inviting to game in S."
+    },
+    {
+        cards: "♠: 9\n♥: 10\n♦: J 9 8 7 6\n♣: 10 9 8 7 6 5\n1 HCP",
+        bids: "?",
+        correctAnswer: "3NT"
+    },
+    {
+        cards: "\n♠: K 10 9 6 4 2\n♥: J 8 7 5 3\n♦: 4\n♣: 8",
+        bids: "4 HCP\n?",
+        correctAnswer: "Pass"
+    },
+    {
+        cards: "♠: Q 9 8 7 5\n♥: 6\n♦: 8 7 5 4 3 2\n♣: J\n3 HCP",
+        bids: "?",
+        correctAnswer: "4♦"
+    },
+    {
+        cards: "♠: Q 9 8 7 5\n♥: 6\n♦: 9\n♣: 8 7 5 4 3 2\n2 HCP",
+        bids: "?",
+        correctAnswer: "4♣"
+    },
+    {
+        cards: "♠: J\n♥: Q 9 8 7 5\n♦: 8 7 5 4 3 2\n♣: J\n4 HCP",
+        bids: "?",
+        correctAnswer: "4♦"
+    },
+    {
+        cards: "♠:\n♥: Q 9 8 7 5 2\n♦: 8 7 5 4 3 2\n♣: J\n3 HCP",
+        bids: "?",
+        correctAnswer: "4♦"
+    },
+    {
+        cards: "♠:\n♥: J 9 8 7 5 2\n♦: A\n♣: 8 7 5 4 3 2\n5 HCP",
+        bids: "?",
+        correctAnswer: "4♣"
+    },
+    {
+        cards: "\n♠: A 9 6 4\n♥: K Q\n♦: Q 8 5 3 2\n♣: 9 5",
+        bids: "11 HCP\nP P ?",
+        correctAnswer: "1NT"
+    },
+    {
+        cards: "♠: A 3 2\n♥: A 8 4 3\n♦: 9\n♣: J 8 7 6 4\n9 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "1♥ - 9-16 HCP, 5+h or 4♥ with shortness."
+    },
+    {
+        cards: "♠: A 3 2\n♥: A 8 4 3\n♦: 9\n♣: J 8 7 6 4\n9 HCP",
+        bids: "1♣ P 1♥ P\n2♥ P ?",
+        correctAnswer: "3♦ - singleton."
+    },
+    {
+        cards: "\n♠: Q J 5\n♥: Q 5 3\n♦: T 9 5\n♣: K T 9 4",
+        bids: "8 HCP\n1♣ P 1♦ P\n2♥ P ?",
+        correctAnswer: "3♣ - 5-8  3♦ -> 3♥"
+    },
+    {
+        cards: "♠: A 6\n♥: 6 3\n♦: K Q J T 4 3\n♣: A Q 5\n16 HCP",
+        bids: "1♦ P 1♥ P\n2♦ P 2♥ P\n3♣ P 3♦ P\n?",
+        correctAnswer: "3NT"
+    },
+    {
+        cards: "♠: A Q 7 6\n♥: K J\n♦: Q 9 5 4 3\n♣: A 10\n16 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "1NT"
+    },
+    {
+        cards: "♠: A Q 7\n♥: K J 8\n♦: Q 10 9 5 4 3\n♣: A\n16 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "2♦"
+    },
+    {
+        cards: "♠: 7\n♥: K J 9 5\n♦: A Q 6 2\n♣: J 10 8 4\n11 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "2♠"
+    },
+    {
+        cards: "♠: K 9 6 3\n♥: 4\n♦: Q J 10 7\n♣: A 8 5 2\n10 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "2♥"
+    },
+    {
+        cards: "♠: A J 9 5\n♥: K 10 7 4\n♦: 6\n♣: Q 8 3 2\n10 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "3♦"
+    },
+    {
+        cards: "♠: K Q 10 4\n♥: A 9 7 5\n♦: J 8 6 2\n♣: 3\n10 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "3♣"
+    },
+    {
+        cards: "\n♠: 7\n♥: A K 10 4\n♦: Q J 8 5\n♣: A Q 9 3",
+        bids: "16 HCP\n1♣ P ?",
+        correctAnswer: "2NT"
+    },
+    {
+        cards: "♠: A Q 10 6\n♥: 4\n♦: K J 9 5\n♣: A K 8 3\n17 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "3NT"
+    },
+    {
+        cards: "♠: K J 10 5\n♥: A Q 9 7\n♦: 4\n♣: K J 8 6\n14 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "2NT"
+    },
+    {
+        cards: "♠: A Q J 5\n♥: K 10 8 7\n♦: K J 9 3\n♣: 4\n14 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "2NT"
+    },
+    {
+        cards: "♠: 7\n♥: A K 10 4\n♦: Q J 8 5\n♣: A Q 9 3\n16 HCP",
+        bids: "1♣ P 2NT P\n3♣ P ?",
+        correctAnswer: "3♠"
+    },
+    {
+        cards: "♠: A Q 10 6\n♥: 4\n♦: K T 9 5\n♣: A K 8 3\n16 HCP",
+        bids: "1♣ P 2NT P\n3♣ P ?",
+        correctAnswer: "3♥"
+    },
+    {
+        cards: "♠: K J 10 5\n♥: A Q 9 7\n♦: 4\n♣: K J 8 6\n14 HCP",
+        bids: "1♣ P 2NT P\n3♣ P ?",
+        correctAnswer: "3♦"
+    },
+    {
+        cards: "♠: A Q J 5\n♥: K 10 8 7\n♦: K J 9 3\n♣: 4\n14 HCP",
+        bids: "1♣ P 2NT P\n3♣ P ?",
+        correctAnswer: "3NT"
+    },
+    {
+        cards: "♠: 7\n♥: K Q J 10 9 8 5\n♦: A 6\n♣: A Q 3\n16 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "3♠"
+    },
+    {
+        cards: "♠: A Q J 10 9 8 5\n♥: 7\n♦: K Q 2\n♣: A 3\n16 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "3♠"
+    },
+    {
+        cards: "♠: K Q J 10 8 7 6 4\n♥: A Q\n♦: 7\n♣: K 5\n15 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "1♠"
+    },
+    {
+        cards: "\n♠: K Q J 9 8 6 5\n♥: A 10\n♦: K Q 7\n♣: 4",
+        bids: "15 HCP\n1♣ P ?",
+        correctAnswer: "1♠"
+    },
+    {
+        cards: "♠: A 4 3\n♥: A K Q J 10 9\n♦: K Q 5\n♣: 3\n19 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "3♠"
+    },
+    {
+        cards: "♠: 7 6\n♥: K Q\n♦: A K Q J 10 9 8\n♣: A 5\n19 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "3♠"
+    },
+    {
+        cards: "♠: A K J 10 7\n♥: Q J 9 8 3\n♦: K 5\n♣: 4\n14 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "1♠"
+    },
+    {
+        cards: "♠: A K J 10\n♥: A K 9 7\n♦: Q J\n♣: A K 4\n25 HCP",
+        bids: "1♣ P ?",
+        correctAnswer: "4♣ ->...(4♥) -> 7NT"
+    },
+    {
+        cards: "♠: Q J 5\n♥: Q 5 3\n♦: T 9 5\n♣: K T 9 4\n8 HCP",
+        bids: "P 1♣ P 1♦\nP 2♥ P ?",
+        correctAnswer: "2♠ -> 2nt -> 3♠"
+    },
+    {
+        cards: "♠: A J 6 2\n♥: 7\n♦: Q T 7 4 3\n♣: A Q 8\n13 HCP",
+        bids: "P 2♥ P ?",
+        correctAnswer: "Pass - you need him to have 11 and 4 spades, which is really unlikely"
+    },
+    {
+        cards: "♠: J 7\n♥: J 7\n♦: Q J T 8\n♣: A K Q 5 2\n14 HCP",
+        bids: "P P ?",
+        correctAnswer: "1NT"
+    },
+    {
+        cards: "♠: A K T 9 4\n♥: K 7\n♦: T 2\n♣: J 8 7 3\n11 HCP",
+        bids: "P 2♦ P ?",
+        correctAnswer: "Pass"
+    },
+    {
+        cards: "♠: K J 9 4\n♥: A J T\n♦: 4 2\n♣: K 7 5 2\n12 HCP",
+        bids: "P 1♦ P ?",
+        correctAnswer: "2♦"
+    },
+    {
+        cards: "♠: A J 7 5\n♥: A 7 2\n♦: 8 6 2\n♣: A 5 4\n13 HCP",
+        bids: "2♣ P 2♦ P\n3♦ P ?",
+        correctAnswer: "3NT"
+    },
+    {
+        cards: "♠: Α Q Τ 8 7\n♥: Α 7 2\n♦: Α Κ 3\n♣: Κ Τ\n20 HCP",
+        bids: "P P 1♣ P\n1♦ P ?",
+        correctAnswer: "1♠"
+    },
+    {
+        cards: "♠: 9 8 7 3 2\n♥: A 8 6 4 3\n♦: 7\n♣: 9 5\n4 HCP",
+        bids: "1♦ P ?",
+        correctAnswer: "1♠ (2♥ is to high i prefer stopping at level 1)"
+    },
+    {
+        cards: "♠: Q\n♥: Q 7\n♦: A 9 5 4\n♣: A K 9 8 6 3\n15 HCP",
+        bids: "2♣ P 2♦ P\n?",
+        correctAnswer: "2♥"
+    },
+    {
+        cards: "♠: J 8 7 5\n♥: A Q 6\n♦: 9 8\n♣: 6 5 4 3\n7 HCP",
+        bids: "P P 1♦ P\n?",
+        correctAnswer: "1NT"
+    },
+    {
+        cards: "♠: A Q\n♥: K Q 9 6 5\n♦: K Q 7 3\n♣: 7 3\n16 HCP",
+        bids: "2♠ P ?",
+        correctAnswer: "3♠"
+    },
+    {
+        cards: "♠: K Q J 9 7\n♥: Q T 7 5\n♦: A\n♣: J T 6\n13 HCP",
+        bids: "P 2♦ P ?",
+        correctAnswer: "2♥"
+    },
+    {
+        cards: "♠: A Q 6 4 2\n♥: 5 4\n♦: K 6 4\n♣: 7 5 2\n9 HCP",
+        bids: "1♦ P ?",
+        correctAnswer: "1♥ (there is more than 1 option of how this bidding will end)"
+    },
+    {
+        cards: "\n♠: 7\n♥: A Q 2\n♦: K Q 7 5 2\n♣: Q J 7 3",
+        bids: "14 HCP\n1♦ P 1NT P\n?",
+        correctAnswer: "2♣ (if partner has better D than C he will correct)"
+    },
+    {
+        cards: "♠: K Q 6 4\n♥: J 8\n♦: Q 5\n♣: A K Q T 5\n17 HCP",
+        bids: "P 1♣ P 1♠\nP ?",
+        correctAnswer: "1NT"
+    },
+    {
+        cards: "♠: K 6 5\n♥: J T 7 6 2\n♦: 8\n♣: K 6 5 4\n7 HCP",
+        bids: "2♥ P 2♠ P\n?",
+        correctAnswer: "2NT"
+    },
+    {
+        cards: "♠: J 6\n♥:\n♦: K T 7 6 5\n♣: A K J T 6 5\n12 HCP",
+        bids: "P 2♠ P ?",
+        correctAnswer: "3♠ (you also dont want your opponents to bid 3♥)"
+    },
+    {
+        cards: "♠: A K Q 5 3\n♥: K T 9 8 3\n♦: 3\n♣: 6 3\n12 HCP",
+        bids: "?",
+        correctAnswer: "1♠"
+    },
+    {
+        cards: "♠: J 6 2\n♥: A 6\n♦: K 8 7\n♣: K J 9 7 2\n12 HCP",
+        bids: "P 1♣ P 1NT\nP 2♣ P 3♦\nP 3♥ P 3♠\nP 4♦ P ?",
+        correctAnswer: "5♣ (ace 2 kings and no queens)"
+    },
+    {
+        cards: "♠: A K 8\n♥: A K 3 2\n♦: K J T 7 5\n♣: 5\n18 HCP",
+        bids: "1♣ P 1♦ P\n?",
+        correctAnswer: "2♦"
+    },
+    {
+        cards: "\n♠: A 8 7\n♥: 8 5 3\n♦: A K Q J 5\n♣: J 9",
+        bids: "15 HCP\nP 1♦ P 2♦\nP ?",
+        correctAnswer: "2NT"
+    },
+    {
+        cards: "♠: Q J 7\n♥: 8 4 3\n♦: Q 9\n♣: K Q T 3 2\n10 HCP",
+        bids: "P 1♥ P ?",
+        correctAnswer: "2♥"
+    },
+    {
+        cards: "\n♠: 7 4\n♥: J 9 3\n♦: 8 7 6 5\n♣: Q J 8 5",
+        bids: "4 HCP\nP P P 1♣\nP 1♦ P 1♥\nP ?",
+        correctAnswer: "2♥"
+    },
+    {
+        cards: "♠: J T 7\n♥: A 8 5\n♦: 8 7 5 2\n♣: Q T 8\n7 HCP",
+        bids: "P P 1♣ P\n1♦ P 1NT P\n?",
+        correctAnswer: "2NT"
+    },
+    {
+        cards: "♠: Q T 7 6\n♥: A J 8 6\n♦: Q T 7 3\n♣: 2\n9 HCP",
+        bids: "P P P 2♣\nP ?",
+        correctAnswer: "2♦"
+    },
+    {
+        cards: "♠: K 9 7 3\n♥: K T\n♦: A K 7\n♣: A J 9 8\n18 HCP",
+        bids: "P 1♣ P 1♦\nP 1NT P 2♥\nP ?",
+        correctAnswer: "2♠"
+    },
+    {
+        cards: "♠: 5\n♥: T 8 2\n♦: 6 3\n♣: K J 9 8 7 6 3\n4 HCP",
+        bids: "P 1♣ P 1♦\nP 1♠ P ?",
+        correctAnswer: "2♣ even though i have only 4 points but it is 7 length"
+    },
+    {
+        cards: "\n♠: A K 8 3\n♥: Q 9 3\n♦: K Q 4\n♣: J T 3",
+        bids: "15 HCP\n1♦ P 1NT P\n?",
+        correctAnswer: "Pass"
+    },
+    {
+        cards: "♠: 7\n♥: J 8 3 2\n♦: A K 5 4\n♣: K J 6 3\n12 HCP",
+        bids: "2♠ P ?",
+        correctAnswer: "Pass"
+    },
+    {
+        cards: "♠: A 5 2\n♥: 7 6\n♦: 9 8\n♣: A T 9 7 5 2\n8 HCP",
+        bids: "1NT P ?",
+        correctAnswer: "3♣"
+    },
+    {
+        cards: "♠: A K Q 7 2\n♥: K Q T 6 5\n♦: 9 8\n♣: 2\n14 HCP",
+        bids: "2♥ P ?",
+        correctAnswer: "2♠ (you know you are going at least to 4♥, hope for 6)"
+    },
+    {
+        cards: "♠: A Q 9 6 4\n♥: A 9 5 4\n♦: 8\n♣: K 9 7\n13 HCP",
+        bids: "1♠ 2♦ P 3♦\n?",
+        correctAnswer: "3♥, let partner choose (he already said no game….so it is ok to be less than 15-16)"
+    },
+    {
+        cards: "♠: Q J 6 5\n♥: J 9 2\n♦: Q 3\n♣: K J 9 3\n10 HCP",
+        bids: "1♣ P 1NT P\n3NT P ?",
+        correctAnswer: "Pass"
+    },
+    {
+        cards: "♠: А 8 7\n♥: K Q T 8\n♦: A T\n♣: A K T 9\n20 HCP",
+        bids: "1♣ P 1♦ P\n?",
+        correctAnswer: "2NT"
+    },
+    {
+        cards: "♠: 8 4 2\n♥: A 7 6 5\n♦: 2\n♣: A K Q 8 5\n13 HCP",
+        bids: "1♣ P 1♥ P\n1NT P ?",
+        correctAnswer: "2♣"
+    },
+    {
+        cards: "♠: 9 8\n♥: Q 9 3\n♦: A T 6 5 2\n♣: Q 7 3\n8 HCP",
+        bids: "P P P 1♦\nP ?",
+        correctAnswer: "1♥ (if partner says 2♦ say Pass, if he says 1♠ go for 3NT or 5♦, if he says 1NT ask again and if he says he has 4♠ go to 3NT otherwise bid 3♦)"
+    },
+    {
+        cards: "♠: Q T 9 7 5\n♥: J T\n♦: 9 3\n♣: Q 8 7 4\n5 HCP",
+        bids: "1♦ P ?",
+        correctAnswer: "1NT"
+    },
+    {
+        cards: "\n♠: K 7\n♥: K J 9 6 5\n♦: A\n♣: A Q 8 5 3",
+        bids: "17 HCP\nP P 1♣ P\n2♣ P 2♦ P\n2NT P 3♣ P\n3♠ P ?",
+        correctAnswer: "4♣ you cant go to 3NT partner has exactly 2♦ and prob no stoppers, so aim for 6♣"
+    },
+    {
+        cards: "♠: A K T 8 3\n♥:\n♦: T 9 6 5 4\n♣: K J 4\n11 HCP",
+        bids: "1♣ P 1♠ P\n1NT P ?",
+        correctAnswer: "2♥ - void."
+    },
+    {
+        cards: "♠: 6 4 3 2\n♥: K Q 9\n♦: K 9 3\n♣: Q T 8\n10 HCP",
+        bids: "P 2♣ P ?",
+        correctAnswer: "2♠ if partner says 3♠ say Pass"
+    },
+    {
+        cards: "♠: A Q 6 4 2\n♥: 5 4\n♦: K 6 4\n♣: 7 5 2\n9 HCP",
+        bids: "1♦ P ?",
+        correctAnswer: "1♥ - you should take control you might want 4♠"
+    },
+    {
+        cards: "♠: 9\n♥: A Q 8 6\n♦: Q J 9 8\n♣: A Q J 8\n16 HCP",
+        bids: "1♦ P 2♦ P\n?",
+        correctAnswer: "2NT"
+    },
+    {
+        cards: "♠: K T 9 7 3\n♥: Q J 8 7\n♦: T\n♣: Q J 6\n9 HCP",
+        bids: "P 1♣ P 1♠\nP 2♥ P ?",
+        correctAnswer: "3♦ - singleton."
+    },
+    {
+        cards: "♠: K 9 8 6 2\n♥: Q J 6 4 2\n♦: T 8\n♣: 4\n6 HCP",
+        bids: "P 1♦ P ?",
+        correctAnswer: "1♠"
+    },
+    {
+        cards: "♠: K J\n♥: A 7 5 4\n♦: 6\n♣: K T 9 8 7 3\n11 HCP",
+        bids: "P P P 1♦\nP 1♥ P 2♦\nP ?",
+        correctAnswer: "3NT (you want to play to make the K♠ a stopper)"
+    },
+    {
+        cards: "♠: K Q 9 3\n♥: T 6\n♦: J T 7 4\n♣: K J 9\n10 HCP",
+        bids: "P P P 1♥\nP ?",
+        correctAnswer: "1♠ (in future 2NT (9-11 balanced 2 of partner suit) only after Pass Pass)"
+    },
+    {
+        cards: "♠: 6\n♥: K Q J 7\n♦: A K 3\n♣: A T 8 5 4\n17 HCP",
+        bids: "P 1♣ P 1♠\nP 2♠ P 2NT\nP ?",
+        correctAnswer: "3NT (if partner is closer to 16 he will ask for aces)"
+    },
+    {
+        cards: "♠: 3\n♥: A K 9 3 2\n♦: A K Q J 9 5\n♣: 6\n17 HCP",
+        bids: "1♣ 2♠ 3♣ ?",
+        correctAnswer: "3♦ (system off)"
+    },
+    {
+        cards: "♠: J 9 6 4\n♥: Q\n♦: K T 9 2\n♣: Q 6 5 4\n8 HCP",
+        bids: "1♦ 1♥ ?",
+        correctAnswer: "Pass"
+    },
+    {
+        cards: "♠: 9 3\n♥: A T 8 5 4\n♦: K Q J 7\n♣: A 3\n14 HCP",
+        bids: "1♥ 1♠ 2♥ ?",
+        correctAnswer: "Pass ( i want to punish them) (this depends on vulnerability) otherwise DBL"
+    },
+    {
+        cards: "♠: K Q 4 3\n♥: Q J 4 2\n♦: 6\n♣: K Q 7 3\n13 HCP",
+        bids: "1♥ P 2♥ ?",
+        correctAnswer: "DBL (this depends on vulnerability) otherwise Pass"
+    },
+    {
+        cards: "♠: A Q 4 3 2\n♥: K 9 4 3\n♦: J\n♣: A 5 3\n14 HCP",
+        bids: "P 1♣ P 1♠\nP 1NT P 2♣\nP 2♦ P 2♥\nP 3♣ P 3♦\nP 3NT P 4♣\nP 5♣ P ?",
+        correctAnswer: "6NT (we know he is 5422, so we need together 31 HCP~ and we have)"
+    },
+    {
+        cards: "♠: K 9 7 6 4\n♥: Q 9\n♦: J T 8\n♣: Q J 2\n9 HCP",
+        bids: "1♦ DBL 2♦ ?",
+        correctAnswer: "2♠"
+    },
+    {
+        cards: "♠: J T 5\n♥: A K J 4\n♦: 7 4\n♣: K 9 8 7\n12 HCP",
+        bids: "1♦ DBL 2♦ 2♠\nP ?",
+        correctAnswer: "Pass (partner is 5-8 5+, you dont want him to punish and want to let him know that there no hope for game)"
+    },
+    {
+        cards: "♠: A K 7 3\n♥: K\n♦: A J\n♣: A T 9 8 7 4\n19 HCP",
+        bids: "P 1♣ P 1NT\nP ?",
+        correctAnswer: "2♣"
+    },
+    {
+        cards: "♠: 9 3\n♥: A T 8 5 4\n♦: K Q J 7\n♣: A 3\n14 HCP",
+        bids: "1♥ 1♠ 2♥ ?",
+        correctAnswer: "Pass ( i want to punish them) (this depends on vulnerability) otherwise DBL"
+    },
+    {
+        cards: "♠: 9 3\n♥: A T 8 5 4\n♦: K Q J 7\n♣: A 3\n14 HCP",
+        bids: "1♥ 1♠ 2♥ P\nP DBL P ?",
+        correctAnswer: "Pass, look above"
+    },
+    {
+        cards: "♠: A Q 9 7 3 2\n♥: J T\n♦: 8 2\n♣: 5 3 2\n7 HCP",
+        bids: "2♠ P 2NT P\n?",
+        correctAnswer: "3♠"
+    },
+    {
+        cards: "♠: A Q 9 7 5\n♥: A\n♦: 8 5\n♣: A K T 5 4\n17 HCP",
+        bids: "P 1♦ ?",
+        correctAnswer: "DBL"
+    },
+    {
+        cards: "♠: T 8 6 2\n♥: K T 8 4\n♦: K 3\n♣: Q 7 3\n8 HCP",
+        bids: "P 1♦ 2♦ 3♦\n?",
+        correctAnswer: "4♥ (partner said he is hoping for game in major and has 16+)"
+    },
+    {
+        cards: "♠: A Q 9 7 5\n♥: A\n♦: 8 5\n♣: A K T 5 4\n17 HCP",
+        bids: "P 1♦ ?",
+        correctAnswer: "DBL"
+    },
+    {
+        cards: "♠: 4\n♥: T 6\n♦: Q 9 7 4 A\n♣: K J 6 4 2\n10 HCP",
+        bids: "1♠ P 2♦ ?",
+        correctAnswer: "3♣"
+    },
+    {
+        cards: "♠: A T 9 2\n♥: K J 2\n♦: A Q\n♣: J T 7 3\n15 HCP",
+        bids: "1♦ 1♠ 2♣ 2♠\n?",
+        correctAnswer: "3♣ push them to 3♠ (do NOT DBL 3♠)"
+    },
+    {
+        cards: "♠: K J 9 8 7 3 2\n♥: J 4\n♦: Q\n♣: A Q 3\n13 HCP",
+        bids: "P 1♦ 1♠ 2♦\n3♣ 3♦ ?",
+        correctAnswer: "4♣ push them to 4♦"
+    },
+    {
+        cards: "♠: A Q 4 3 2\n♥: K 9 4 3\n♦: J\n♣: A 5 3\n14 HCP",
+        bids: "P 1♣ P 1♠\nP 1NT P 2♣\nP 2♦ P 2♥\nP 3♣ P 3♦\nP 3NT P 4♣\nP 5♣ P ?",
+        correctAnswer: "6NT (we know he is 5422, so we need together 31 HCP~ and we have)"
+    },
+    {
+        cards: "♠: A K 6 4 3\n♥: A T 4\n♦: K 8\n♣: 8 5 4\n14 HCP",
+        bids: "P 1♦ P 1♥\nP 2♣ P 2♦\nP 3♣ P 3♦\nP 3♥ P 4♣\nP 4♠ P ?",
+        correctAnswer: "5♣ (shame, was hoping for 6♣, but missing kings, so we go to 5♣, even though 3NT would be better)"
+    },
+    {
+        cards: "♠: K Q J T 9 8 4\n♥: J\n♦: A 6 4\n♣: K 8\n14 HCP",
+        bids: "1♠ 2♥ DBL P\n3♦ P 3NT P\n?",
+        correctAnswer: "4♠, even though partner has good stoppers, we should play 4♠"
+    },
+    {
+        cards: "♠: A K T 8 3\n♥:\n♦: T 9 6 5 4\n♣: K J 4\n11 HCP",
+        bids: "1♣ P 1♠ P\n1NT P 2♥ P\n2NT P ?",
+        correctAnswer: "3♣ - He described he has A&Q in ♣, you relay for diamonds."
+    },
+    {
+        cards: "♠: K T 9 7 3\n♥: Q J 8 7\n♦: T\n♣: Q J 6\n9 HCP",
+        bids: "P 1♣ P 1♠\nP 2♥ P 3♦\nP 4♦ P ?",
+        correctAnswer: "4♥ - 0 Aces."
+    },
+    {
+        cards: "♠: 6 3\n♥: J 9 8 5 3\n♦: T 8 7 3 2\n♣: 6\n1 HCP",
+        bids: "1♣ P 1♦ P\n1♠ P 1NT P\n2♣ P ?",
+        correctAnswer: "2♥"
+    },
+    {
+        cards: "♠: Α Q Τ 8 7\n♥: Α 7 2\n♦: Α Κ 3\n♣: Κ Τ\n20 HCP",
+        bids: "P P 1♣ P\n1♦ P 1♠ P\n2♣ P ?",
+        correctAnswer: "2♦ (i hope to take control)"
+    },
+    {
+        cards: "♠: 7 5\n♥: 4\n♦: A K 6 3\n♣: A K 8 7 3 2\n14 HCP",
+        bids: "2♣ P 2♦ P\n3♦ P 3NT P\n?",
+        correctAnswer: "Pass"
+    },
+    {
+        cards: "♠: A J 5 4 3\n♥: A K J 2\n♦: A K\n♣: K 9\n23 HCP",
+        bids: "P P 1♣ P\n1♦ P ?",
+        correctAnswer: "1♠"
+    },
+    {
+        cards: "♠: 6 2\n♥: T 4\n♦: A K 8\n♣: A K Q 5 4 2\n16 HCP",
+        bids: "1NT P 2♣ P\n3♦ P ?",
+        correctAnswer: "4♣ (i am going to 5♣ but if partner has 2aces and at least 1 king i will go to 6♣)"
+    },
+    {
+        cards: "♠: K J 9 4\n♥: A J T\n♦: 4 2\n♣: K 7 5 2\n12 HCP",
+        bids: "P 1♦ P ?",
+        correctAnswer: "2♦"
+    },
+    {
+        cards: "♠: A 8 7\n♥: 8 5 3\n♦: A K Q J 5\n♣: J 9\n15 HCP",
+        bids: "P 1♦ P 2♦\nP ?",
+        correctAnswer: "3NT"
+    },
+    {
+        cards: "♠: A 8 7\n♥: A K J T 5\n♦: 2\n♣: K Q J 5\n18 HCP",
+        bids: "1♣ P 1♦ P\n1♥ P 1♠ P\n?",
+        correctAnswer: "2♣, next i will say 2♠ i have a hand easy to describe (so not 1NT)"
+    },
+    {
+        cards: "♠: K 9 7 2\n♥: 7 5\n♦: A 3\n♣: A Q J 3 2\n14 HCP",
+        bids: "P 2♣ P 2♥\nP 2NT P 3♣\nP ?",
+        correctAnswer: "Pass - 3♣ is not a new unbid suit, so signoff."
+    },
+    {
+        cards: "♠: A 8 7\n♥: A K J T 5\n♦: 2\n♣: K Q J 5\n18 HCP",
+        bids: "1♣ P 1♦ P\n1♥ P 1♠ P\n2♣ P 3♣ P\n?",
+        correctAnswer: "3♠, he is also minimum so we want to cooperate with partner"
+    },
+    {
+        cards: "♠: A T 6 3\n♥: K\n♦: A Q 9 6\n♣: A T 7 5\n17 HCP",
+        bids: "P 1♥ P 1♠\nP 1NT P 2♣\nP 2♦ P 2♥\nP 2♠ P 2NT\nP 3♦ P 3♥\nP 3♠ P ?",
+        correctAnswer: "4♣ hope for slam"
+    },
+    {
+        cards: "♠: 8 4 2\n♥: A 7 6 5\n♦: 2\n♣: A K Q 8 5\n13 HCP",
+        bids: "1♣ P 1♥ P\n1NT P 2♣ P\n2♦ P 2♥ P\n2NT P 3♣ P\n3♦ P 3♥ P\n3♠ P 4♣ P\n4NT P ?",
+        correctAnswer: "5♥ we plan on going to 6NT, but if partner suddenly has something like AKQJT9 of diamonds we can go to 7NT"
+    },
+    {
+        cards: "♠: Q J 8 2\n♥: A K T 2\n♦: 4\n♣: K 9 7 4\n13 HCP",
+        bids: "1♦ P 1♥ P\n1♠ P 1NT P\n2♣ P 2♦ P\n2♠ P 2NT P\n3♦ P 3♠ P\n4♠ P ?",
+        correctAnswer: "6♠"
+    },
+    {
+        cards: "♠: Q J 6\n♥: Q 9 7 2\n♦: J 9 7 5\n♣: K T\n9 HCP",
+        bids: "P P P 1♣\nP 1NT P 2♣\nP 2♥ P 2♠\nP ?",
+        correctAnswer: "3♦"
+    },
+    {
+        cards: "♠: A T 2\n♥: K T 7 2\n♦: T 9\n♣: Q J T 5\n10 HCP",
+        bids: "P P 1♦ P\n?",
+        correctAnswer: "2♦"
+    },
+    {
+        cards: "♠: K 9 7 3\n♥: K T\n♦: A K 7\n♣: A J 9 8\n18 HCP",
+        bids: "P 1♣ P 1♦\nP 1NT P 2♥\nP ?",
+        correctAnswer: "2♠ (transfer)"
+    },
+    {
+        cards: "♠: Q 8 5 4 2\n♥: 8 7 4\n♦: 6\n♣: K T 7 6\n5 HCP",
+        bids: "P 1♣ P 1♦\nP 1NT P ?",
+        correctAnswer: "2♣ -> later will invite in spades"
+    },
+    {
+        cards: "♠: A K J 9 4\n♥: A 5 4\n♦: A K J 8\n♣: Q\n22 HCP",
+        bids: "P 1♣ P 1♦\nP 1♠ P 1NT\nP ?",
+        correctAnswer: "2♣, even though partner is 0-4 you still hope, later you will invite in spades"
+    },
+    {
+        cards: "♠: A K J 5\n♥: A\n♦: A K J 5 3\n♣: J 4 3\n21 HCP",
+        bids: "P 1♣ P 1♥\nP ?",
+        correctAnswer: "2♥ (single)"
+    },
+    {
+        cards: "♠: A K 8\n♥: A K 3 2\n♦: K J T 7 5\n♣: 5\n18 HCP",
+        bids: "1♣ P 1♦ P\n?",
+        correctAnswer: "1♥"
+    },
+    {
+        cards: "\n♠: A K Q 7 2\n♥: K Q T 6 5\n♦: 9 8\n♣: 2",
+        bids: "14 HCP\n2♥ P 2♠ P\n3♥ P ?",
+        correctAnswer: "4♥ (no chance for slam)"
+    },
+    {
+        cards: "♠: 8 3\n♥: K Q J T 9\n♦: A Q 6 4\n♣: 7 5\n12 HCP",
+        bids: "P P P 1♥\nP 1NT P ?",
+        correctAnswer: "Pass - He has a weak hand and singleton in hearts."
+    },
+    {
+        cards: "♠: A K T 6\n♥: A Q 8\n♦: A K\n♣: A K 9 8\n27 HCP",
+        bids: "?",
+        correctAnswer: "1♣ ,partner will probably bid 1♦, and i will say 3NT"
+    },
+    {
+        cards: "♠: A 8 7\n♥: A K J T 5\n♦: 2\n♣: K Q J 5\n18 HCP",
+        bids: "1♣ P 1♦ P\n1♥ P 1♠ P\n2♣ P 3♣ P\n?",
+        correctAnswer: "3♦ lets hear more maybe 5♣ or 4♥ and maybe even 6♣"
+    },
+    {
+        cards: "♠: A Q 9 8\n♥: 6\n♦: 8\n♣: A K Q T 9 4 2\n15 HCP",
+        bids: "P 2♣ P 2♥\nP ?",
+        correctAnswer: "3♠ - 10+ cards of spades and clubs, 14-16 HCP."
+    },
+    {
+        cards: "♠: 5 4 2\n♥: A K 3\n♦: A 8 6\n♣: A Q 8 4\n17 HCP",
+        bids: "1♣ P 1NT P\n?",
+        correctAnswer: "3NT (17-19 balanced)"
+    },
+    {
+        cards: "♠: K\n♥: J T\n♦: Q J T 7 6 4 3\n♣: T 6 4\n7 HCP",
+        bids: "2♦ P 2NT P\n?",
+        correctAnswer: "3♠ (he asked for single)"
+    },
+    {
+        cards: "♠: 7\n♥: K T 9 6 4 3\n♦: 8 3\n♣: A 9 7 3\n7 HCP",
+        bids: "2♠ P ?",
+        correctAnswer: "3♥ (if red Pass)"
+    },
+    {
+        cards: "♠: Q T 6\n♥: Q T\n♦: Q J T 5 4\n♣: K 7 5\n10 HCP",
+        bids: "P P P 3♥\nP ?",
+        correctAnswer: "4♠"
+    },
+    {
+        cards: "♠: A J 8 5 2\n♥: A K 9 8 7 4\n♦: 8\n♣: T\n12 HCP",
+        bids: "P P P ?",
+        correctAnswer: "3♥"
+    },
+    {
+        cards: "♠: K J 6 5 3\n♥: 7 6\n♦: K Q J\n♣: J 3 2\n11 HCP",
+        bids: "P P 2♥ P\n?",
+        correctAnswer: "Pass"
+    },
+    {
+        cards: "♠: J T 6 5 2\n♥: 3 2\n♦: A J 6 5 2\n♣: 2\n6 HCP",
+        bids: "P 2♠ P 2NT\nP ?",
+        correctAnswer: "3♣"
+    },
+    {
+        cards: "♠: J 9 8 5 3\n♥: K\n♦: Q 8 7\n♣: T 8 7 3\n6 HCP",
+        bids: "2♠ P 3♣ P\n?",
+        correctAnswer: "3♠"
+    },
+    {
+        cards: "♠: J T 6\n♥: Q 9 6 5 4\n♦: T 8\n♣: K 7\n6 HCP",
+        bids: "P 2♣ P ?",
+        correctAnswer: "Pass"
+    },
+    {
+        cards: "♠: A Q J 6\n♥: \n♦: A K 6 4 3\n♣: K T 8 5\n17 HCP",
+        bids: "P 1♣ P 1♠\nP 2♥ P 3♦\nP ?",
+        correctAnswer: "3♥, i want to take control and want to hear how great are his spades, (only i know we go to spades)"
+    },
+    {
+        cards: "♠: 6\n♥: K Q J 7\n♦: A K 3\n♣: A T 8 5 4\n17 HCP",
+        bids: "P 1♣ P 1♠\nP 2♠ P 2NT\nP 3♣ P 3♥\nP 3♠ P 4♣\nP ?",
+        correctAnswer: "4♦ asking for kings, since i am planning on going to 4/5/6 Hearts (partner said he is 5422)"
+    },
+    {
+        cards: "♠: 6 2\n♥: T 4\n♦: A K 8\n♣: A K Q 5 4 2\n16 HCP",
+        bids: "1NT P 2♣ P\n3♦ P 4♣ P\n4♥ P ?",
+        correctAnswer: "5♣"
+    },
+    {
+        cards: "\n♠: A Q 9 7 5\n♥: A\n♦: 8 5\n♣: A K T 5 4",
+        bids: "17 HCP\nP 1♦ ?",
+        correctAnswer: "DBL"
+    },
+    {
+        cards: "♠: A Q 9 7\n♥: A 8 5 2\n♦: 7\n♣: A K T 8\n17 HCP",
+        bids: "P 1♦ ?",
+        correctAnswer: "2♦"
+    },
+    {
+        cards: "♠: A J 9 7 5\n♥: 3\n♦: A J 4\n♣: J 9 8 2\n11 HCP",
+        bids: "P 1♣ P 1♠\nP 1NT P 2♣\nP 2♠ P 2NT\nP 3♣ P 3♦\nP 3NT P ?",
+        correctAnswer: "4♣ hope for slam he has similar to 4432 3 in diamonds"
+    },
+    {
+        cards: "♠: 6\n♥: K Q J 7\n♦: A K 3\n♣: A T 8 5 4\n17 HCP",
+        bids: "P 1♣ P 1♠\nP 2♠ P 2NT\nP 3♣ P 3♥\nP 3♠ P 4♣\nP 4♦ P 4♥\nP ?",
+        correctAnswer: "Pass partner has 5422 1 ace no kings, it will be a very hard slam to make"
+    },
+    {
+        cards: "♠: 9 7 5 2\n♥: Q 7 5 4 3\n♦: 8 7\n♣: A K\n9 HCP",
+        bids: "P P P 2♣\nP 2♥ P 3♥\nP ?",
+        correctAnswer: "4♥, even though we lack points but our points look aligned in the same 2 suits"
+    },
+    {
+        cards: "♠: A K J 5\n♥: A\n♦: A K J 5 3\n♣: J 4 3\n21 HCP",
+        bids: "P 1♣ P 1♥\nP 2♥ P 2♠\nP ?",
+        correctAnswer: "2NT, i want to take control (1 above)"
+    },
+    {
+        cards: "♠: Q\n♥: K 8 2\n♦: K T 7 4 2\n♣: K Q 9 8\n13 HCP",
+        bids: "2♣ P ?",
+        correctAnswer: "2♠ or 2♦ , 2♠ since i have no aces so i prefer 3NT, but 2♦ also makes sense, mabye i hope that partner has the aces and then maybe we can go to 6♣ "
+    },
+    {
+        cards: "♠: A 9 6\n♥: Q J 8 6\n♦: 5 3\n♣: A Q 7 3\n13 HCP",
+        bids: "P 1♥ P ?",
+        correctAnswer: "1♠, we dont know if 4♥ or 6♥, lets first hear that he does not have an amazing hand and then go to 4♥"
+    },
+    {
+        cards: "♠: 9 8 7 3 2\n♥: A 8 6 4 3\n♦: 7\n♣: 9 5\n4 HCP",
+        bids: "1♦ P ?",
+        correctAnswer: "1♠ no game lowest bid to stop in"
+    },
+    {
+        cards: "♠: K Q T\n♥: A K 7 3\n♦: K 7 4 3 2\n♣: 3\n15 HCP",
+        bids: "P 1♦ P 1♥\nP 2♥ P 2♠\nP ?",
+        correctAnswer: "3♠ hand of 5431"
+    },
+    {
+        cards: "\n♠: Q 6 3 2\n♥: Q 8 5\n♦: A Q\n♣: A K 6 5",
+        bids: "17 HCP\nP P 1♣ P\n1NT P 2♣ P\n2NT P ?",
+        correctAnswer: "3♣, lets hear more"
+    },
+    {
+        cards: "♠: A 6 5 2\n♥: A 9 7\n♦: \n♣: A J 6 5 4 3\n13 HCP",
+        bids: "2♣ P 2♠ P\n?",
+        correctAnswer: "3♠ 12-14 3+S if partner would have bid 2♦/H, i would try to show i have an amazing hand maybe even evaluate it as 15-16 all are aces and have a void"
+    },
+    {
+        cards: "♠: A 8 2\n♥: A K Q 7 5 2\n♦: J 9 7 3\n♣: \n14 HCP",
+        bids: "P 1♥ P 4♥\nP ?",
+        correctAnswer: "5♣, ask for aces ignoring clubs, if he has the ace there is a good chance for 6♥, if not we will stop at 5♥"
+    },
+    {
+        cards: "♠: 9 7\n♥: A 8 3\n♦: A T 3\n♣: Q J T 9 2\n11 HCP",
+        bids: "P P ?",
+        correctAnswer: "1NT"
+    },
+    {
+        cards: "♠: 7\n♥: Q J 6\n♦: T 5\n♣: A K T 6 5 3 2\n10 HCP",
+        bids: "P P P ?",
+        correctAnswer: "Pass/3♣ both are ok, i would go with Pass if red, and 3♣ if green"
+    },
+    {
+        cards: "♠: 9 3\n♥: 8 7 6 3\n♦: A Q J T 8 7 3\n♣: \n7 HCP",
+        bids: "P 2♦ P 3♦\nP ?",
+        correctAnswer: "Pass"
+    },
+    {
+        cards: "♠: K J 7 6 5 3\n♥: 9 8 7 2\n♦: Q\n♣: 5 2\n6 HCP",
+        bids: "2♣ P ?",
+        correctAnswer: "Pass"
+    },
+    {
+        cards: "♠: K Q 8 7\n♥: Q J\n♦: A 9 7\n♣: A K J 6\n20 HCP",
+        bids: "1♥ P ?",
+        correctAnswer: "1♠, i am gonna go to slam lets start asking about the shape of partners hand"
+    },
+    {
+        cards: "♠: A K T 6\n♥: A Q 8\n♦: A K\n♣: A K 9 8\n27 HCP",
+        bids: "1♣ P 1♦ P\n?",
+        correctAnswer: "3NT"
+    },
+    {
+        cards: "♠: A K T 6\n♥: A Q 8\n♦: A K\n♣: A K 9 8\n27 HCP",
+        bids: "1♣ P 1NT P\n?",
+        correctAnswer: "2♣, lets take control probably go to 7NT"
+    },
+    {
+        cards: "\n♠: A K T 6\n♥: A Q 8\n♦: A K\n♣: A K 9 8",
+        bids: "27 HCP\n1♣ P 1♥ P\n?",
+        correctAnswer: "1NT he will say probably 2♣ and i will say 3♣ (24+)"
+    },
+    {
+        cards: "♠: A K T 9 5\n♥: A Q 9 8 4\n♦: 8\n♣: 7 4\n13 HCP",
+        bids: "P ?",
+        correctAnswer: "1♠ when partner says 2♣(hopefully) i will bid 3♥"
+    },
+    {
+        cards: "♠: A K 7 3\n♥: K\n♦: A J\n♣: A T 9 8 7 4\n19 HCP",
+        bids: "P 1♣ P 1NT\nP 2♣ P 3♥\nP ?",
+        correctAnswer: "4♦, i am going to at least 6♣ and i have 3 aces so lets start hearing the kings and queens he has 12-14 HCP"
+    },
+    {
+        cards: "♠: T 9 6\n♥: J 6 5\n♦: 8 3\n♣: K J 8 6 3\n5 HCP",
+        bids: "P P 1♣ P\n1♦ P 1NT P\n?",
+        correctAnswer: "Pass, very low chance of game (2NT is pushing it)"
+    },
+    {
+        cards: "♠: A K 5\n♥: K Q T\n♦: A J T 7 2\n♣: 7 4\n17 HCP",
+        bids: "1♥ DBL 2♥ P\nP ?",
+        correctAnswer: "2NT 2 stoppers and balanced 16-19"
+    },
+    {
+        cards: "\n♠: 8\n♥: T 6 5 4\n♦: T 6 5\n♣: A K 8 5 4",
+        bids: "7 HCP\n1♦ 1♠ ?",
+        correctAnswer: "Pass"
+    },
+    {
+        cards: "♠: K J 9 8 7 3 2\n♥: J 4\n♦: Q\n♣: A Q 3\n13 HCP",
+        bids: "P 1♦ 1♠ 2♦\n3♣ 3♦ ?",
+        correctAnswer: "4♣ partner has 8-11 HCP with 5+ clubs and single spade, that is great"
+    },
+    {
+        cards: "♠: 6\n♥: K Q J 7\n♦: A K 3\n♣: A T 8 5 4\n17 HCP",
+        bids: "1♣ P 1♠ P\n2♠ P 2NT P\n3♣ P 3♥ P\n?",
+        correctAnswer: "3♠ ask for aces hope for slam in hearts"
+    },
+    {
+        cards: "♠: A 6\n♥: Q T 5 3\n♦: Q T 9 4\n♣: J 7 5\n9 HCP",
+        bids: "P 1♦ P 2♦\nP 2♥ P ?",
+        correctAnswer: "2NT, partner is one of 2 extreme either unbalanced hoping for 3NT and then we need to say 2NT to say no, or he is very strong in diamonds and then we say 2NT that means weak balanced"
+    },
+    {
+        cards: "♠: K Q J T 5 4\n♥: J\n♦: A 2\n♣: A J 3 2\n16 HCP",
+        bids: "P P P ?",
+        correctAnswer: "1♠"
+    },
+    {
+        cards: "\n♠: \n♥: K 8 5 3 2\n♦: К 9\n♣: A K Q 8 5 3",
+        bids: "12 HCP\n2♦ P 2NT P\n3♠ P ?",
+        correctAnswer: "4♥ (this is bad that the opponents have at least 12 spades and they did not bid)"
+    },
+    {
+        cards: "♠: T 8 2\n♥: Q J 4\n♦: 9 5 4\n♣: A 8 5 4\n7 HCP",
+        bids: "P 1♣ P 1♦\nP 2♦ P ?",
+        correctAnswer: "2♥, you hope for game, and want to hear if partner has stoppers in spades"
+    },
+    {
+        cards: "♠: K J 8 5\n♥: 8 5\n♦: 6 4\n♣: K J T 3 2\n8 HCP",
+        bids: "1♣ P 1♦ P\n2NT P ?",
+        correctAnswer: "3NT dont share data and just go straight because you will no matter what partner bids after 3♣ will say 3NT"
+    },
+    {
+        cards: "♠: J T 6 5 2\n♥: 3 2\n♦: A J 6 5 2\n♣: 2\n6 HCP",
+        bids: "P 2♠ P 2NT\nP 3♣ P 3♠\nP ?",
+        correctAnswer: "Pass, i am minimum"
+    },
+    {
+        cards: "♠: K 6\n♥: A Q J 7 3\n♦: K J 2\n♣: J 6 2\n15 HCP",
+        bids: "2♠ P 3♣ P\n3♠ P ?",
+        correctAnswer: "Pass"
+    },
+    {
+        cards: "\n♠: K 6 5\n♥: A K Q T 8 6 5\n♦: \n♣: 8 4 3",
+        bids: "12 HCP\nP 1♣ P 1♥\nP 2♥ P ?",
+        correctAnswer: "3♦"
+    },
+    {
+        cards: "♠: A K T 8 3\n♥: \n♦: T 9 6 5 4\n♣: K J 4\n11 HCP",
+        bids: "1♣ P 1♠ P\n1NT P 2♥ P\n2NT P 3♣ P\n3♦ P 3♥ P\n4♣ P 4♦ P\n4♠ P ?",
+        correctAnswer: "6♠  partner has AQ in clubs, A or King and Q of diamonds, Q of spades AK of hearts,"
+    }
+];
+
+    let correctCount = 0;
+    const quizContainer = document.getElementById('quiz-container');
+
+    hands.forEach((hand, index) => {
+        const handDiv = document.createElement('div');
+        handDiv.classList.add('hand');
+        handDiv.innerHTML = `
+            <pre>Hand #${index + 1}</pre><pre>${colorSuits(hand.cards)}</pre><pre>${colorSuits(hand.bids)}</pre><div class="options"><div><button onclick="checkAnswer(${index}, 'Pass')">Pass</button><button onclick="checkAnswer(${index}, 'DBL')">DBL</button><button onclick="checkAnswer(${index}, 'RDBL')">RDBL</button></div><div>
+                    ${[...Array(7).keys()].map(i => `<button onclick="selectNumber(${index}, ${i + 1})">${i + 1}</button>`).join('')}
+                </div><div id="suits-${index}">
+                    ${['♣', '♦', '♥', '♠', 'NT'].map(suit => `<button onclick="selectSuit(${index}, '${suit}')">${colorSuits(suit)}</button>`).join('')}
+                </div></div><div class="result" id="result-${index}"></div>
+        `;
+        quizContainer.appendChild(handDiv);
+    });
+
+    function colorSuits(text) {
+        return text.replace(/♠/g, '<span class="spade">♠</span>')
+                   .replace(/♥/g, '<span class="heart">♥</span>')
+                   .replace(/♦/g, '<span class="diamond">♦</span>')
+                   .replace(/♣/g, '<span class="club">♣</span>');
+    }
+    function selectNumber(index, number) {
+        const suitDiv = document.getElementById(`suits-${index}`);
+        suitDiv.setAttribute('data-number', number);
+    }
+
+    function selectSuit(index, suit) {
+        const suitDiv = document.getElementById(`suits-${index}`);
+        const number = suitDiv.getAttribute('data-number');
+        if (number) {
+            checkAnswer(index, `${number}${suit}`);
+        }
+    }
+
+    function checkAnswer(index, answer) {
+        const resultDiv = document.getElementById(`result-${index}`);
+        const correctAnswer = hands[index].correctAnswer;
+        if (correctAnswer.startsWith(answer)) {
+            correctCount++;
+        }
+        resultDiv.innerHTML = `Correct Answer: ${colorSuits(correctAnswer)} <br> Your Answer: ${colorSuits(answer)} <br> Success Rate: ${(correctCount / (index + 1) * 100).toFixed(2)}%`;
+    }
+</script></body></html>
