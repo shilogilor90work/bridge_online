@@ -3,5 +3,10 @@ from django.views import generic
 from .models import Hand
 from django.http import HttpResponseRedirect
 
-class HandsView(generic.ListView):
-    template_name = 'hands/bids_practice.html'
+
+def bridge_hand(request):
+    return render(request, 'hands/bids_practice.html', locals())
+
+
+def bridge_hand_labels(request):
+    return render(request, 'hands/bids_practice_labels.html', locals())
