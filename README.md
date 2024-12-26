@@ -19,13 +19,8 @@ sudo apt install python3-pip -y
 ```bash
 pip install django
 ```
-Once you have downloaded django, go to the cloned repo directory and run the following command
 
-```bash
-python3 manage.py makemigrations
-```
-
- Start the server by following command
+Start the server by following command
 
 ```bash
 python3 manage.py runserver

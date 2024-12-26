@@ -4,14 +4,14 @@
 <ul>
     {% for hand in hands %}
         <li>
-            <pre>Hand #{{ hand.id }} Subject {{ hand.subject }}</pre>
+            <pre>Hand #{{ hand.id }} Subject: <b>{{ hand.subject }}</b></pre>
             <pre>{{ hand.cards|color_suits|safe }}</pre>
             <pre>{{ hand.bids|color_suits|safe }}</pre>
             <div class="options">
                         <div>
-                            <button onclick="checkAnswer({{ hand.id }}, 'Pass', '{{ hand.correct_answer }}')">Pass</button>
-                            <button onclick="checkAnswer({{ hand.id }}, 'DBL' '{{ hand.correct_answer }}')">DBL</button>
-                            <button onclick="checkAnswer({{ hand.id }}, 'RDBL' '{{ hand.correct_answer }}')">RDBL</button>
+                            <button onclick="checkAnswer({{ hand.id }}, 'Pass', '{{ hand.correct_answer }}', '{{ hand.explanation }}')">Pass</button>
+                            <button onclick="checkAnswer({{ hand.id }}, 'DBL' '{{ hand.correct_answer }}', '{{ hand.explanation }}')">DBL</button>
+                            <button onclick="checkAnswer({{ hand.id }}, 'RDBL' '{{ hand.correct_answer }}', '{{ hand.explanation }}')">RDBL</button>
                         </div>
                         <div>
                            <button onclick="selectNumber({{ hand.id }}, 1)">1</button>
@@ -24,11 +24,11 @@
 
                         </div>
                         <div id="suits-{{ hand.id }}">
-                            <button onclick="selectSuit({{ hand.id }}, '♣', '{{ hand.correct_answer }}')" class="club">♣</button>
-                            <button onclick="selectSuit({{ hand.id }}, '♦', '{{ hand.correct_answer }}')" class="diamond">♦</button>
-                            <button onclick="selectSuit({{ hand.id }}, '♥', '{{ hand.correct_answer }}')" class="heart">♥</button>
-                            <button onclick="selectSuit({{ hand.id }}, '♠', '{{ hand.correct_answer }}')" class="spade">♠</button>
-                            <button onclick="selectSuit({{ hand.id }}, 'NT', '{{ hand.correct_answer }}')">NT</button>
+                            <button onclick="selectSuit({{ hand.id }}, '♣', '{{ hand.correct_answer }}', '{{ hand.explanation }}')" class="club">♣</button>
+                            <button onclick="selectSuit({{ hand.id }}, '♦', '{{ hand.correct_answer }}', '{{ hand.explanation }}')" class="diamond">♦</button>
+                            <button onclick="selectSuit({{ hand.id }}, '♥', '{{ hand.correct_answer }}', '{{ hand.explanation }}')" class="heart">♥</button>
+                            <button onclick="selectSuit({{ hand.id }}, '♠', '{{ hand.correct_answer }}', '{{ hand.explanation }}')" class="spade">♠</button>
+                            <button onclick="selectSuit({{ hand.id }}, 'NT', '{{ hand.correct_answer }}', '{{ hand.explanation }}')">NT</button>
                         </div>
                     </div>
             <div class="result" id="result-{{ hand.id }}"></div>
@@ -50,11 +50,11 @@
             suitDiv.setAttribute('data-number', number);
         }
 
-        function selectSuit(index, suit, correctAnswer) {
+        function selectSuit(index, suit, correctAnswer, explanation) {
             const suitDiv = document.getElementById(`suits-${index}`);
             const number = suitDiv.getAttribute('data-number');
             if (number) {
-                checkAnswer(index, `${number}${suit}`, correctAnswer);
+                checkAnswer(index, `${number}${suit}`, correctAnswer, explanation);
             }
         }
         function colorSuits(text) {
@@ -64,7 +64,7 @@
                        .replace(/♣/g, '<span class="club">♣</span>');
         }
 
-    function checkAnswer(index, answer, correctAnswer) {
+    function checkAnswer(index, answer, correctAnswer, explanation) {
         const resultDiv = document.getElementById(`result-${index}`);
         if (correctAnswer.startsWith(answer)) {
             correctCount++;
@@ -73,7 +73,7 @@
             wrongCount++;
         }
 
-        resultDiv.innerHTML = `Correct Answer: ${colorSuits(correctAnswer)} <br> Your Answer: ${colorSuits(answer)} <br> Success Rate: ${(correctCount / (correctCount + wrongCount) * 100).toFixed(1)}%`;
+        resultDiv.innerHTML = `Correct Answer: ${colorSuits(correctAnswer)} <br> The Reason: ${explanation}<br> Your Answer: ${colorSuits(answer)} <br> Success Rate: ${(correctCount / (correctCount + wrongCount) * 100).toFixed(1)}%`;
     }
     </script>
 

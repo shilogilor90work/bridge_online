@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render, get_object_or_404, redirect
 from hands.models import Hand
 from .forms import HandForm  # Create a HandForm for handling form data
