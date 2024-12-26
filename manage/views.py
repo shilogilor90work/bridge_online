@@ -1,4 +1,5 @@
 import json
+import random
 
 from django.shortcuts import render, get_object_or_404, redirect
 from hands.models import Hand
@@ -41,5 +42,6 @@ def delete_hand(request, hand_id):
 
 
 def hand_list(request):
-    hands = Hand.objects.all()
+    hands = list(Hand.objects.all())
+    random.shuffle(hands)
     return render(request, 'manage_hands/hand_list.html', {'hands': hands})

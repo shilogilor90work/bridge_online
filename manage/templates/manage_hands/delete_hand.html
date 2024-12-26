@@ -1,7 +1,13 @@
+{% extends 'manage/base.html' %}
+{% block title %}
 <h2>Delete Hand</h2>
+{% endblock %}
+{% block content %}
+
 <p>Are you sure you want to delete "{{ hand.subject }}"?</p>
 <form method="post">
     {% csrf_token %}
     <button type="submit">Yes, delete</button>
 </form>
 <a href="{% url 'manage:hand_list' %}">Cancel</a>
+{% endblock %}

@@ -1,6 +1,12 @@
+{% extends 'manage_hands/base.html' %}
+{% block title %}
 <h2>Update Hand</h2>
+{% endblock %}
+{% block content %}
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Update</button>
 </form>
+
+{% endblock %}
