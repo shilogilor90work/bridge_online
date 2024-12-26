@@ -5,7 +5,7 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
-        <input type="hidden" name="id" value="{{ form.instance.id }}">
+        <p><strong>ID:</strong> {{ form.instance.id }}</p>
 
     {{ form.as_p }}
     <button type="submit">Update</button>
