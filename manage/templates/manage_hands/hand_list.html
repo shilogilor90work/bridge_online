@@ -10,8 +10,8 @@
     {% for hand in hands %}
         <li>
             <pre>Hand #{{ hand.id }}: <b>{{ hand.subject }}</b></pre>
-            <pre style="font-size: 26px; margin: 1; padding: 1;">{{ hand.cards|color_suits|safe }}</pre>
-            <pre style="font-size: 26px; margin: 1; padding: 1;">{{ hand.bids|color_suits|safe }}</pre>
+            <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
+            <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
             <div class="options">
                         <div>
                             <button onclick="checkAnswer({{ hand.id }}, 'Pass', '{{ hand.correct_answer }}', '{{ hand.explanation }}')">Pass</button>
