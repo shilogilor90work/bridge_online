@@ -1,6 +1,11 @@
-{% load custom_filters %}
+{% extends 'manage_hands/base.html' %}
 
+{% load custom_filters %}
+{% block title %}
 <h2>Hands List</h2>
+{% endblock %}
+{% block content %}
+
 <ul>
     {% for hand in hands %}
         <li>
@@ -133,3 +138,5 @@
             font-weight: bold;
         }
     </style>
+
+{% endblock %}
