@@ -9,7 +9,7 @@
 <ul>
     {% for hand in hands %}
         <li>
-            <pre>Hand #{{ hand.id }} Subject: <b>{{ hand.subject }}</b></pre>
+            <pre>Hand #{{ hand.id }}: <b>{{ hand.subject }}</b></pre>
             <pre>{{ hand.cards|color_suits|safe }}</pre>
             <pre>{{ hand.bids|color_suits|safe }}</pre>
             <div class="options">
