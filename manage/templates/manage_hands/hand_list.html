@@ -9,9 +9,9 @@
 <ul>
     {% for hand in hands %}
         <li>
-            <pre>Hand #{{ hand.id }} Subject: <b>{{ hand.subject }}</b></pre>
-            <pre>{{ hand.cards|color_suits|safe }}</pre>
-            <pre>{{ hand.bids|color_suits|safe }}</pre>
+            <pre>Hand #{{ hand.id }}: <b>{{ hand.subject }}</b></pre>
+            <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
+            <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
             <div class="options">
                         <div>
                             <button onclick="checkAnswer({{ hand.id }}, 'Pass', '{{ hand.correct_answer }}', '{{ hand.explanation }}')">Pass</button>
@@ -38,7 +38,7 @@
                     </div>
             <div class="result" id="result-{{ hand.id }}"></div>
             <a href="{% url 'manage:update_hand' hand.id %}">Edit</a>
-            <a href="{% url 'manage:delete_hand' hand.id %}">Delete</a>
+            <!--a href="{% url 'manage:delete_hand' hand.id %}">Delete</a-->
         </li>
     {% endfor %}
 </ul>
@@ -91,7 +91,7 @@
         }
         .options button {
             padding: 10px;
-            margin: 5px;
+            margin: 2px;
             border: none;
             background-color: lightgray;
             color: black;

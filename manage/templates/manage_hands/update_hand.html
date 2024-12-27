@@ -5,6 +5,8 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
+        <p><strong>ID:</strong> {{ form.instance.id }}</p>
+
     {{ form.as_p }}
     <button type="submit">Update</button>
 </form>
