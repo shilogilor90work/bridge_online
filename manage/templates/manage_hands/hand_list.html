@@ -5,8 +5,6 @@
 <h2>Hands List</h2>
 {% endblock %}
 {% block content %}
-
-
     {% for hand in hands %}
         <hr>
             <pre>Hand #{{ hand.id }}: <b>{{ hand.subject }}</b></pre>
@@ -20,7 +18,7 @@
                         </div>
                         <div>
                            <button onclick="selectNumber({{ hand.id }}, 1)">1</button>
-                            <button onclick="selectNumber({{ hand.id }}, 2)">2</button>
+                           <button onclick="selectNumber({{ hand.id }}, 2)">2</button>
                            <button onclick="selectNumber({{ hand.id }}, 3)">3</button>
                            <button onclick="selectNumber({{ hand.id }}, 4)">4</button>
                            <button onclick="selectNumber({{ hand.id }}, 5)">5</button>
@@ -39,6 +37,10 @@
             <div class="result" id="result-{{ hand.id }}"></div>
             <a href="{% url 'manage:update_hand' hand.id %}">Edit</a>
             <!--a href="{% url 'manage:delete_hand' hand.id %}">Delete</a-->
+			{% if not hand.correct_answer %}
+                <input type="text" id="explanation-{{ hand.id }}" placeholder="Enter explanation">
+                <button type="button" onclick="updateValues('{{ hand.id }}')">Update</button>
+            {% endif %}
         
     {% endfor %}
 	

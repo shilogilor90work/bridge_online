@@ -43,5 +43,5 @@ def delete_hand(request, hand_id):
 
 def hand_list(request):
     hands = list(Hand.objects.all())
-    random.shuffle(hands)
+    #random.shuffle(hands)
     return render(request, 'manage_hands/hand_list.html', {'hands': hands})
