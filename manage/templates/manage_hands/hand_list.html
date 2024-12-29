@@ -5,44 +5,44 @@
 <h2>Hands List</h2>
 {% endblock %}
 {% block content %}
-    {% for hand in hands %}
-        <hr>
-            <pre>Hand #{{ hand.id }}: <b>{{ hand.subject }}</b></pre>
-            <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
-            <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
-            <div class="options">
-                        <div>
-                            <button onclick="checkAnswer({{ hand.id }}, 'Pass', '{{ hand.correct_answer }}', '{{ hand.explanation }}')">Pass</button>
-                            <button onclick="checkAnswer({{ hand.id }}, 'DBL', '{{ hand.correct_answer }}', '{{ hand.explanation }}')">DBL</button>
-                            <button onclick="checkAnswer({{ hand.id }}, 'RDBL', '{{ hand.correct_answer }}', '{{ hand.explanation }}')">RDBL</button>
-                        </div>
-                        <div>
-                           <button onclick="selectNumber({{ hand.id }}, 1)">1</button>
-                           <button onclick="selectNumber({{ hand.id }}, 2)">2</button>
-                           <button onclick="selectNumber({{ hand.id }}, 3)">3</button>
-                           <button onclick="selectNumber({{ hand.id }}, 4)">4</button>
-                           <button onclick="selectNumber({{ hand.id }}, 5)">5</button>
-                           <button onclick="selectNumber({{ hand.id }}, 6)">6</button>
-                           <button onclick="selectNumber({{ hand.id }}, 7)">7</button>
+{% for hand in hands %}
+	<hr>
+		<pre>Hand #{{ hand.id }}: <b>{{ hand.subject }}</b></pre>
+		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
+		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
+		<div class="options">
+					<div>
+						<button onclick="checkAnswer({{ hand.id }}, 'Pass', '{{ hand.correct_answer }}', '{{ hand.explanation }}')">Pass</button>
+						<button onclick="checkAnswer({{ hand.id }}, 'DBL', '{{ hand.correct_answer }}', '{{ hand.explanation }}')">DBL</button>
+						<button onclick="checkAnswer({{ hand.id }}, 'RDBL', '{{ hand.correct_answer }}', '{{ hand.explanation }}')">RDBL</button>
+					</div>
+					<div>
+					   <button onclick="selectNumber({{ hand.id }}, 1)">1</button>
+					   <button onclick="selectNumber({{ hand.id }}, 2)">2</button>
+					   <button onclick="selectNumber({{ hand.id }}, 3)">3</button>
+					   <button onclick="selectNumber({{ hand.id }}, 4)">4</button>
+					   <button onclick="selectNumber({{ hand.id }}, 5)">5</button>
+					   <button onclick="selectNumber({{ hand.id }}, 6)">6</button>
+					   <button onclick="selectNumber({{ hand.id }}, 7)">7</button>
 
-                        </div>
-                        <div id="suits-{{ hand.id }}">
-                            <button onclick="selectSuit({{ hand.id }}, '♣', '{{ hand.correct_answer }}', '{{ hand.explanation }}')" class="club">♣</button>
-                            <button onclick="selectSuit({{ hand.id }}, '♦', '{{ hand.correct_answer }}', '{{ hand.explanation }}')" class="diamond">♦</button>
-                            <button onclick="selectSuit({{ hand.id }}, '♥', '{{ hand.correct_answer }}', '{{ hand.explanation }}')" class="heart">♥</button>
-                            <button onclick="selectSuit({{ hand.id }}, '♠', '{{ hand.correct_answer }}', '{{ hand.explanation }}')" class="spade">♠</button>
-                            <button onclick="selectSuit({{ hand.id }}, 'NT', '{{ hand.correct_answer }}', '{{ hand.explanation }}')">NT</button>
-                        </div>
-                    </div>
-            <div class="result" id="result-{{ hand.id }}"></div>
-            <a href="{% url 'manage:update_hand' hand.id %}">Edit</a>
-            <!--a href="{% url 'manage:delete_hand' hand.id %}">Delete</a-->
-			{% if hand.correct_answer == "?" %}
-                <input type="text" id="explanation-{{ hand.id }}" placeholder="Enter explanation">
-                <button type="button" onclick="updateValues('{{ hand.id }}')">Update</button>
-            {% endif %}
-        
-    {% endfor %}
+					</div>
+					<div id="suits-{{ hand.id }}">
+						<button onclick="selectSuit({{ hand.id }}, '♣', '{{ hand.correct_answer }}', '{{ hand.explanation }}')" class="club">♣</button>
+						<button onclick="selectSuit({{ hand.id }}, '♦', '{{ hand.correct_answer }}', '{{ hand.explanation }}')" class="diamond">♦</button>
+						<button onclick="selectSuit({{ hand.id }}, '♥', '{{ hand.correct_answer }}', '{{ hand.explanation }}')" class="heart">♥</button>
+						<button onclick="selectSuit({{ hand.id }}, '♠', '{{ hand.correct_answer }}', '{{ hand.explanation }}')" class="spade">♠</button>
+						<button onclick="selectSuit({{ hand.id }}, 'NT', '{{ hand.correct_answer }}', '{{ hand.explanation }}')">NT</button>
+					</div>
+				</div>
+		<div class="result" id="result-{{ hand.id }}"></div>
+		<a href="{% url 'manage:update_hand' hand.id %}">Edit</a>
+		<!--a href="{% url 'manage:delete_hand' hand.id %}">Delete</a-->
+		{% if hand.correct_answer == "?" %}
+			<input type="text" id="explanation-{{ hand.id }}" placeholder="Enter explanation">
+			<button type="button" onclick="updateValues('{{ hand.id }}')">Update</button>
+		{% endif %}
+	
+{% endfor %}
 	
 <a href="{% url 'manage:create_hand' %}">Add New Hand</a>
 
