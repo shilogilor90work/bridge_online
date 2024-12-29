@@ -39,7 +39,6 @@
 		<!--a href="{% url 'manage:delete_hand' hand.id %}">Delete</a-->
 		{% if hand.correct_answer == "?" %}
 			<input type="text" id="explanation-{{ hand.id }}" placeholder="Enter explanation">
-			<button type="button" onclick="updateValues('{{ hand.id }}')">Update</button>
 		{% endif %}
 	
 {% endfor %}
@@ -79,8 +78,42 @@
         else {
             wrongCount++;
         }
+		if (correctAnswer != "?"):
+			resultDiv.innerHTML = `Correct Answer: ${colorSuits(correctAnswer)} <br> The Reason: ${explanation}<br> Your Answer: ${colorSuits(answer)} <br> Success Rate: ${(correctCount / (correctCount + wrongCount) * 100).toFixed(1)}%`;
+		else {
+			newExplaination = document.getElementById(`explanation-${index}`)
+			if(updateAnswer(index, answer, newExplaination)) {
+				resultDiv.innerHTML = `Your Answer: ${colorSuits(answer)}<br> The Reason: ${explanation} <br> Updated successfully`;
+			}
+		}
+    }
+	
+    function updateAnswer(index, answer, explanation) {
+        // Construct the URL for the Django view
+        const url = `/update-answer/${index}/${answer}/${explanation}/`;
 
-        resultDiv.innerHTML = `Correct Answer: ${colorSuits(correctAnswer)} <br> The Reason: ${explanation}<br> Your Answer: ${colorSuits(answer)} <br> Success Rate: ${(correctCount / (correctCount + wrongCount) * 100).toFixed(1)}%`;
+        // Send a POST request to the backend
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken') // Include CSRF token for security
+            }
+        })
+        .then(data => {
+            if (data && data.success) {
+                return true;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            return false;
+        });
+    }
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
     }
     </script>
 

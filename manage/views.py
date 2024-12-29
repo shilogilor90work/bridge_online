@@ -32,6 +32,16 @@ def update_hand(request, hand_id):
         form = HandForm(instance=hand)
     return render(request, 'manage_hands/update_hand.html', {'form': form})
 
+def update_answer(request, hand_id, answer, explaination):
+    hand = get_object_or_404(Hand, id=hand_id)
+    if request.method == 'POST':
+        hand.correct_answer = answer
+        hand.explanation = explaination
+        form = HandForm(request.POST, instance=hand)
+        if form.is_valid():
+            form.save()
+            return redirect('manage:hand_list')  # Replace with the name of your success page or list view
+
 
 def delete_hand(request, hand_id):
     hand = get_object_or_404(Hand, id=hand_id)
