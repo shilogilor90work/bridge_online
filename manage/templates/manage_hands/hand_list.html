@@ -81,7 +81,7 @@
 		if (!correctAnswer.startsWith("?")):
 			resultDiv.innerHTML = `Correct Answer: ${colorSuits(correctAnswer)} <br> The Reason: ${explanation}<br> Your Answer: ${colorSuits(answer)} <br> Success Rate: ${(correctCount / (correctCount + wrongCount) * 100).toFixed(1)}%`;
 		else {
-			resultDiv.innerHTML = `Trying to update the hand with Your Answer: ${colorSuits(answer)}<br> The Reason: ${explanation}`;
+			resultDiv.innerHTML = `New Answer: ${colorSuits(answer)}<br> The Reason: ${explanation}`;
 			newExplaination = document.getElementById(`explanation-${index}`)
 			if(updateAnswer(index, answer, newExplaination)) {
 				resultDiv.innerHTML = `Your Answer: ${colorSuits(answer)}<br> The Reason: ${explanation} <br> Updated successfully`;
