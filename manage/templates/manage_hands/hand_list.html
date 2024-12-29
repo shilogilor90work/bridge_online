@@ -78,7 +78,7 @@
         else {
             wrongCount++;
         }
-		if (!correctAnswer.startsWith("?")):
+		if (!correctAnswer.startsWith('?')):
 			resultDiv.innerHTML = `Correct Answer: ${colorSuits(correctAnswer)} <br> The Reason: ${explanation}<br> Your Answer: ${colorSuits(answer)} <br> Success Rate: ${(correctCount / (correctCount + wrongCount) * 100).toFixed(1)}%`;
 		else {
 			resultDiv.innerHTML = `New Answer: ${colorSuits(answer)}<br> The Reason: ${explanation}`;
