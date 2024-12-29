@@ -37,7 +37,7 @@
             <div class="result" id="result-{{ hand.id }}"></div>
             <a href="{% url 'manage:update_hand' hand.id %}">Edit</a>
             <!--a href="{% url 'manage:delete_hand' hand.id %}">Delete</a-->
-			{% if not hand.correct_answer %}
+			{% if hand.correct_answer == "?" %}
                 <input type="text" id="explanation-{{ hand.id }}" placeholder="Enter explanation">
                 <button type="button" onclick="updateValues('{{ hand.id }}')">Update</button>
             {% endif %}
