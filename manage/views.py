@@ -105,3 +105,9 @@ def upload_json_view(request):
         form = JSONUploadForm()
 
     return render(request, 'manage_hands/upload_json.html', {'form': form})
+
+
+def display_hand(request, hand_id):
+    hand = get_object_or_404(Hand, id=hand_id)
+    return render(request, 'manage_hands/hand_list.html', {'hands':[hand]})
+
