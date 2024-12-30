@@ -557,7 +557,7 @@
     {
         "cards": "♠: Q J 7 6 2\n♥: 8 6\n♦: A\n♣: K Q 7 4 2\n12 HCP",
         "bids": "1♠ P 1NT P\n?",
-        "correctAnswer": "2♣, PARTNER WILL PASS THIS, UNLESS HE HAS SUCH AN EXTREME HAND OF VERY VERY LONG DIAMONDS OR HEARTS AND I WILL PASS IT, WHEN HE "bids" AGAIN."
+        "correctAnswer": "2♣, PARTNER WILL PASS THIS, UNLESS HE HAS SUCH AN EXTREME HAND OF VERY VERY LONG DIAMONDS OR HEARTS AND I WILL PASS IT, WHEN HE bids AGAIN."
     },
     {
         "cards": "♠: A Q J T 7 6 2\n♥: 8 6\n♦: A\n♣: K Q 7\n16 HCP",
@@ -697,12 +697,12 @@
     {
         "cards": "♠: A K 7 5\n♥: Q T 9 5 2\n♦: K T\n♣: K Q\n17 HCP",
         "bids": "1♠ DBL 2♠ P\nP ?",
-        "correctAnswer": "3♥ NOTICE, THE RIGHT HAND PROMISED 5+ "cards", THE LEFT HAND PROMISED 3+, YOU HAVE 4, THERE’S NO WAY YOUR PARTNER’S HAND WAS [WITH] A VOID. I WANT TO PUNISH WITH 2 SPADES.... SO RIGHT NOW, START DESCRIBING YOUR HAND AND COOPERATE. YOU HAVE AT LEAST 16+ POINTS AND ARE HOPING FOR 4 HEARTS."
+        "correctAnswer": "3♥ NOTICE, THE RIGHT HAND PROMISED 5+ cards, THE LEFT HAND PROMISED 3+, YOU HAVE 4, THERE’S NO WAY YOUR PARTNER’S HAND WAS [WITH] A VOID. I WANT TO PUNISH WITH 2 SPADES.... SO RIGHT NOW, START DESCRIBING YOUR HAND AND COOPERATE. YOU HAVE AT LEAST 16+ POINTS AND ARE HOPING FOR 4 HEARTS."
     },
     {
         "cards": "♠: K 7 4\n♥: Q J 8 5\n♦: 9 7 6 3\n♣: Q\n8 HCP",
         "bids": "1♥ 1♠ DBL 2♠\nP P DBL P\n3♣ P ?",
-        "correctAnswer": "4♥ - Partner promised 5+ Hearts, 4+ clubs, 12-14 points, and is not interested in doubling 2 Spades. Now, with this information, what do you think the probability is of making 4 Hearts (of course, given your hand)? Making a vulnerable game is 10 IMPs compared to 3+1. Failing a game versus making 3 is 6 IMPs. So, based on the visible "cards", if the probability is above 6/16, it’s worth declaring a game. However, since the bidding is based on hidden "cards", this is a probability of a probability, so the root of this should be around 60%. Therefore, if you think there is about a 60% chance of success, you should take it and bid the game. And this is where the essence of hand evaluation comes in."
+        "correctAnswer": "4♥ - Partner promised 5+ Hearts, 4+ clubs, 12-14 points, and is not interested in doubling 2 Spades. Now, with this information, what do you think the probability is of making 4 Hearts (of course, given your hand)? Making a vulnerable game is 10 IMPs compared to 3+1. Failing a game versus making 3 is 6 IMPs. So, based on the visible cards, if the probability is above 6/16, it’s worth declaring a game. However, since the bidding is based on hidden cards, this is a probability of a probability, so the root of this should be around 60%. Therefore, if you think there is about a 60% chance of success, you should take it and bid the game. And this is where the essence of hand evaluation comes in."
     },
     {
         "cards": "♠: A 3 2\n♥: Q J 6\n♦: A J 8 7\n♣: 6 3 2\n12 HCP",
@@ -742,7 +742,7 @@
     {
         "cards": "♠: A K J 2\n♥: A K J 8 3\n♦: 6\n♣: A 7 2\n20 HCP",
         "bids": "1♦ DBL 2♦ P\n3♦ ?",
-        "correctAnswer": "4♥ - This is a matter of hand evaluation. Notice that bidding 3 Hearts already indicates 16+ points, which used to be raised only with 8 points. We already said he doesn’t have 8 points, but here you're ready for him to raise with just 5 points, and even 4 points. Also, he has 3 boxes (likely referring to a suit with 3 "cards") and 2 points – you're okay with him making that bid because there are no big honors like a King or Ace to worry about losing. You're the only one who really knows that in this game, there are only 34 points, not 40. Why? Because the clubs don’t matter here. So, you have 20 points out of 34. In other words, it’s as if you have 22-23 points out of 40. Now, even if your partner has just 3 points in Diamonds, we're already in a good position. We can easily go for game now. Just bid it immediately because you’re already at about 60% and that’s enough."
+        "correctAnswer": "4♥ - This is a matter of hand evaluation. Notice that bidding 3 Hearts already indicates 16+ points, which used to be raised only with 8 points. We already said he doesn’t have 8 points, but here you're ready for him to raise with just 5 points, and even 4 points. Also, he has 3 boxes (likely referring to a suit with 3 cards) and 2 points – you're okay with him making that bid because there are no big honors like a King or Ace to worry about losing. You're the only one who really knows that in this game, there are only 34 points, not 40. Why? Because the clubs don’t matter here. So, you have 20 points out of 34. In other words, it’s as if you have 22-23 points out of 40. Now, even if your partner has just 3 points in Diamonds, we're already in a good position. We can easily go for game now. Just bid it immediately because you’re already at about 60% and that’s enough."
     },
     {
         "cards": "♠: J T\n♥: A Q J 6 5\n♦: Q 2\n♣: A 6 3 2\n14 HCP",
