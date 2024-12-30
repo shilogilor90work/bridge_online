@@ -64,6 +64,11 @@ def hand_list(request):
     return render(request, 'manage_hands/hand_list.html', {'hands': hands})
 
 
+def hand_list_no_shuffle(request):
+    hands = list(Hand.objects.all())
+    return render(request, 'manage_hands/hand_list.html', {'hands': hands})
+
+
 def upload_json_view(request):
     if request.method == 'POST':
         form = JSONUploadForm(request.POST, request.FILES)
