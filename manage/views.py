@@ -27,13 +27,13 @@ def update_hand(request, hand_id):
             return redirect('manage:hand_list')  # Replace with the name of your success page or list view
     else:
         if hand.cards:
-            hand.cards = hand.cards.replace('\n', '\\n').replace("'", "\\'")
+            hand.cards = hand.cards.replace('\n', '\\n')
         if hand.bids:
-            hand.bids = hand.bids.replace('\n', '\\n').replace("'", "\\'")
+            hand.bids = hand.bids.replace('\n', '\\n')
         if hand.explanation:
-            hand.explanation = hand.explanation.replace('\n', '\\n').replace("'", "\\'")
+            hand.explanation = hand.explanation.replace('\n', '\\n')
         if hand.correct_answer:
-            hand.correct_answer = hand.correct_answer.replace('\n', '\\n').replace("'", "\\'")
+            hand.correct_answer = hand.correct_answer.replace('\n', '\\n')
         form = HandForm(instance=hand)
     return render(request, 'manage_hands/update_hand.html', {'form': form})
 
