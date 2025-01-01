@@ -121,9 +121,14 @@
 	}
 
 	function updateAnswer(index, newAnswer) {
-		const newExplaination = document.getElementById(`explanation-${index}`);
-		// Construct the URL
-		const url = `/update-answer/${index}/${newAnswer}/${newExplaination}/`;
+		const newExplainationInput = document.getElementById(`explanation-${index}`);
+		const newExplanation = newExplainationInput ? newExplainationInput.value : ''; // Get the value or set it to an empty string if not found
+
+		if (!newExplanation.trim()) {
+			alert('Please provide an explanation before submitting.');
+			return;
+		}
+		const url = `/update-answer/${index}/${newAnswer}/${newExplanation}/`;
 
 		// Send the request (AJAX example)
 		fetch(url, {
