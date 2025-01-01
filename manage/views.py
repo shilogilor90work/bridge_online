@@ -64,9 +64,26 @@ def hand_list(request):
     return render(request, 'manage_hands/hand_list.html', {'hands': hands})
 
 
+def hand_list_limit(request, limit):
+    hands = list(Hand.objects.all())
+    hands = [hand for hand in hands if '?' not in hand.correct_answer]
+    random.shuffle(hands)
+    return render(request, 'manage_hands/hand_list.html', {'hands': hands[:limit]})
+
+
 def hand_list_no_shuffle(request):
     hands = list(Hand.objects.all())
     return render(request, 'manage_hands/hand_list.html', {'hands': hands})
+
+
+def hand_list_no_shuffle_limit_and_start(request, start_point, end_point):
+    hands = list(Hand.objects.all())
+    return render(request, 'manage_hands/hand_list.html', {'hands': hands[start_point:end_point]})
+
+
+def hand_list_no_shuffle_limit(request, limit):
+    hands = list(Hand.objects.all())
+    return render(request, 'manage_hands/hand_list.html', {'hands': hands[:limit]})
 
 
 def upload_json_view(request):
@@ -109,5 +126,5 @@ def upload_json_view(request):
 
 def display_hand(request, hand_id):
     hand = get_object_or_404(Hand, id=hand_id)
-    return render(request, 'manage_hands/hand_list.html', {'hands':[hand]})
+    return render(request, 'manage_hands/hand_list.html', {'hands': [hand]})
 

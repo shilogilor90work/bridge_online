@@ -12,9 +12,9 @@
 		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
 		<div class="options">
 					<div>
-						<button onclick="checkAnswer({{ hand.id }}, 'Pass', '{{ hand.correct_answer }}', '{{ hand.explanation }}')">Pass</button>
-						<button onclick="checkAnswer({{ hand.id }}, 'DBL', '{{ hand.correct_answer }}', '{{ hand.explanation }}')">DBL</button>
-						<button onclick="checkAnswer({{ hand.id }}, 'RDBL', '{{ hand.correct_answer }}', '{{ hand.explanation }}')">RDBL</button>
+						<button onclick='checkAnswer({{ hand.id }}, "Pass", "{{ hand.correct_answer }}", "{{ hand.explanation }}")'>Pass</button>
+						<button onclick='checkAnswer({{ hand.id }}, "DBL", "{{ hand.correct_answer }}", "{{ hand.explanation }}")'>DBL</button>
+						<button onclick='checkAnswer({{ hand.id }}, "RDBL", "{{ hand.correct_answer }}", "{{ hand.explanation }}")'>RDBL</button>
 					</div>
 					<div>
 					   <button onclick="selectNumber({{ hand.id }}, 1)">1</button>
@@ -27,11 +27,11 @@
 
 					</div>
 					<div id="suits-{{ hand.id }}">
-						<button onclick="selectSuit({{ hand.id }}, '♣', '{{ hand.correct_answer }}', '{{ hand.explanation }}')" class="club">♣</button>
-						<button onclick="selectSuit({{ hand.id }}, '♦', '{{ hand.correct_answer }}', '{{ hand.explanation }}')" class="diamond">♦</button>
-						<button onclick="selectSuit({{ hand.id }}, '♥', '{{ hand.correct_answer }}', '{{ hand.explanation }}')" class="heart">♥</button>
-						<button onclick="selectSuit({{ hand.id }}, '♠', '{{ hand.correct_answer }}', '{{ hand.explanation }}')" class="spade">♠</button>
-						<button onclick="selectSuit({{ hand.id }}, 'NT', '{{ hand.correct_answer }}', '{{ hand.explanation }}')">NT</button>
+						<button onclick='selectSuit({{ hand.id }}, "♣", "{{ hand.correct_answer }}", "{{ hand.explanation }}")' class="club">♣</button>
+						<button onclick='selectSuit({{ hand.id }}, "♠", "{{ hand.correct_answer }}", "{{ hand.explanation }}")' class="spade">♠</button>
+						<button onclick='selectSuit({{ hand.id }}, "♦", "{{ hand.correct_answer }}", "{{ hand.explanation }}")' class="diamond">♦</button>
+						<button onclick='selectSuit({{ hand.id }}, "♥", "{{ hand.correct_answer }}", "{{ hand.explanation }}")' class="heart">♥</button>
+						<button onclick='selectSuit({{ hand.id }}, "NT", "{{ hand.correct_answer }}", "{{ hand.explanation }}")'>NT</button>
 					</div>
 				</div>
 		<div class="result" id="result-{{ hand.id }}"></div>
