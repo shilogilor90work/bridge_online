@@ -1088,7 +1088,7 @@
         "cards": "♠: A K 9 8 7 6\n♥: J 6\n♦: A 3\n♣: K 8 3\n9 HCP",
         "bids": "1♠ P 2NT P\n3♦ P 3NT P\n4♦ P 4♥ P\n5♠ P 5NT P\n?",
         "correctAnswer": "6♦ : 2 above, i have the ace no king in the void suit"
-    }
+    },
     {
         "cards": "♠: A Q 3 2\n♥: A Q 9 4\n♦: 6 5 4\n♣: A 5\n16 HCP",
         "bids": "P 1♦ P 2♥\nDBL ?",
