@@ -28,6 +28,7 @@ python3 manage.py runserver
 
 Once the server is hosted, head over to http://127.0.0.1:8000 for the App.
 
+
 ssh -i private_key.pem ec2-user@16.170.223.167
 
 
