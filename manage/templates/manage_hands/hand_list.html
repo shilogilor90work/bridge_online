@@ -121,7 +121,7 @@
 	}
 
 	function updateAnswer(index, newAnswer) {
-		const newExplaination = suitDiv.getAttribute(`explanation-${index}`);
+		const newExplaination = document.getElementById(`explanation-${index}`);
 		// Construct the URL
 		const url = `/update-answer/${index}/${encodeURIComponent(newAnswer)}/${encodeURIComponent(newExplaination)}/`;
 
