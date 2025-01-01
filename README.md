@@ -27,3 +27,20 @@ python3 manage.py runserver
 ```
 
 Once the server is hosted, head over to http://127.0.0.1:8000 for the App.
+
+
+To update the server with latest version:
+ssh -i private_key.pem ec2-user@16.170.223.167
+
+the server is running in a "screen" (if you dont know what this is google it)
+attach to the screen:
+screen -r bridge
+
+ctrl+c (to stop the server)
+git pull
+python3 manage.py runserver 0.0.0.0:8000 (to start the server)
+ctrl+a (let go) and click d (to detach from screen)
+
+ and you could exit the connection
+
+but you could simply click the up arrow and enter (find the command in history, should be once or twice)
