@@ -123,7 +123,7 @@
 	function updateAnswer(index, newAnswer) {
 		const newExplaination = document.getElementById(`explanation-${index}`);
 		// Construct the URL
-		const url = `/update-answer/${index}/${encodeURIComponent(newAnswer)}/${encodeURIComponent(newExplaination)}/`;
+		const url = `/update-answer/${index}/${newAnswer}/${newExplaination}/`;
 
 		// Send the request (AJAX example)
 		fetch(url, {
