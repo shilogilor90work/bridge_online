@@ -10,8 +10,12 @@
 		<pre>Hand #{{ hand.id }}: <b>{{ hand.subject }}</b></pre>
 		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
 		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
-		<!--div style="font-size: 26px; margin: 0; padding: 0;" id="bids-{{ hand.id }}">'interactiveBids({{ hand.id }}, "{{ hand.bids }}", "{{ hand.correct_answer }}")'</div-->
-		<div class="options">
+		<div id="bids-{{ hand.id }}" style="font-size: 26px; margin: 0; padding: 0;">
+    <script>
+        interactiveBids({{ hand.id }}, "{{ hand.bids }}", "{{ hand.correct_answer }}");
+    </script>
+</div>
+<div class="options">
 					<div>
 						<button onclick='checkAnswer({{ hand.id }}, "Pass", "{{ hand.correct_answer }}", "{{ hand.explanation }}")'>Pass</button>
 						<button onclick='checkAnswer({{ hand.id }}, "DBL", "{{ hand.correct_answer }}", "{{ hand.explanation }}")'>DBL</button>
@@ -93,11 +97,13 @@
 
 	function interactiveBids(index, bids, correctAnswer) {
 		if(correctAnswer === "?"){
+		    bidsDiv.innerHTML = bids;
 			return bids;
 		}
 		const bidsDiv = document.getElementById(`suits-${index}`);
 		getCurrentBids(index, bids);
 		bidsDiv.innerHTML = currentBids;
+		return currentBids;
 	}
 
 	function selectNumber(index, number) {
