@@ -44,3 +44,8 @@ ctrl+a (let go) and click d (to detach from screen)
  and you could exit the connection
 
 but you could simply click the up arrow and enter (find the command in history, should be once or twice)
+
+
+
+To checkout sidebranch for testing:
+git checkout -b interactive_bids origin/interactive_bids
