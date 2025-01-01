@@ -120,11 +120,44 @@
 		suitDiv.setAttribute('data-number', number);
 	}
 
+	function updateAnswer(index, newAnswer) {
+		const newExplaination = suitDiv.getAttribute(`explanation-${index}`);
+		// Construct the URL
+		const url = `/update-answer/${index}/${encodeURIComponent(newAnswer)}/${encodeURIComponent(newExplaination)}/`;
+
+		// Send the request (AJAX example)
+		fetch(url, {
+			method: 'GET', // Change to 'POST' if your Django view requires it
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+		.then(response => {
+			if (response.ok) {
+				return response.json();
+			} else {
+				throw new Error('Network response was not ok.');
+			}
+		})
+		.then(data => {
+			console.log('Response:', data);
+			alert('Answer submitted successfully!');
+		})
+		.catch(error => {
+			console.error('There was a problem with the fetch operation:', error);
+		});
+	}
+
 	function selectSuit(index, suit, correctAnswer, explanation, bids) {
 		const suitDiv = document.getElementById(`suits-${index}`);
 		const number = suitDiv.getAttribute('data-number');
 		if (number) {
-			checkAnswer(index, `${number}${suit}`, correctAnswer, explanation, bids);
+			if(correctAnswer === "?") {
+				updateAnswer(index, `${number}${suit}`);
+			}
+			else {
+				checkAnswer(index, `${number}${suit}`, correctAnswer, explanation, bids);
+			}
 		}
 	}
 	function colorSuits(text) {
