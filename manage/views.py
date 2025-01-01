@@ -76,6 +76,13 @@ def hand_list_no_shuffle(request):
     return render(request, 'manage_hands/hand_list.html', {'hands': hands})
 
 
+
+def hand_list_no_answer_only(request):
+    hands = list(Hand.objects.all())
+    hands = [hand for hand in hands if '?' in hand.correct_answer]
+    return render(request, 'manage_hands/hand_list.html', {'hands': hands})
+
+
 def hand_list_no_shuffle_limit_and_start(request, start_point, end_point):
     hands = list(Hand.objects.all())
     return render(request, 'manage_hands/hand_list.html', {'hands': hands[start_point:end_point]})
