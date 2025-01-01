@@ -49,3 +49,7 @@ but you could simply click the up arrow and enter (find the command in history, 
 
 To checkout sidebranch for testing:
 git checkout -b interactive_bids origin/interactive_bids
+
+And to go back to main:
+git checkout main
+git pull origin main
