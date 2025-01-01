@@ -127,7 +127,7 @@
 
     function checkAnswer(index, answer, correctAnswer, explanation, bids) {
         const resultDiv = document.getElementById(`result-${index}`);
-		if(true || currentBids === bids) {	
+		if(currentBids === bids) {	
 			if (correctAnswer.toLowerCase().startsWith(answer.toLowerCase())) {
 				correctCount++;
 			}
