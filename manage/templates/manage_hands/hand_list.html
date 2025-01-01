@@ -9,7 +9,7 @@
 	<hr>
 		<pre>Hand #{{ hand.id }}: <b>{{ hand.subject }}</b></pre>
 		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
-		<div style="font-size: 26px; margin: 0; padding: 0; id="bids-{{ hand.id }}">'interactiveBids({{ hand.id }}, "{{ hand.bids|color_suits|safe }}", "{{ hand.correct_answer }})"'</div>
+		<div style="font-size: 26px; margin: 0; padding: 0;" id="bids-{{ hand.id }}">'interactiveBids({{ hand.id }}, "{{ hand.bids }}", "{{ hand.correct_answer }}")'</div>
 		<div class="options">
 					<div>
 						<button onclick='checkAnswer({{ hand.id }}, "Pass", "{{ hand.correct_answer }}", "{{ hand.explanation }}")'>Pass</button>
