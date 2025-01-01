@@ -9,7 +9,8 @@
 	<hr>
 		<pre>Hand #{{ hand.id }}: <b>{{ hand.subject }}</b></pre>
 		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
-		<div id="bids-{{ hand.id }}" style="font-size: 26px; margin: 0; padding: 0;"></div>
+		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
+		<!--div id="bids-{{ hand.id }}" style="font-size: 26px; margin: 0; padding: 0;"></div-->
 		<div class="options">
 					<div>
 						<button onclick='checkAnswer({{ hand.id }}, "Pass", "{{ hand.correct_answer }}", "{{ hand.explanation }}")'>Pass</button>
@@ -126,7 +127,7 @@
 
     function checkAnswer(index, answer, correctAnswer, explanation, bids) {
         const resultDiv = document.getElementById(`result-${index}`);
-		if(currentBids === bids) {	
+		if(true || currentBids === bids) {	
 			if (correctAnswer.toLowerCase().startsWith(answer.toLowerCase())) {
 				correctCount++;
 			}
@@ -147,13 +148,13 @@
 			interactiveBids(index, bids, correctAnswer)
 		}
 	}
-	
+	/**
 	document.addEventListener('DOMContentLoaded', function () {
 		const hands = {{ hands|safe }}; // Render hands as JSON
 		hands.forEach(hand => {
 			interactiveBids(hand.id, hand.bids, hand.correct_answer);
 		});
-	});
+	});**/
 </script>
 
 
