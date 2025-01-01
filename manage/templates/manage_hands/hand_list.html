@@ -9,13 +9,8 @@
 	<hr>
 		<pre>Hand #{{ hand.id }}: <b>{{ hand.subject }}</b></pre>
 		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
-		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
-		<div id="bids-{{ hand.id }}" style="font-size: 26px; margin: 0; padding: 0;">
-    <script>
-        interactiveBids({{ hand.id }}, "{{ hand.bids }}", "{{ hand.correct_answer }}");
-    </script>
-</div>
-<div class="options">
+		<pre id="bids-{{ hand.id }}" style="font-size: 26px; margin: 0; padding: 0;">'currentBids({{ hand.id }}, "{{ hand.bids }}")</pre>
+		<div class="options">
 					<div>
 						<button onclick='checkAnswer({{ hand.id }}, "Pass", "{{ hand.correct_answer }}", "{{ hand.explanation }}")'>Pass</button>
 						<button onclick='checkAnswer({{ hand.id }}, "DBL", "{{ hand.correct_answer }}", "{{ hand.explanation }}")'>DBL</button>
@@ -70,7 +65,7 @@
 		const rows = bids.split("\n");
 		if(rows.length == currentBidNumber) {
 			currentBids = bids;
-			return;
+			return currentBids;
 		}
 
 		// Find the last row with "?" to calculate myBidColumn
@@ -93,6 +88,7 @@
 
 		// Construct the currentBids string
 		currentBids = selectedRows.join("\n");
+		return currentBids;
 	}
 
 	function interactiveBids(index, bids, correctAnswer) {
