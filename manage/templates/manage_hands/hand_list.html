@@ -46,11 +46,24 @@
 				</div>
 		<div class="result" id="result-{{ hand.id }}"></div>
 		<a href="{% url 'manage:update_hand' hand.id %}">Edit</a>
+		<br>
 		<!--a href="{% url 'manage:delete_hand' hand.id %}">Delete</a-->
-		{% if hand.correct_answer == "?" %}
-			<input type="text" id="explanation-{{ hand.id }}" placeholder="Enter explanation">
-		{% endif %}
-	
+	    <button type="button" onclick="toggleForm({{ hand.id }})">Edit Explanation</button>
+    	<div id="form_{{ hand.id }}" style="display: none;">
+			<form method="post" action="{% url 'manage:update_explanation' hand.id %}">
+				{% csrf_token %}
+				<div>
+					<label for="correct_answer_{{ hand.id }}">Correct Answer:</label>
+					<input type="text" id="correct_answer_{{ hand.id }}" name="correct_answer" value="{{ hand.correct_answer }}">
+				</div>
+				<div>
+					<label for="explanation_{{ hand.id }}">Explanation:</label>
+					<textarea id="explanation_{{ hand.id }}" name="explanation">{{ hand.explanation }}</textarea>
+				</div>
+				<button type="submit">Update</button>
+			</form>
+	    </div>
+
 {% endfor %}
 	
 <a href="{% url 'manage:create_hand' %}">Add New Hand</a>
@@ -195,6 +208,16 @@
 			interactiveBids(index, bids, correctAnswer)
 		}**/
 	}
+	    function toggleForm(handId) {
+        var formElement = document.getElementById("form_" + handId);
+
+        // Toggle visibility of the form
+        if (formElement.style.display === "none") {
+            formElement.style.display = "block";
+        } else {
+            formElement.style.display = "none";
+        }
+    }
 </script>
 
 
