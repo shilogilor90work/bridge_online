@@ -161,7 +161,7 @@ def display_hand(request, hand_id):
 
 
 def to_symbol(answer):
-    bid = bid.strip().lower()
+    bid = answer.strip().lower()
 
     if len(bid) != 2:
         return answer
