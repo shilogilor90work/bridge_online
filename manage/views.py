@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 from django.shortcuts import render, get_object_or_404, redirect
 from hands.models import Hand
-from .forms import HandForm, JSONUploadForm  # Create a HandForm for handling form data
+from .forms import HandForm, JSONUploadForm, ExplanationForm  # Create a HandForm for handling form data
 
 
 def create_hand(request):
@@ -35,6 +35,30 @@ def update_hand(request, hand_id):
         if hand.correct_answer:
             hand.correct_answer = hand.correct_answer.replace('\n', '\\n')
         form = HandForm(instance=hand)
+    return render(request, 'manage_hands/update_hand.html', {'form': form})
+
+
+def update_explanation(request, hand_id):
+    hand = get_object_or_404(Hand, id=hand_id)
+    print(request.method)
+    if request.method == 'POST':
+        # Create a form with only the fields we want to update
+        form = ExplanationForm(request.POST, instance=hand)
+
+        # Only update the 'correct_answer' and 'explanation' fields
+        print(form.is_valid())
+        print(form)
+        if form.is_valid():
+            hand.correct_answer = form.cleaned_data.get('correct_answer', hand.correct_answer)
+            hand.explanation = form.cleaned_data.get('explanation', hand.explanation)
+
+            # Save the updated hand
+            hand.save()
+            return redirect('manage:hand_list')  # Replace with the correct URL name for your hand list view
+
+    else:
+        form = HandForm(instance=hand)
+
     return render(request, 'manage_hands/update_hand.html', {'form': form})
 
 
