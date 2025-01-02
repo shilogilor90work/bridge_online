@@ -10,3 +10,9 @@ class HandForm(forms.ModelForm):
 
 class JSONUploadForm(forms.Form):
     json_file = forms.FileField(label="Upload JSON File")
+
+
+class ExplanationForm(forms.ModelForm):
+    class Meta:
+        model = Hand
+        fields = ['correct_answer', 'explanation']
