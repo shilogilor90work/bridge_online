@@ -54,7 +54,12 @@ def update_explanation(request, hand_id):
 
             # Save the updated hand
             hand.save()
-            return redirect('manage:hand_list')  # Replace with the correct URL name for your hand list view
+            # Redirect back to the referring page
+            referer = request.META.get('HTTP_REFERER')
+            if referer:
+                return redirect(referer)
+            else:
+                return redirect('manage:hand_list')  # Fallback if no referer is provided
 
     else:
         form = HandForm(instance=hand)
