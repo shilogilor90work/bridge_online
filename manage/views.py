@@ -33,7 +33,7 @@ def update_hand(request, hand_id):
         if hand.explanation:
             hand.explanation = hand.explanation.replace('\n', '\\n')
         if hand.correct_answer:
-            hand.correct_answer = hand.correct_answer.replace('\n', '\\n')
+            hand.correct_answer = to_symbol(hand.correct_answer.replace('\n', '\\n'))
         form = HandForm(instance=hand)
     return render(request, 'manage_hands/update_hand.html', {'form': form})
 
@@ -49,12 +49,17 @@ def update_explanation(request, hand_id):
         print(form.is_valid())
         print(form)
         if form.is_valid():
-            hand.correct_answer = form.cleaned_data.get('correct_answer', hand.correct_answer)
+            hand.correct_answer = to_symbol(form.cleaned_data.get('correct_answer', hand.correct_answer))
             hand.explanation = form.cleaned_data.get('explanation', hand.explanation)
 
             # Save the updated hand
             hand.save()
-            return redirect('manage:hand_list')  # Replace with the correct URL name for your hand list view
+            # Redirect back to the referring page
+            referer = request.META.get('HTTP_REFERER')
+            if referer:
+                return redirect(referer)
+            else:
+                return redirect('manage:hand_list')  # Fallback if no referer is provided
 
     else:
         form = HandForm(instance=hand)
@@ -65,7 +70,7 @@ def update_explanation(request, hand_id):
 def update_answer(request, hand_id, answer, explaination):
     hand = get_object_or_404(Hand, id=hand_id)
     if request.method == 'POST':
-        hand.correct_answer = answer
+        hand.correct_answer = to_symbol(answer)
         hand.explanation = explaination
         form = HandForm(request.POST, instance=hand)
         if form.is_valid():
@@ -138,7 +143,7 @@ def upload_json_view(request):
                         subject="Bridge Hand",
                         cards=entry["cards"],
                         bids=entry["bids"],
-                        correct_answer=correct_answer,
+                        correct_answer=to_symbol(correct_answer),
                         explanation=explanation,
                         metadata={},  # Add metadata if required
                     )
@@ -158,4 +163,35 @@ def upload_json_view(request):
 def display_hand(request, hand_id):
     hand = get_object_or_404(Hand, id=hand_id)
     return render(request, 'manage_hands/hand_list.html', {'hands': [hand]})
+
+
+def to_symbol(answer):
+    bid = answer.strip().lower()
+
+    if len(bid) != 2:
+        return answer
+
+    # Extract the level (number) and suit (letter) from the bid
+    level = bid[0]  # All characters except the last
+    suit = bid[1]    # Last character
+
+    # Define a mapping of suit letters to symbols
+    suit_symbols = {
+        'c': '♣',  # Clubs
+        'd': '♦',  # Diamonds
+        'h': '♥',  # Hearts
+        's': '♠',  # Spades
+        'n': 'NT'  # No Trump
+    }
+
+    # Check if the level is a valid number
+    if not level.isdigit():
+        return answer
+
+    # Check if the suit is valid
+    if suit not in suit_symbols:
+        return answer
+
+    # Combine the level with the suit symbol
+    return f"{level}{suit_symbols[suit]}"
 
