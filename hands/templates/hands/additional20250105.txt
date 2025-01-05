@@ -7,7 +7,7 @@
     {
         "cards": "♠: K\n♥: A K J 5 4\n♦: J 4 3\n♣: K 6 4 2\n15 HCP",
         "bids": "1♥ P 1♠ P\n2♦ P 2♥ P\n3♣ P 3♦ P\n3♥ P 3♠ P\n4♣ P 4♦ P\n?",
-        "correctAnswer": ""
+        "correctAnswer": "?"
     },
     {
         "cards": "♠: 6 5\n♥: K Q T 9 2\n♦: J 8 6 5\n♣: A 6\n10 HCP",
@@ -67,7 +67,7 @@
     {
         "cards": "♠: Q 6\n♥: A K Q 9\n♦: 9 6 2\n♣: A K 8 4\n18 HCP",
         "bids": "P 1♠ DBL P\n1NT 2♠ ?",
-        "correctAnswer": ""
+        "correctAnswer": "?"
     },
     {
         "cards": "♠: Q J 9 8 5\n♥: J\n♦: A 5 2\n♣: K Q J 7\n14 HCP",
@@ -97,42 +97,42 @@
     {
         "cards": "♠: T 8 7 5 4 3 2\n♥: 8 4\n♦: J 6\n♣: Q 2\n3 HCP",
         "bids": "P 1♦ 1♠ DBL\nP 2♥ 2♠ P\nP DBL P 3♦\nP ?",
-        "correctAnswer": ""
+        "correctAnswer": "?"
     },
     {
         "cards": "♠: K Q T 9 4\n♥: 4\n♦: 9 8 3\n♣: A K J 8\n13 HCP",
         "bids": "P P ?",
-        "correctAnswer": ""
+        "correctAnswer": "?"
     },
     {
         "cards": "♠: Q 5\n♥: K Q T 8 6\n♦: J 6\n♣: K Q 8 2\n13 HCP",
         "bids": "P 1♥ DBL 1♠\nP ?",
-        "correctAnswer": ""
+        "correctAnswer": "?"
     },
     {
         "cards": "♠: K J 6 5 3\n♥: J\n♦: Q 8 4\n♣: J T 7 3\n8 HCP",
         "bids": "P 1♥ DBL ?",
-        "correctAnswer": ""
+        "correctAnswer": "?"
     },
     {
         "cards": "♠: J 5 2\n♥: Q 8 4\n♦: K 7 3\n♣: Q 9 5 3\n8 HCP",
         "bids": "1♣ 1♠ ?",
-        "correctAnswer": ""
+        "correctAnswer": "?"
     },
     {
         "cards": "♠: A 8 4\n♥: 9 5 3\n♦: 7 3\n♣: A 9 5 4 3\n8 HCP",
         "bids": "1♣ 1♠ ?",
-        "correctAnswer": ""
+        "correctAnswer": "?"
     },
     {
         "cards": "♠: J 5 2\n♥: Q 8 4\n♦: K 7 3\n♣: Q 9 5 3\n8 HCP",
         "bids": "P P 1♣ 1♠\n?",
-        "correctAnswer": ""
+        "correctAnswer": "?"
     },
     {
         "cards": "♠: A 8 4\n♥: 9 5 3\n♦: 7 3\n♣: A 9 5 4 3\n8 HCP",
         "bids": "P P 1♣ 1♠\n?",
-        "correctAnswer": ""
+        "correctAnswer": "?"
     },
     {
         "cards": "♠: \n♥: J 10 9 6 4\n♦: 7 6 5 2\n♣: A 10 9 7\n5 HCP",
