@@ -1,0 +1,157 @@
+[
+    {
+        "cards": "♠: K\n♥: A K J 5 4\n♦: J 4 3\n♣: K 6 4 2\n15 HCP",
+        "bids": "1♥ P 1♠ P\n?",
+        "correctAnswer": "2♦ because you plan to say 3♣ after that…"
+    },
+    {
+        "cards": "♠: K\n♥: A K J 5 4\n♦: J 4 3\n♣: K 6 4 2\n15 HCP",
+        "bids": "1♥ P 1♠ P\n2♦ P 2♥ P\n3♣ P 3♦ P\n3♥ P 3♠ P\n4♣ P 4♦ P\n?",
+        "correctAnswer": ""
+    },
+    {
+        "cards": "♠: 6 5\n♥: K Q T 9 2\n♦: J 8 6 5\n♣: A 6\n10 HCP",
+        "bids": "P P 1♠ P\n?",
+        "correctAnswer": "2♥ hoping for game in hearts and if partner is 11-14 so Pass if he answers 3♥"
+    },
+    {
+        "cards": "♠: Q J 9 8 5 3\n♥: T 8 6\n♦: A 2\n♣: 8 5\n7 HCP",
+        "bids": "2♠ P 3♣ P\n3♠ P 4♣ P\n?",
+        "correctAnswer": "0 HCP"
+    },
+    {
+        "cards": "♠: Q J 9 8 5 3\n♥: T 8 6\n♦: A 2\n♣: 8 5\n7 HCP",
+        "bids": "2♠ P 3♣ P\n?",
+        "correctAnswer": "3♠"
+    },
+    {
+        "cards": "♠: A\n♥: A K Q J\n♦: K Q 7 4 3\n♣: K Q T\n24 HCP",
+        "bids": "2♠ P 3♣ P\n3♠ P 4♣ P\n4♥ P ?",
+        "correctAnswer": "6NT"
+    },
+    {
+        "cards": "♠: A 9\n♥: K 9 7 2\n♦: K Q 5\n♣: K J 7 2\n16 HCP",
+        "bids": "P 1♦ DBL 2♦\nP 3♦ ?",
+        "correctAnswer": "PASS need 70 percent to be sure that you dropping them."
+    },
+    {
+        "cards": "♠: K J 10 9 8 4 2\n♥: 5\n♦: J 9\n♣: K 7 2\n8 HCP",
+        "bids": "P P 1NT ?",
+        "correctAnswer": "3♠ BUT PASS IF WE ARE VULNERABLE."
+    },
+    {
+        "cards": "♠: 8 5 4\n♥: A J T 8\n♦: 5\n♣: A Q 7 6\n11 HCP",
+        "bids": "1♦ DBL RDBL P\n?",
+        "correctAnswer": "PASS if you have a chance, we always let us play 1♦ rDBL, we have at least 24 points… it is a small risk and a high reward."
+    },
+    {
+        "cards": "♠: \n♥: A K Q 8 7\n♦: J 8 6 5 4 3\n♣: A 5\n14 HCP",
+        "bids": "1♥ P 4♥ P\n?",
+        "correctAnswer": "4♠ void asking for aces ignoring spades."
+    },
+    {
+        "cards": "♠: A 9 3\n♥: J 9 6 3 2\n♦: Q\n♣: K 9 3 2\n10 HCP",
+        "bids": "1♥ P 4♥ P\n4♠ P ?",
+        "correctAnswer": "4NT he asked for aces with void in spades."
+    },
+    {
+        "cards": "♠: A 9 3\n♥: J 9 6 3 2\n♦: Q\n♣: K 9 3 2\n10 HCP",
+        "bids": "1♥ P ?",
+        "correctAnswer": "1♠ get more info"
+    },
+    {
+        "cards": "♠: \n♥: A K Q 8 7\n♦: J 8 6 5 4 3\n♣: A 5\n14 HCP",
+        "bids": "1♥ P 1♠ P\n?",
+        "correctAnswer": "3♦ 14-16 HCP, at least 10 cards in diamonds and hearts with minimum 4 in each suit"
+    },
+    {
+        "cards": "♠: Q 6\n♥: A K Q 9\n♦: 9 6 2\n♣: A K 8 4\n18 HCP",
+        "bids": "P 1♠ DBL P\n1NT 2♠ ?",
+        "correctAnswer": ""
+    },
+    {
+        "cards": "♠: Q J 9 8 5\n♥: J\n♦: A 5 2\n♣: K Q J 7\n14 HCP",
+        "bids": "1♠ P 2♥ P\n2NT P 3♥ P\n?",
+        "correctAnswer": "PASS you know that partner knows that you can have void in hearts, so if you had 2 and 14 points go to 4♥"
+    },
+    {
+        "cards": "♠: 9\n♥: A J 10 8 7 4 3\n♦: J 7 2\n♣: 8 6\n6 HCP",
+        "bids": "1♣ DBL 1♠ ?",
+        "correctAnswer": "PASS you should either bid Pass or 2♥, if you evaluate your hand as 8+ so bid 2♥, but we saw all opponents bid so E has 12+ partner has 12+ W bid a new suit, so you should Pass and then bid Hearts"
+    },
+    {
+        "cards": "♠: J 3 2\n♥: 8 3\n♦: K 10 3\n♣: A Q J 7 4\n11 HCP",
+        "bids": "2♥ ?",
+        "correctAnswer": "3♣"
+    },
+    {
+        "cards": "♠: A 8 6 5\n♥: A 9 5\n♦: Q 7\n♣: K 10 9 8\n13 HCP",
+        "bids": "2♥ 3♣ 3♦ ?",
+        "correctAnswer": "3NT we are red so we prefer game we know partner is 8+ 5+ so we should have at least 5 tricks in clubs, and 2 aces, so we hope for game on length, (this is gamble)"
+    },
+    {
+        "cards": "♠: A 10 5 3\n♥: K 4 3\n♦: Q 7\n♣: J 6 4 2\n10 HCP",
+        "bids": "1♠ P 1NT DBL\n2♥ DBL P 2NT\n3♥ ?",
+        "correctAnswer": "PASS instead of 3NT, partner promised 8+ and showed balanced(hot potato) and no 4 spades…"
+    },
+    {
+        "cards": "♠: T 8 7 5 4 3 2\n♥: 8 4\n♦: J 6\n♣: Q 2\n3 HCP",
+        "bids": "P 1♦ 1♠ DBL\nP 2♥ 2♠ P\nP DBL P 3♦\nP ?",
+        "correctAnswer": ""
+    },
+    {
+        "cards": "♠: K Q T 9 4\n♥: 4\n♦: 9 8 3\n♣: A K J 8\n13 HCP",
+        "bids": "P P ?",
+        "correctAnswer": ""
+    },
+    {
+        "cards": "♠: Q 5\n♥: K Q T 8 6\n♦: J 6\n♣: K Q 8 2\n13 HCP",
+        "bids": "P 1♥ DBL 1♠\nP ?",
+        "correctAnswer": ""
+    },
+    {
+        "cards": "♠: K J 6 5 3\n♥: J\n♦: Q 8 4\n♣: J T 7 3\n8 HCP",
+        "bids": "P 1♥ DBL ?",
+        "correctAnswer": ""
+    },
+    {
+        "cards": "♠: J 5 2\n♥: Q 8 4\n♦: K 7 3\n♣: Q 9 5 3\n8 HCP",
+        "bids": "1♣ 1♠ ?",
+        "correctAnswer": ""
+    },
+    {
+        "cards": "♠: A 8 4\n♥: 9 5 3\n♦: 7 3\n♣: A 9 5 4 3\n8 HCP",
+        "bids": "1♣ 1♠ ?",
+        "correctAnswer": ""
+    },
+    {
+        "cards": "♠: J 5 2\n♥: Q 8 4\n♦: K 7 3\n♣: Q 9 5 3\n8 HCP",
+        "bids": "P P 1♣ 1♠\n?",
+        "correctAnswer": ""
+    },
+    {
+        "cards": "♠: A 8 4\n♥: 9 5 3\n♦: 7 3\n♣: A 9 5 4 3\n8 HCP",
+        "bids": "P P 1♣ 1♠\n?",
+        "correctAnswer": ""
+    },
+    {
+        "cards": "♠: \n♥: J 10 9 6 4\n♦: 7 6 5 2\n♣: A 10 9 7\n5 HCP",
+        "bids": "P P P 1♦\n2♦ ?",
+        "correctAnswer": "2♥ 5-8 5+h"
+    },
+    {
+        "cards": "♠: J T 5 3 2\n♥: 7 3\n♦: 7\n♣: A 9 7 4 3\n5 HCP",
+        "bids": "P 1♦ ?",
+        "correctAnswer": "2♠ instead of 1♠, 5-13 6+ or 5 with shortness"
+    },
+    {
+        "cards": "♠: T 8 7\n♥: A J 3\n♦: Q J 8 4\n♣: T 5 3\n8 HCP",
+        "bids": "1NT 2♠ P ?",
+        "correctAnswer": "PASS Not 3♠. Always Pass, they opened with 15-17"
+    },
+    {
+        "cards": "♠: A Q J 10 7\n♥: 10 6 4 2\n♦: 8 2\n♣: J\n8 HCP",
+        "bids": "P ?",
+        "correctAnswer": "2♠ not 2♥ So that you can later bid 3 Hearts and the partner will be able to choose"
+    }
+]
