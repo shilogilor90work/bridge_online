@@ -32,14 +32,14 @@
 							onclick='selectSuit({{ hand.id|escape }}, "♣", "{{ hand.correct_answer|escapejs }}", "{{ hand.explanation|escapejs }}", "{{ hand.bids|escapejs }}")' 
 							class="club">♣</button>
 						<button 
-							onclick='selectSuit({{ hand.id|escape }}, "♠", "{{ hand.correct_answer|escapejs }}", "{{ hand.explanation|escapejs }}", "{{ hand.bids|escapejs }}")' 
-							class="spade">♠</button>
-						<button 
 							onclick='selectSuit({{ hand.id|escape }}, "♦", "{{ hand.correct_answer|escapejs }}", "{{ hand.explanation|escapejs }}", "{{ hand.bids|escapejs }}")' 
 							class="diamond">♦</button>
 						<button 
 							onclick='selectSuit({{ hand.id|escape }}, "♥", "{{ hand.correct_answer|escapejs }}", "{{ hand.explanation|escapejs }}", "{{ hand.bids|escapejs }}")' 
 							class="heart">♥</button>
+						<button 
+							onclick='selectSuit({{ hand.id|escape }}, "♠", "{{ hand.correct_answer|escapejs }}", "{{ hand.explanation|escapejs }}", "{{ hand.bids|escapejs }}")' 
+							class="spade">♠</button>
 						<button 
 							onclick='selectSuit({{ hand.id|escape }}, "NT", "{{ hand.correct_answer|escapejs }}", "{{ hand.explanation|escapejs }}", "{{ hand.bids|escapejs }}")'>NT</button>
 					</div>
