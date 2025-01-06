@@ -40,14 +40,11 @@ def update_hand(request, hand_id):
 
 def update_explanation(request, hand_id):
     hand = get_object_or_404(Hand, id=hand_id)
-    print(request.method)
     if request.method == 'POST':
         # Create a form with only the fields we want to update
         form = ExplanationForm(request.POST, instance=hand)
 
         # Only update the 'correct_answer' and 'explanation' fields
-        print(form.is_valid())
-        print(form)
         if form.is_valid():
             hand.correct_answer = to_symbol(form.cleaned_data.get('correct_answer', hand.correct_answer))
             hand.explanation = form.cleaned_data.get('explanation', hand.explanation)
