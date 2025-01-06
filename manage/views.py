@@ -127,7 +127,8 @@ def upload_json_view(request):
         form = JSONUploadForm(request.POST, request.FILES)
         if form.is_valid():
             json_file = request.FILES['json_file']
-
+            subject = form.cleaned_data['subject']
+            metadata = form.cleaned_data['metadata']
             try:
                 # Load JSON data from the uploaded file
                 data = json.load(json_file)
@@ -140,12 +141,12 @@ def upload_json_view(request):
 
                     # Create and save a Hand instance
                     Hand.objects.create(
-                        subject="Bridge Hand",
+                        subject=subject,
                         cards=entry["cards"],
                         bids=entry["bids"],
                         correct_answer=to_symbol(correct_answer),
                         explanation=explanation,
-                        metadata={},  # Add metadata if required
+                        metadata=metadata,  # Add the metadata from the form
                     )
                 return HttpResponse("JSON data successfully uploaded and processed!")
 
