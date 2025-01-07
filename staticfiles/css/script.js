@@ -130,3 +130,27 @@ function addBiddingRow() {
   // Append the new row to the container
   biddingRowsContainer.appendChild(newRow);
 }
+
+
+const dragBids = document.querySelectorAll('.drag-bid');
+
+// Get the input box
+const bidInput = document.getElementById('bid-input');
+
+// Add dragstart event to drag-bids
+dragBids.forEach(dragBid => {
+  dragBid.addEventListener('dragstart', (e) => {
+    e.dataTransfer.setData('text/plain', dragBid.dataset.bid);
+  });
+});
+
+// Allow drop on input box
+bidInput.addEventListener('dragover', (e) => {
+  e.preventDefault(); // Necessary to allow drop
+});
+
+bidInput.addEventListener('drop', (e) => {
+  e.preventDefault(); // Prevent default handling
+  const bid = e.dataTransfer.getData('text/plain'); // Get the dragged bid
+  bidInput.value = bid; // Set the input value to the bid
+});

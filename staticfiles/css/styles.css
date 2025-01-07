@@ -331,10 +331,99 @@ body {
 }
 
 .bidding-row input {
-  width: 18px;
+  width: 28px;
+  height: 10px;
   padding: 1px;
   text-align: center;
-  font-size: 5px; /* Set font size to a smaller value */
+  font-size: 8px; /* Set font size to a smaller value */
   z-index: 10; /* Ensure inputs are above other elements */
   pointer-events: auto; /* Ensure the input is interactive */
+}
+
+
+
+
+.drag-bid-container {
+  width: auto; /* Set a smaller width */
+  height: auto; /* Keep the height to auto adjust with content */
+  padding: 10px; /* Optional: reduce padding */
+  margin: 10px; /* Optional: reduce margin */
+  position: absolute; /* Keeps it in the top-left corner */
+  top: 10px; /* Adjust top margin */
+  left: 10px; /* Adjust left margin */
+  display: flex;
+  flex-direction: column; /* Stack the rows vertically */
+  gap: 5px; /* Space between rows */
+  overflow: hidden; /* Prevent overflow */
+  z-index: 1000;
+}
+
+.drag-bid {
+  display: inline-block;
+  height: 17px;
+  padding: 5px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: grab;
+  text-align: center;
+}
+
+.input-box {
+  width: 200px;
+  height: 30px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  padding: 5px;
+  text-align: center;
+}
+
+.drop-area {
+  border: 2px dashed #aaa;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.drop-area:hover {
+  border-color: #000;
+}
+
+.bid-row {
+  display: flex;
+  gap: 10px; /* Spacing between bids in a row */
+}
+
+.drag-bid.blue {
+  background-color: #007BFF; /* Blue background */
+  color: white; /* White text for contrast */
+  border: 1px solid #0056b3; /* Darker blue border */
+}
+.drag-bid.red {
+  background-color: #FF4136; /* Bright red background */
+  color: white; /* White text for contrast */
+  border: 1px solid #C70000; /* Darker red border */
+}
+
+.drag-bid.green {
+  background-color: #2ECC40; /* Green background */
+  color: white; /* White text */
+  border: 1px solid #1E8C2C; /* Darker green border */
+}
+
+.drag-bid.orange {
+  background-color: #FF851B; /* Orange background */
+  color: white; /* White text */
+  border: 1px solid #CC6A14; /* Darker orange border */
+}
+
+.drag-bid.black {
+  background-color: #333333; /* Black background */
+  color: white; /* White text */
+  border: 1px solid #000000; /* Black border */
+}
+
+.drag-bid.dark-green {
+  background-color: #006400; /* Dark green color */
+  color: white; /* White text for contrast */
+  border: 1px solid #004b23; /* Slightly darker green border */
 }
