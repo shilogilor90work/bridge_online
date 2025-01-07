@@ -39,6 +39,8 @@ hands.forEach((hand) => {
 // Select a hand
 hands.forEach((hand) => {
   hand.addEventListener("click", () => {
+    console.log("hands")
+
     // Deselect all hands
     hands.forEach((h) => h.classList.remove("selected"));
     // Select the clicked hand
@@ -49,6 +51,7 @@ hands.forEach((hand) => {
 
 // Assign card to the correct suit section in the selected hand
 cardsContainer.addEventListener("click", (e) => {
+  console.log("cards container")
   if (e.target.classList.contains("card") && !e.target.classList.contains("disabled")) {
     if (selectedHand) {
       const card = e.target.dataset.card;
@@ -97,6 +100,7 @@ function handleCardClick(e) {
   currentPlayerBox.appendChild(playedCardElement);
 
   playedCardElement.addEventListener("click", function () {
+  console.log("playedCardElement")
       const cardElement = document.querySelector(`.card[data-card="${playedCardElement.textContent}"]`);
       if (cardElement && cardElement.classList.contains('disabled')) {
         // Remove the 'disabled' class

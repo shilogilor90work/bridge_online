@@ -1,4 +1,10 @@
 {% load static %}
+
+{% block title %}
+<h2>Card Assignment Game</h2>
+{% endblock %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,19 +13,16 @@
   <title>Interactive Card Assignment</title>
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body>
-  <h1>Card Assignment Game</h1>
-          <span class="add-row-btn" onclick="addBiddingRow()">+</span>
-
-  <div class="hands">
+<body> <div class="hands">
       <div class="center-box">
-          <div id="biddingBox" class="bidding-box">
+        <div class="played-cards-container">
+          <span class="add-row-btn" onclick="addBiddingRow()">+</span>
+           <div id="biddingBox" class="bidding-box">
             <div class="bidding-title">W  N  E  S</div>
             <div class="bidding-rows">
               <!-- Bids will be added dynamically here -->
             </div>
           </div>
-        <div class="played-cards-container">
           <div class="player-box" id="player1-box">
             <div class="player-cards"></div>
           </div>
@@ -121,3 +124,5 @@
   <script src="{% static 'css/script.js' %}"></script>
 </body>
 </html>
+
+{% endblock %}

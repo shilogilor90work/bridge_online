@@ -302,7 +302,7 @@ body {
 .bidding-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
 }
 
 .bidding-row span {
@@ -331,7 +331,7 @@ body {
 }
 
 .bidding-row input {
-  width: 10px;
+  width: 18px;
   padding: 1px;
   text-align: center;
   font-size: 5px; /* Set font size to a smaller value */
