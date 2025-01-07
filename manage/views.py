@@ -102,7 +102,6 @@ def hand_list_no_shuffle(request):
     return render(request, 'manage_hands/hand_list.html', {'hands': hands})
 
 
-
 def hand_list_no_answer_only(request):
     hands = list(Hand.objects.all())
     hands = [hand for hand in hands if '?' in hand.correct_answer]
@@ -193,3 +192,6 @@ def to_symbol(answer):
     # Combine the level with the suit symbol
     return f"{level}{suit_symbols[suit]}"
 
+
+def teaching(request):
+    return render(request, 'manage_hands/practice_hands.html', {})

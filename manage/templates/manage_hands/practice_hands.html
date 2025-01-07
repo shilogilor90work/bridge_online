@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Card Assignment</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <h1>Card Assignment Game</h1>
+          <span class="add-row-btn" onclick="addBiddingRow()">+</span>
+
+  <div class="hands">
+      <div class="center-box">
+          <div id="biddingBox" class="bidding-box">
+            <div class="bidding-title">W  N  E  S</div>
+            <div class="bidding-rows">
+              <!-- Bids will be added dynamically here -->
+            </div>
+          </div>
+        <div class="played-cards-container">
+          <div class="player-box" id="player1-box">
+            <div class="player-cards"></div>
+          </div>
+          <div class="player-box" id="player2-box">
+            <div class="player-cards"></div>
+          </div>
+          <div class="player-box" id="player3-box">
+            <div class="player-cards"></div>
+          </div>
+          <div class="player-box" id="player4-box">
+            <div class="player-cards"></div>
+          </div>
+        </div>
+      </div>
+    <div class="hand" id="player1">
+      <h2><input type="text" value="North" id="player1-name" class="player-name"></h2>
+        <div class="suit-row" data-suit="♠">
+          <span class="suit-label black">♠</span>
+          <div class="suit" data-suit="♠"></div>
+        </div>
+        <div class="suit-row" data-suit="♥">
+          <span class="suit-label red">♥</span>
+          <div class="suit" data-suit="♥"></div>
+        </div>
+        <div class="suit-row" data-suit="♦">
+          <span class="suit-label orange">♦</span>
+          <div class="suit" data-suit="♦"></div>
+        </div>
+        <div class="suit-row" data-suit="♣">
+          <span class="suit-label green">♣</span>
+          <div class="suit" data-suit="♣"></div>
+        </div>
+      </div>
+
+      <div class="hand" id="player2">
+        <h2><input type="text" value="East" id="player2-name" class="player-name"></h2>
+        <div class="suit-row" data-suit="♠">
+          <span class="suit-label black">♠</span>
+          <div class="suit" data-suit="♠"></div>
+        </div>
+        <div class="suit-row" data-suit="♥">
+          <span class="suit-label red">♥</span>
+          <div class="suit" data-suit="♥"></div>
+        </div>
+        <div class="suit-row" data-suit="♦">
+          <span class="suit-label orange">♦</span>
+          <div class="suit" data-suit="♦"></div>
+        </div>
+        <div class="suit-row" data-suit="♣">
+          <span class="suit-label green">♣</span>
+          <div class="suit" data-suit="♣"></div>
+        </div>
+      </div>
+
+      <div class="hand" id="player3">
+        <h2><input type="text" value="South" id="player3-name" class="player-name"></h2>
+        <div class="suit-row" data-suit="♠">
+          <span class="suit-label black">♠</span>
+          <div class="suit" data-suit="♠"></div>
+        </div>
+        <div class="suit-row" data-suit="♥">
+          <span class="suit-label red">♥</span>
+          <div class="suit" data-suit="♥"></div>
+        </div>
+        <div class="suit-row" data-suit="♦">
+          <span class="suit-label orange">♦</span>
+          <div class="suit" data-suit="♦"></div>
+        </div>
+        <div class="suit-row" data-suit="♣">
+          <span class="suit-label green">♣</span>
+          <div class="suit" data-suit="♣"></div>
+        </div>
+      </div>
+
+      <div class="hand" id="player4">
+        <h2><input type="text" value="West" id="player4-name" class="player-name"></h2>
+        <div class="suit-row" data-suit="♠">
+          <span class="suit-label black">♠</span>
+          <div class="suit" data-suit="♠"></div>
+        </div>
+        <div class="suit-row" data-suit="♥">
+          <span class="suit-label red">♥</span>
+          <div class="suit" data-suit="♥"></div>
+        </div>
+        <div class="suit-row" data-suit="♦">
+          <span class="suit-label orange">♦</span>
+          <div class="suit" data-suit="♦"></div>
+        </div>
+        <div class="suit-row" data-suit="♣">
+          <span class="suit-label green">♣</span>
+          <div class="suit" data-suit="♣"></div>
+        </div>
+      </div>
+  </div>
+  <div class="cards">
+    <!-- Cards will be generated here -->
+  </div>
+
+  <script src="{% static 'css/script.js' %}"></script>
+</body>
+</html>

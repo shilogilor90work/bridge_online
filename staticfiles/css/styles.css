@@ -1,0 +1,340 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.hands {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 80%;
+  height: 130vh; /* Increased height for more room */
+}
+
+.hand {
+  position: absolute;
+  width: 150px; /* Reduced width for smaller player divs */
+  height: auto;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Player 1 - Top */
+#player1 {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Player 2 - Right */
+#player2 {
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+/* Player 3 - Bottom */
+#player3 {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Player 4 - Left */
+#player4 {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+/* Player name input styling */
+.player-name {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  text-transform: capitalize;
+}
+
+.player-name:focus {
+  outline: none;
+  border-bottom: 2px solid #000;
+}
+
+.hand.selected {
+  border-color: blue;
+}
+
+.hand h3 {
+  margin: 5px 0;
+}
+
+.suits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.suit-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 2px 0;
+}
+
+.suit-label {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.suit {
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  padding: 5px;
+  flex: 1;
+  min-height: 10px;
+  display: flex;
+  align-items: center;
+  overflow-x: auto; /* Allows scrolling if cards overflow */
+}
+
+.suit span {
+  margin: 2px;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  gap: 5px;
+}
+
+.card {
+  border: 1px solid #333;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+.card.black {
+  color: black;
+}
+
+.card.red {
+  color: red;
+}
+
+.card.orange {
+  color: orange;
+}
+
+.card.green {
+  color: green;
+}
+
+.card:hover {
+  background-color: #ddd;
+}
+
+.suit.black {
+  color: black;
+}
+
+.suit.red {
+  color: red;
+}
+
+.suit.orange {
+  color: orange;
+}
+
+.suit.green {
+  color: green;
+}
+
+.suit-label.black {
+  color: black;
+}
+
+.suit-label.red {
+  color: red;
+}
+
+.suit-label.orange {
+  color: orange;
+}
+
+.suit-label.green {
+  color: green;
+}
+
+.card.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.center-box {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 200px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px solid #000;
+  padding: 20px;
+  text-align: center;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.played-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.played-cards .card {
+  width: 40px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  border: 1px solid #333;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.played-cards-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-box {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ccc;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#player1-box {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#player2-box {
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+#player3-box {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#player4-box {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.bidding-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  padding: 10px;
+  border: 2px solid #000; /* Black border */
+  background-color: white;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for similar style */
+  border-radius: 10px; /* Similar border-radius to .center-box */
+}
+
+.bidding-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bidding-title {
+  font-weight: bold;
+  font-size: 10px;
+  margin-bottom: 10px;
+  letter-spacing: 14px; /* Adjust this value to control the gap */
+}
+.bidding-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.bidding-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.bidding-row span {
+  flex: 1;
+}
+
+.bidding-input {
+  width: 60px;
+  text-align: center;
+}
+
+.add-row-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+}
+.add-row-btn:hover {
+  color: #000;
+}
+
+.bidding-rows {
+  margin-top: 5px;
+}
+
+.bidding-row input {
+  width: 10px;
+  padding: 1px;
+  text-align: center;
+  font-size: 5px; /* Set font size to a smaller value */
+  z-index: 10; /* Ensure inputs are above other elements */
+  pointer-events: auto; /* Ensure the input is interactive */
+}

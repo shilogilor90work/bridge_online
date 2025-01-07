@@ -16,4 +16,5 @@ urlpatterns = [
     path('<int:hand_id>/', views.display_hand, name='display_hand'),  # New path for displaying one hand
     path('update-explanation/<int:hand_id>/', views.update_explanation, name='update_explanation'),
     path('upload-json/', views.upload_json_view, name='upload_json'),
+    path('teaching/', views.teaching, name='teaching'),
 ]
