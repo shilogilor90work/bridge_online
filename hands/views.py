@@ -20,7 +20,7 @@ def hands_by_user(request, user_name):
             continue
         filtered_hands.append(hand)
     random.shuffle(filtered_hands)
-    return render(request, 'hands/hand_list_by_user.html', {'hands': filtered_hands})
+    return render(request, 'hands/hand_list_by_user.html', {'hands': filtered_hands[:20]})
 
 
 def update_practice(request, hand_id):
