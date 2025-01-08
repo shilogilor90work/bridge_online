@@ -49,20 +49,22 @@
 		<br>
 		<!--a href="{% url 'manage:delete_hand' hand.id %}">Delete</a-->
 	    <button type="button" onclick="toggleForm({{ hand.id }})">Edit Explanation</button>
-    	<div id="form_{{ hand.id }}" style="display: none;">
-			<form method="post" action="{% url 'manage:update_explanation' hand.id %}">
+		<div id="form_{{ hand.id }}">
+			<form id="form_{{ hand.id }}_form_update" method="post" action="{% url 'hands:update_practice' hand.id %}">
 				{% csrf_token %}
-				<div>
-					<label for="correct_answer_{{ hand.id }}">Correct Answer:</label>
-					<input type="text" id="correct_answer_{{ hand.id }}" name="correct_answer" value="{{ hand.correct_answer }}">
-				</div>
-				<div>
-					<label for="explanation_{{ hand.id }}">Explanation:</label>
-					<textarea id="explanation_{{ hand.id }}" name="explanation">{{ hand.explanation }}</textarea>
-				</div>
-				<button type="submit">Update</button>
+				<input type="hidden" name="user_name" id="user_name_input_{{ hand.id }}_update">
+				<button type="button" onclick="submitForm({{ hand.id }}, 'update')">this is extra hard i want this to show</button>
 			</form>
-	    </div>
+		</div>
+
+		<div id="form_done_{{ hand.id }}">
+			<form id="form_{{ hand.id }}_form_done" method="post" action="{% url 'hands:update_done' hand.id %}">
+				{% csrf_token %}
+				<input type="hidden" name="user_name" id="user_name_input_{{ hand.id }}_done">
+				<button type="button" onclick="submitForm({{ hand.id }}, 'done')">This is to easy, dont show again</button>
+			</form>
+		</div>
+
 
 {% endfor %}
 	
@@ -208,7 +210,7 @@
 			interactiveBids(index, bids, correctAnswer)
 		}**/
 	}
-	    function toggleForm(handId) {
+	function toggleForm(handId) {
         var formElement = document.getElementById("form_" + handId);
 
         // Toggle visibility of the form
@@ -217,6 +219,33 @@
         } else {
             formElement.style.display = "none";
         }
+    }
+	function getUserNameFromURL() {
+        const url = new URL(window.location.href); // Get the current page URL
+        const pathParts = url.pathname.split('/'); // Split the path into parts
+        // Look for "play" and return the segment after it
+        const playIndex = pathParts.indexOf("play");
+        return playIndex !== -1 && pathParts.length > playIndex + 1
+            ? pathParts[playIndex + 1]
+            : null;
+    }
+
+    function submitForm(handId, actionType) {
+        const userName = getUserNameFromURL();
+        if (!userName) {
+            alert("User name not found in URL!");
+            return;
+        }
+
+        // Determine the form and hidden input based on actionType
+        const form = document.getElementById(`form_${handId}_form_${actionType}`);
+        const userNameInput = document.getElementById(`user_name_input_${handId}_${actionType}`);
+
+        // Set the hidden input value for `user_name`
+        userNameInput.value = userName;
+
+        // Submit the form
+        form.submit();
     }
 </script>
 

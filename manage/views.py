@@ -40,14 +40,11 @@ def update_hand(request, hand_id):
 
 def update_explanation(request, hand_id):
     hand = get_object_or_404(Hand, id=hand_id)
-    print(request.method)
     if request.method == 'POST':
         # Create a form with only the fields we want to update
         form = ExplanationForm(request.POST, instance=hand)
 
         # Only update the 'correct_answer' and 'explanation' fields
-        print(form.is_valid())
-        print(form)
         if form.is_valid():
             hand.correct_answer = to_symbol(form.cleaned_data.get('correct_answer', hand.correct_answer))
             hand.explanation = form.cleaned_data.get('explanation', hand.explanation)
@@ -105,7 +102,6 @@ def hand_list_no_shuffle(request):
     return render(request, 'manage_hands/hand_list.html', {'hands': hands})
 
 
-
 def hand_list_no_answer_only(request):
     hands = list(Hand.objects.all())
     hands = [hand for hand in hands if '?' in hand.correct_answer]
@@ -127,7 +123,8 @@ def upload_json_view(request):
         form = JSONUploadForm(request.POST, request.FILES)
         if form.is_valid():
             json_file = request.FILES['json_file']
-
+            subject = form.cleaned_data['subject']
+            metadata = form.cleaned_data['metadata']
             try:
                 # Load JSON data from the uploaded file
                 data = json.load(json_file)
@@ -140,12 +137,12 @@ def upload_json_view(request):
 
                     # Create and save a Hand instance
                     Hand.objects.create(
-                        subject="Bridge Hand",
+                        subject=subject,
                         cards=entry["cards"],
                         bids=entry["bids"],
                         correct_answer=to_symbol(correct_answer),
                         explanation=explanation,
-                        metadata={},  # Add metadata if required
+                        metadata=metadata,  # Add the metadata from the form
                     )
                 return HttpResponse("JSON data successfully uploaded and processed!")
 
@@ -195,3 +192,6 @@ def to_symbol(answer):
     # Combine the level with the suit symbol
     return f"{level}{suit_symbols[suit]}"
 
+
+def teaching(request):
+    return render(request, 'manage_hands/practice_hands.html', {})
