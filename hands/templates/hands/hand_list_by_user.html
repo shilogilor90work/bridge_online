@@ -1,0 +1,309 @@
+{% extends 'manage_hands/base.html' %}
+
+{% load custom_filters %}
+{% block title %}
+<h2>Hands List</h2>
+{% endblock %}
+{% block content %}
+{% for hand in hands %}
+	<hr>
+		<pre>Hand #{{ hand.id }}: <b>{{ hand.subject }}</b></pre>
+		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
+		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
+		<!--div id="bids-{{ hand.id }}" style="font-size: 26px; margin: 0; padding: 0;"></div-->
+		<div class="options">
+					<div>
+						<button onclick='checkAnswer({{ hand.id }}, "Pass", "{{ hand.correct_answer }}", "{{ hand.explanation }}")'>Pass</button>
+						<button onclick='checkAnswer({{ hand.id }}, "DBL", "{{ hand.correct_answer }}", "{{ hand.explanation }}")'>DBL</button>
+						<button onclick='checkAnswer({{ hand.id }}, "RDBL", "{{ hand.correct_answer }}", "{{ hand.explanation }}")'>RDBL</button>
+					</div>
+					<div>
+					   <button onclick="selectNumber({{ hand.id }}, 1)">1</button>
+					   <button onclick="selectNumber({{ hand.id }}, 2)">2</button>
+					   <button onclick="selectNumber({{ hand.id }}, 3)">3</button>
+					   <button onclick="selectNumber({{ hand.id }}, 4)">4</button>
+					   <button onclick="selectNumber({{ hand.id }}, 5)">5</button>
+					   <button onclick="selectNumber({{ hand.id }}, 6)">6</button>
+					   <button onclick="selectNumber({{ hand.id }}, 7)">7</button>
+
+					</div>
+					<div id="suits-{{ hand.id|escape }}">
+						<button 
+							onclick='selectSuit({{ hand.id|escape }}, "♣", "{{ hand.correct_answer|escapejs }}", "{{ hand.explanation|escapejs }}", "{{ hand.bids|escapejs }}")' 
+							class="club">♣</button>
+						<button 
+							onclick='selectSuit({{ hand.id|escape }}, "♦", "{{ hand.correct_answer|escapejs }}", "{{ hand.explanation|escapejs }}", "{{ hand.bids|escapejs }}")' 
+							class="diamond">♦</button>
+						<button 
+							onclick='selectSuit({{ hand.id|escape }}, "♥", "{{ hand.correct_answer|escapejs }}", "{{ hand.explanation|escapejs }}", "{{ hand.bids|escapejs }}")' 
+							class="heart">♥</button>
+						<button 
+							onclick='selectSuit({{ hand.id|escape }}, "♠", "{{ hand.correct_answer|escapejs }}", "{{ hand.explanation|escapejs }}", "{{ hand.bids|escapejs }}")' 
+							class="spade">♠</button>
+						<button 
+							onclick='selectSuit({{ hand.id|escape }}, "NT", "{{ hand.correct_answer|escapejs }}", "{{ hand.explanation|escapejs }}", "{{ hand.bids|escapejs }}")'>NT</button>
+					</div>
+				</div>
+		<div class="result" id="result-{{ hand.id }}"></div>
+		<a href="{% url 'manage:update_hand' hand.id %}">Edit</a>
+		<br>
+		<!--a href="{% url 'manage:delete_hand' hand.id %}">Delete</a-->
+	    <button type="button" onclick="toggleForm({{ hand.id }})">Edit Explanation</button>
+		<div id="form_{{ hand.id }}">
+			<form id="form_{{ hand.id }}_form_update" method="post" action="{% url 'hands:update_practice' hand.id %}">
+				{% csrf_token %}
+				<input type="hidden" name="user_name" id="user_name_input_{{ hand.id }}_update">
+				<button type="button" onclick="submitForm({{ hand.id }}, 'update')">this is extra hard i want this to show</button>
+			</form>
+		</div>
+
+		<div id="form_done_{{ hand.id }}">
+			<form id="form_{{ hand.id }}_form_done" method="post" action="{% url 'hands:update_done' hand.id %}">
+				{% csrf_token %}
+				<input type="hidden" name="user_name" id="user_name_input_{{ hand.id }}_done">
+				<button type="button" onclick="submitForm({{ hand.id }}, 'done')">This is to easy, dont show again</button>
+			</form>
+		</div>
+
+
+{% endfor %}
+	
+<a href="{% url 'manage:create_hand' %}">Add New Hand</a>
+
+
+<script>
+
+	let correctCount = 0;
+	let wrongCount = 0;
+	
+	let currentIndex = 0;
+	let currentBids = "";
+	let currentBidNumber = 1;
+	let currentAnswer = "";
+	
+	function getCurrentBids(index, bids) {
+		if(index != currentIndex){
+			currentIndex = index;
+			currentBidNumber = 1;
+		}
+		// Split bids into rows
+		const rows = bids.split("\n");
+		if(rows.length == currentBidNumber) {
+			currentBids = bids;
+			return currentBids;
+		}
+
+		// Find the last row with "?" to calculate myBidColumn
+		const lastRow = rows[rows.length - 1];
+		const spacesBeforeQuestion = lastRow.split("?")[0];
+		const myBidColumn = spacesBeforeQuestion.split(" ").length;
+
+		// Extract rows up to currentBidNumber
+		const selectedRows = rows.slice(0, currentBidNumber);
+
+		// Replace the word at myBidColumn in the last row
+		if (selectedRows.length > 0) {
+			const lastRowToEdit = selectedRows[selectedRows.length - 1].split(" ");
+			if (myBidColumn - 1 < lastRowToEdit.length) {
+				currentAnswer = lastRowToEdit[myBidColumn - 1]
+				lastRowToEdit[myBidColumn - 1] = "?";
+			}
+			selectedRows[selectedRows.length - 1] = lastRowToEdit.join(" ");
+		}
+
+		// Construct the currentBids string
+		currentBids = selectedRows.join("\n");
+		return currentBids;
+	}
+
+	function interactiveBids(index, bids, correctAnswer) {
+		const bidsDiv = document.getElementById(`bids-${index}`);
+		if (!bidsDiv) return; // Avoid errors if the element doesn't exist
+
+		if (correctAnswer === "?") {
+			bidsDiv.innerHTML = bids;
+			return bids;
+		}
+
+		getCurrentBids(index, bids);
+		bidsDiv.innerHTML = currentBids;
+		return currentBids;
+	}
+
+	function selectNumber(index, number) {
+		const suitDiv = document.getElementById(`suits-${index}`);
+		suitDiv.setAttribute('data-number', number);
+	}
+
+	function updateAnswer(index, newAnswer) {
+		const newExplainationInput = document.getElementById(`explanation-${index}`);
+		const newExplanation = newExplainationInput ? newExplainationInput.value : ''; // Get the value or set it to an empty string if not found
+
+		if (!newExplanation.trim()) {
+			alert('Please provide an explanation before submitting.');
+			return;
+		}
+		const url = `/update-answer/${index}/${newAnswer}/${newExplanation}/`;
+
+		// Send the request (AJAX example)
+		fetch(url, {
+			method: 'GET', // Change to 'POST' if your Django view requires it
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+		.then(response => {
+			if (response.ok) {
+				return response.json();
+			} else {
+				throw new Error('Network response was not ok.');
+			}
+		})
+		.then(data => {
+			console.log('Response:', data);
+			alert('Answer submitted successfully!');
+		})
+		.catch(error => {
+			console.error('There was a problem with the fetch operation:', error);
+		});
+	}
+
+	function selectSuit(index, suit, correctAnswer, explanation, bids) {
+		const suitDiv = document.getElementById(`suits-${index}`);
+		const number = suitDiv.getAttribute('data-number');
+		if (number) {
+			if(correctAnswer === "?") {
+				updateAnswer(index, `${number}${suit}`);
+			}
+			else {
+				checkAnswer(index, `${number}${suit}`, correctAnswer, explanation, bids);
+			}
+		}
+	}
+	function colorSuits(text) {
+		return text.replace(/♠/g, '<span class="spade">♠</span>')
+				   .replace(/♥/g, '<span class="heart">♥</span>')
+				   .replace(/♦/g, '<span class="diamond">♦</span>')
+				   .replace(/♣/g, '<span class="club">♣</span>');
+	}
+
+    function checkAnswer(index, answer, correctAnswer, explanation, bids) {
+        const resultDiv = document.getElementById(`result-${index}`);
+		//if(true || currentBids === bids) {	
+			if (correctAnswer.toLowerCase().startsWith(answer.toLowerCase())) {
+				correctCount++;
+			}
+			else {
+				wrongCount++;
+			}
+			resultDiv.innerHTML = `Correct Answer: ${colorSuits(correctAnswer)} <br> The Reason: ${explanation}<br> Your Answer: ${colorSuits(answer)} <br> Success Rate: ${(correctCount / (correctCount + wrongCount) * 100).toFixed(1)}%`;
+		/**}
+		else {
+			if (answer.toLowerCase().startsWith(currentAnswer.toLowerCase())) {
+				correctCount++;
+			}
+			else {
+				wrongCount++;
+			}
+			resultDiv.innerHTML = `You answered: ${colorSuits(correctAnswer)} as last bid.<br> Success Rate: ${(correctCount / (correctCount + wrongCount) * 100).toFixed(1)}%`;
+			currentBidNumber++;
+			interactiveBids(index, bids, correctAnswer)
+		}**/
+	}
+	function toggleForm(handId) {
+        var formElement = document.getElementById("form_" + handId);
+
+        // Toggle visibility of the form
+        if (formElement.style.display === "none") {
+            formElement.style.display = "block";
+        } else {
+            formElement.style.display = "none";
+        }
+    }
+	function getUserNameFromURL() {
+        const url = new URL(window.location.href); // Get the current page URL
+        const pathParts = url.pathname.split('/'); // Split the path into parts
+        // Look for "play" and return the segment after it
+        const playIndex = pathParts.indexOf("play");
+        return playIndex !== -1 && pathParts.length > playIndex + 1
+            ? pathParts[playIndex + 1]
+            : null;
+    }
+
+    function submitForm(handId, actionType) {
+        const userName = getUserNameFromURL();
+        if (!userName) {
+            alert("User name not found in URL!");
+            return;
+        }
+
+        // Determine the form and hidden input based on actionType
+        const form = document.getElementById(`form_${handId}_form_${actionType}`);
+        const userNameInput = document.getElementById(`user_name_input_${handId}_${actionType}`);
+
+        // Set the hidden input value for `user_name`
+        userNameInput.value = userName;
+
+        // Submit the form
+        form.submit();
+    }
+</script>
+
+
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            font-size: 20px;
+        }
+        .options button {
+            padding: 10px;
+            margin: 2px;
+            border: none;
+            background-color: lightgray;
+            color: black;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .hand {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+        .heart {
+            color: red !important;
+        }
+        .diamond {
+            color: orange !important;
+        }
+        .club {
+            color: green !important;
+        }
+        .spade {
+            color: black !important;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+		.options div {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .options button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+
+{% endblock %}
