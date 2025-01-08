@@ -79,6 +79,13 @@
 			</form>
 		</div>
 
+		<div id="form_needs_validation_{{ hand.id }}">
+			<form id="form_{{ hand.id }}_form_needs_validation" method="post" action="{% url 'hands:needs_validation' hand.id %}">
+				{% csrf_token %}
+				<input type="hidden" name="user_name" id="user_name_input_{{ hand.id }}_needs_validation">
+				<button type="button" onclick="submitForm({{ hand.id }}, 'needs_validation')">Needs Validation</button>
+			</form>
+		</div>
 
 {% endfor %}
 	

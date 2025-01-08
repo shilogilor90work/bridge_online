@@ -24,6 +24,15 @@ def hands_by_user(request, user_name):
     return render(request, 'hands/hand_list_by_user.html', {'hands': filtered_hands[:20]})
 
 
+def hands_that_need_validation(request):
+    hands = list(Hand.objects.all())
+    filtered_hands = []
+    for hand in hands:
+        if "needs_validation" in hand.metadata:
+            filtered_hands.append(hand)
+    return render(request, 'hands/hand_list_by_user.html', {'hands': filtered_hands[:20]})
+
+
 def update_practice(request, hand_id):
     hand = get_object_or_404(Hand, id=hand_id)
     if request.method == 'POST':
@@ -63,6 +72,33 @@ def update_done(request, hand_id):
                 hand.metadata["users_done_practice"] = [form.cleaned_data.get('user_name', "moshe")]
             else:
                 hand.metadata["users_done_practice"].append(form.cleaned_data.get('user_name', "moshe"))
+            # Save the updated hand
+            hand.save()
+            # Redirect back to the referring page
+            referer = request.META.get('HTTP_REFERER')
+            if referer:
+                return redirect(referer)
+            else:
+                return redirect('manage:hand_list')  # Fallback if no referer is provided
+
+    else:
+        form = HandForm(instance=hand)
+
+    return render(request, 'manage_hands/update_hand.html', {'form': form})
+
+
+def needs_validation(request, hand_id):
+    hand = get_object_or_404(Hand, id=hand_id)
+    if request.method == 'POST':
+        # Create a form with only the fields we want to update
+        form = DoneForm(request.POST, instance=hand)
+
+        # Only update the 'correct_answer' and 'explanation' fields
+        if form.is_valid():
+            if "needs_validation" not in hand.metadata:
+                hand.metadata["needs_validation"] = [form.cleaned_data.get('user_name', "moshe")]
+            else:
+                hand.metadata["needs_validation"].append(form.cleaned_data.get('user_name', "moshe"))
             # Save the updated hand
             hand.save()
             # Redirect back to the referring page
