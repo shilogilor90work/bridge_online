@@ -1,0 +1,142 @@
+[
+    {
+        "cards": "♠: T 5\n♥: K J 9 7 2\n♦: A Q 9 6\n♣: Q 3\n12 HCP",
+        "bids": "1♥ P 1♠ P\n?",
+        "correctAnswer": "1NT: 12-14 HCP, no 3 spades, and hearts are not amazing."
+    },
+    {
+        "cards": "♠: K 3\n♥: A K Q J T\n♦: Q 8 5\n♣: 6 4\n15 HCP",
+        "bids": "1♥ P 1♠ P\n?",
+        "correctAnswer": "2♣: 15-16 HCP, similar to 3 suit hand: distribution of 5431 or similar."
+    },
+    {
+        "cards": "♠: K 2\n♥: A Q J T 9\n♦: K Q 8\n♣: 6 4\n15 HCP",
+        "bids": "1♥ P 1♠ P\n?",
+        "correctAnswer": "2♦: 15-16 HCP, at least 2 diamonds more than clubs."
+    },
+    {
+        "cards": "♠: Q 3\n♥: A K Q J T 9\n♦: Q 5\n♣: T 4\n14 HCP",
+        "bids": "1♥ P 1♠ P\n?",
+        "correctAnswer": "2♥: 12-14 HCP, with amazing hearts and no 3 spades."
+    },
+    {
+        "cards": "♠: K Q J 3\n♥: Q J T 7 3\n♦: A J\n♣: 5 2\n14 HCP",
+        "bids": "1♥ P 1♠ P\n?",
+        "correctAnswer": "2♠: 12-14 HCP, with 3+ spades."
+    },
+    {
+        "cards": "♠: A K 5\n♥: Q J T 8 7\n♦: A J 4\n♣: 6 3\n15 HCP",
+        "bids": "1♥ P 1♠ P\n?",
+        "correctAnswer": "2NT: 15-16 HCP, distribution of 5422."
+    },
+    {
+        "cards": "♠: 8 7\n♥: A K Q J 9 8\n♦: Q J\n♣: K 2\n15 HCP",
+        "bids": "1♥ P 1♠ P\n?",
+        "correctAnswer": "3♣: 14-16 HCP, at least 10 cards in clubs and hearts with minimum 4 in each suit."
+    },
+    {
+        "cards": "♠: K 3\n♥: Q J T 9 7\n♦: A K T 8\n♣: Q 4\n15 HCP",
+        "bids": "1♥ P 1♠ P\n?",
+        "correctAnswer": "3♦: 14-16 HCP, at least 10 cards in diamonds and hearts with minimum 4 in each suit."
+    },
+    {
+        "cards": "♠: 9 3\n♥: A K Q J T 8 4\n♦: K Q\n♣: 7 2\n15 HCP",
+        "bids": "1♥ P 1♠ P\n?",
+        "correctAnswer": "3♥: 14-16 HCP, with 7+ hearts and wanting only hearts to be the trump suit a lot of points in hearts."
+    },
+    {
+        "cards": "♠: K Q 6\n♥: A K Q J 9 7 4\n♦: 5\n♣: 6 4\n15 HCP",
+        "bids": "1♥ P 1♠ P\n?",
+        "correctAnswer": "3♠: 14-16 HCP, at least 10 cards in spades and hearts with minimum 3 in each suit."
+    },
+    {
+        "cards": "♠: J 6\n♥: K Q J 9 8\n♦: A K Q\n♣: T 4 2\n16 HCP",
+        "bids": "1♥ P 1♠ P\n?",
+        "correctAnswer": "3NT: 15-16 HCP, and distribution of 5332, and rare 6322 and rare 5422."
+    },
+    {
+        "cards": "♠: K J T 7 5\n♥: A 7 2\n♦: A J 6\n♣: Q 3\n15 HCP",
+        "bids": "1♠ P 2♣ P\n?",
+        "correctAnswer": "2♦: 15-16 HCP, without an extreme distribution."
+    },
+    {
+        "cards": "♠: A K T 7 5\n♥: K Q 8 7\n♦: Q 6\n♣: J 3\n15 HCP",
+        "bids": "1♠ P 2♣ P\n?",
+        "correctAnswer": "2♥: 15-16 HCP, with at least 2 hearts more than diamonds."
+    },
+    {
+        "cards": "♠: A K J T 7\n♥: 9 6\n♦: Q 8 5\n♣: K 3\n13 HCP",
+        "bids": "1♠ P 2♣ P\n?",
+        "correctAnswer": "2♠: 12-14 HCP, strong spades, and less than 3 good clubs."
+    },
+    {
+        "cards": "♠: K J T 8 5\n♥: A 7 3\n♦: K 4\n♣: Q 6 5\n13 HCP",
+        "bids": "1♠ P 2♣ P\n?",
+        "correctAnswer": "2NT: 12-14 HCP, no 3+ good clubs, and 5 simple spades, could be 3 clubs."
+    },
+    {
+        "cards": "♠: A K J T 6\n♥: 7 5\n♦: Q 3\n♣: A T 8 4\n14 HCP",
+        "bids": "1♠ P 2♣ P\n?",
+        "correctAnswer": "3♣: 12-14 HCP, with 4+ or 3 good clubs."
+    },
+    {
+        "cards": "♠: K Q J T 7\n♥: 9\n♦: A K J 8 4\n♣: J 4\n15 HCP",
+        "bids": "1♠ P 2♣ P\n?",
+        "correctAnswer": "3♦: 14-16 HCP, at least 10 cards in diamonds and spades with at least 4 of diamonds."
+    },
+    {
+        "cards": "♠: A K T 8 5 2\n♥: Q J 7 6\n♦: 9\n♣: A 2\n14 HCP",
+        "bids": "1♠ P 2♣ P\n?",
+        "correctAnswer": "3♥: 14-16 HCP, at least 10 cards in spades and hearts with at least 4 hearts."
+    },
+    {
+        "cards": "♠: A K Q T 9 7 4\n♥: 8 5\n♦: Q 4\n♣: K 3\n14 HCP",
+        "bids": "1♠ P 2♣ P\n?",
+        "correctAnswer": "3♠: 14-16 HCP, with 7+ spades and wanting only spades to be the trump suit, a lot of points in spades."
+    },
+    {
+        "cards": "♠: K J T 7 6\n♥: Q 8 3\n♦: A Q 5\n♣: K 4\n15 HCP",
+        "bids": "1♠ P 2♣ P\n?",
+        "correctAnswer": "3NT: 15-16 HCP, balanced."
+    },
+	{
+        "cards": "♠: K 7 5\n♥: A 7 6 2\n♦: A Q 8 7 6\n♣: Q\n15 HCP",
+        "bids": "2♣ P 2♦ P\n?",
+        "correctAnswer": "2♥: 15-16 HCP, without an extreme distribution, could be 5431 or even 6331."
+    },
+    {
+        "cards": "♠: A Q 9 8 7\n♥: 6 2\n♦: K J 8 5\n♣: A Q 5\n16 HCP",
+        "bids": "2♣ P 2♦ P\n?",
+        "correctAnswer": "2♠: 15-16 HCP, with at least 2 spades more than hearts, could be 5431 or even 6331."
+    },
+    {
+        "cards": "♠: K J 3\n♥: Q 7 4\n♦: 9 8 2\n♣: A K T 6 4\n13 HCP",
+        "bids": "2♣ P 2♦ P\n?",
+        "correctAnswer": "2NT: 12-14 HCP, no 3+ good diamonds, and 5 simple clubs, could be 3 diamonds."
+    },
+    {
+        "cards": "♠: 10 7 2\n♥: A 4\n♦: 8 6 3\n♣: A K Q J 9\n14 HCP",
+        "bids": "2♣ P 2♦ P\n?",
+        "correctAnswer": "3♣: 12-14 HCP, strong clubs, and less than 3 diamonds or 3 bad diamonds."
+    },
+    {
+        "cards": "♠: Q 7 4\n♥: Q 9\n♦: A 8 3\n♣: A Q 8 5 3\n14 HCP",
+        "bids": "2♣ P 2♦ P\n?",
+        "correctAnswer": "3♦: 12-14 HCP, with 3+ diamonds."
+    },
+    {
+        "cards": "♠: 9\n♥: K Q 6 4\n♦: 7 5\n♣: A K Q J 9 4\n15 HCP",
+        "bids": "2♣ P 2♦ P\n?",
+        "correctAnswer": "3♥: 14-16 HCP, 6+ clubs and exactly 4 hearts."
+    },
+    {
+        "cards": "♠: K Q J 10\n♥: 8 7\n♦: 9 6\n♣: A K Q J 9\n16 HCP",
+        "bids": "2♣ P 2♦ P\n?",
+        "correctAnswer": "3♠: 14-16 HCP, 6+ clubs and exactly 4 spades."
+    },
+    {
+        "cards": "♠: K J 9\n♥: Q 7 6\n♦: 8 4\n♣: A K Q T 5\n15 HCP",
+        "bids": "2♣ P 2♦ P\n?",
+        "correctAnswer": "3NT: 15-16 HCP, balanced, no good diamonds."
+    }
+]

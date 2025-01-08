@@ -1,0 +1,167 @@
+[
+    {
+      "cards": "♠: 2\n♥: T 9\n♦: K 9 8 4\n♣: J T 8 6 4\n4 HCP",
+      "bids": "1♥ ?",
+      "correctAnswer": "2NT 2NT: 0-5 5+/4+ in lower unbid suits and a single in other suit."
+    },
+    {
+      "cards": "♠: K 7 5 2\n♥: 8\n♦: Q T 9 6 4\n♣: 9 7 3\n5 HCP",
+      "bids": "1♥ ?",
+      "correctAnswer": "1NT 1NT: 0-5 5+/4+ in higher suit and one other, and a single."
+    },
+    {
+      "cards": "♠: A J T 8\n♥: K Q\n♦: 9 5 2\n♣: K Q T 3\n16 HCP",
+      "bids": "1♥ ?",
+      "correctAnswer": "2♥ Repeat: approx 16-19 balanced hand and singleton of opponents suit."
+    },
+    {
+      "cards": "♠: Q J 9 8 7\n♥: A\n♦: Q 7 6 4 2\n♣: 5 2\n8 HCP",
+      "bids": "1♥ ?",
+      "correctAnswer": "1♠ Overcall: 8-15 with 5+ (not opponents suit, if opp bid 1NT then 10-17HCP)"
+    },
+    {
+      "cards": "♠: A Q J 8 7\n♥: A\n♦: Q 7 6 4 2\n♣: 5 2\n13 HCP",
+      "bids": "1NT ?",
+      "correctAnswer": "2♠ Overcall: 8-15 with 5+ (not opponents suit, if opp bid 1NT then 10-17HCP)"
+    },
+    {
+      "cards": "♠: K Q J T 9 8\n♥: 7 6\n♦: 5 3 2\n♣: 4\n6 HCP",
+      "bids": "1♥ ?",
+      "correctAnswer": "2♠ Jump: 6-11(7) with 6+ or 5 with a singleton."
+    },
+    {
+      "cards": "♠: A Q 9 6\n♥: K J\n♦: 7 5 3\n♣: K J 4 2\n14 HCP",
+      "bids": "1♥ ?",
+      "correctAnswer": "DBL DBL: 12+"
+    },
+    {
+      "cards": "♠: T 9 3\n♥: 7 6\n♦: K Q 6 4\n♣: A J 7 3\n10 HCP",
+      "bids": "1♥ ?",
+      "correctAnswer": "Pass"
+    },
+    {
+      "cards": "♠: 2\n♥: T 9\n♦: K 9 8 4\n♣: J T 8 6 4\n4 HCP",
+      "bids": "P 1♥ ?",
+      "correctAnswer": "2NT 2NT: 0-15 5+/4+ in lower suits and a single in other suit (only the opponent before me bid a suit)"
+    },
+    {
+      "cards": "♠: K Q 5 2\n♥: 8\n♦: Q J 9 6 4\n♣: Q 7 3\n10 HCP",
+      "bids": "P 1♥ ?",
+      "correctAnswer": "1NT 1NT: 0-13 5+/4+ in higher suit and one other, and a single (only the opponent before me bid a suit)"
+    },
+    {
+      "cards": "♠: A J T 8\n♥: Q\n♦: K 9 5 2\n♣: K Q T 3\n16 HCP",
+      "bids": "P 1♥ ?",
+      "correctAnswer": "2♥ Repeat opponents: approx 15-19 balanced hand and singleton of opponents suit."
+    },
+    {
+      "cards": "♠: Q J 9 8 4\n♥: A 7 3 2\n♦: 6\n♣: J 4 2\n8 HCP",
+      "bids": "P 1♥ ?",
+      "correctAnswer": "2♠ Jump: 5-13 with 6+ or 5 with a singleton"
+    },
+    {
+      "cards": "♠: A J T 9\n♥: K J\n♦: 7 6 2\n♣: Q T 5 2\n11 HCP",
+      "bids": "P 1♥ ?",
+      "correctAnswer": "DBL DBL: 8+"
+    },
+    {
+      "cards": "♠: 9 5 3\n♥: 7 6\n♦: Q 8 4\n♣: A J T 7 3\n7 HCP",
+      "bids": "P 1♥ ?",
+      "correctAnswer": "Pass"
+    },
+    {
+      "cards": "♠: T 2\n♥: 9\n♦: K 9 8 4\n♣: J T 8 6 4\n4 HCP",
+      "bids": "1♥ 1♠ ?",
+      "correctAnswer": "2♣ 5-8 5+ with a singleton of partners suit (not opponents suit)"
+    },
+    {
+      "cards": "♠: K 7 5 2\n♥: A\n♦: Q J 9 6 4\n♣: K 7 3\n13 HCP",
+      "bids": "1♥ 1♠ ?",
+      "correctAnswer": "3NT Bid game if no other option exists (like 3NT, or 4 same major)"
+    },
+    {
+      "cards": "♠: A J T 8\n♥: K Q\n♦: 9 5 2\n♣: 9 5 4 3\n10 HCP",
+      "bids": "1♥ 1♠ ?",
+      "correctAnswer": "DBL hope for game (usually with 9+ points)"
+    },
+    {
+      "cards": "♠: Q J 9\n♥: 8 7 3\n♦: T 7 6 4 2\n♣: 5 2\n3 HCP",
+      "bids": "1♥ 1♠ ?",
+      "correctAnswer": "2♥ Support of partners suit 3+ 0+"
+    },
+    {
+      "cards": "♠: T 9 4\n♥: 7 6\n♦: K Q J 8\n♣: Q T 7 3\n8 HCP",
+      "bids": "1♥ 1♠ ?",
+      "correctAnswer": "Pass"
+    },
+    {
+      "cards": "♠: K 2\n♥: K Q 8 7\n♦: A\n♣: A T 8 6 4\n16 HCP",
+      "bids": "2♥ 3♦ ?",
+      "correctAnswer": "4♥ Bid game: use logic"
+    },
+    {
+      "cards": "♠: K Q J 9 7 5\n♥: 8\n♦: 9 6 4\n♣: 7 3 2\n6 HCP",
+      "bids": "2♥ 3♦ ?",
+      "correctAnswer": "3♠ New suit: No game (usually 0-13) with 6+ and single in partners suit"
+    },
+    {
+      "cards": "♠: A J T 8\n♥: K Q\n♦: T 9 5 2\n♣: J T 3\n11 HCP",
+      "bids": "2♥ 3♦ ?",
+      "correctAnswer": "3♥ Support of partners suit: No game (usually 0-13) with 2+ of partners suit (notice vulnerability, if 5-10 HCP and only 2, allowed pass)"
+    },
+    {
+      "cards": "♠: T 8 7 3\n♥: 5 3\n♦: T 9 5 2\n♣: 7 5 3\n0 HCP",
+      "bids": "2♥ 3♦ ?",
+      "correctAnswer": "3♥ Support of partners suit: No game (usually 0-13) with 2+ of partners suit (notice vulnerability, if 5-10 HCP and only 2, allowed pass)"
+    },
+    {
+      "cards": "♠: A J 9 8 7\n♥: A\n♦: A K 6 4 2\n♣: 5 2\n16 HCP",
+      "bids": "2♥ 3♦ ?",
+      "correctAnswer": "DBL Dbl is punishing"
+    },
+    {
+      "cards": "♠: 9 6\n♥: 7\n♦: K Q T 8 4\n♣: Q J T 7 3\n8 HCP",
+      "bids": "2♥ 3♦ ?",
+      "correctAnswer": "Pass Pass: single in partnes suit"
+    },
+    {
+      "cards": "♠: K 2\n♥: K Q 8 7\n♦: A\n♣: A T 8 6 4\n16 HCP",
+      "bids": "2♥ 3♠ ?",
+      "correctAnswer": "Bid game: use logic"
+    },
+    {
+      "cards": "♠: A T\n♥: A K J\n♦: T 9 6 4 3\n♣: A 7 3\n16 HCP",
+      "bids": "2♠ 3♥ ?",
+      "correctAnswer": "3♠ 3 of partners suit: No game, strong!! with 2+ of partners suit and want to punish them if they bid 4 majors"
+    },
+    {
+      "cards": "♠: 9 7 5\n♥: 8 6 4\n♦: 9\n♣: K Q J 7 3 2\n6 HCP",
+      "bids": "2♦ 2♥ ?",
+      "correctAnswer": "3♣ New suit: No game (usually 0-13) with 6+ and single in partners suit"
+    },
+    {
+      "cards": "♠: A Q J 9 8 7\n♥: 3\n♦: T 6 4 2\n♣: 5 2\n8 HCP",
+      "bids": "2♥ 3♠ ?",
+      "correctAnswer": "DBL Dbl is punishing"
+    },
+    {
+      "cards": "♠: 9\n♥: 7 6\n♦: K Q J 8 4\n♣: A J T 7 3\n8 HCP",
+      "bids": "2♥ 2♠ ?",
+      "correctAnswer": "Pass Pass: Single in partner suit."
+    },
+    {
+      "cards": "♠: K 7 5 2\n♥: 8\n♦: Q J 9 7 6 4\n♣: 9 3\n5 HCP",
+      "bids": "2♥ 2♠ ?",
+      "correctAnswer": "3♦ New suit: No game (usually 0-13) with 6+ and single in partners suit"
+    },
+    {
+      "cards": "♠: A J T 8\n♥: K Q\n♦: 9 5 2\n♣: 9 6 4 3\n10 HCP",
+      "bids": "2♥ 2♠ ?",
+      "correctAnswer": "3 of partners suit: No game (usually 0-13) with 2+ of partners suit(notice vulnerability, if 5-10 HCP and only 2, allowed pass)"
+    },
+    {
+      "cards": "♠: A Q\n♥: Q J 9 3\n♦: A 7 6 4 2\n♣: J 2\n14 HCP",
+      "bids": "2♥ 2♠ ?",
+      "correctAnswer": "DBL Dbl is interested in game"
+    }
+  ]

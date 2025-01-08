@@ -1,0 +1,142 @@
+[
+    {
+        "cards": "♠: 2\n♥: Q 9 8 2\n♦: J T 4\n♣: K Q 9 6 5\n8 HCP",
+        "bids": "P P 1NT DBL\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: Q 8 5\n♥: 3\n♦: A J 7 5 2\n♣: A Q 9 4\n13 HCP",
+        "bids": "P 1♥ 1♠ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A K Q 5 3\n♥: T 2\n♦: 4\n♣: A Q T 9 6\n15 HCP",
+        "bids": "P 1♠ DBL P\n2♦ P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A J\n♥: 6\n♦: A K T 6 5 3\n♣: 9 7 5 2\n12 HCP",
+        "bids": "P 1♦ P 1♥\nP 2♥ P 2♠\nP 2NT P 3♣\nDBL 3♥ P 4♣\nP 4♥ P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A J\n♥: 6\n♦: A K T 6 5 3\n♣: 9 7 5 2\n12 HCP",
+        "bids": "P 1♦ P 1♥\nP 2♥ P 2♠\nP 2NT P 3♣\nDBL 3♥ P 4♣\nP 4♥ P 6♦\nDBL P P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: K Q T\n♥: A Q 6 2\n♦: T 9 8\n♣: 7 4 3\n11 HCP",
+        "bids": "P P P 1♦\n1♥ 1♠ P P\nDBL P 2♦ DBL\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: J 5 4\n♥: 7 5\n♦: A K Q 6 5\n♣: T 9 2\n10 HCP",
+        "bids": "P 1♣ 1NT DBL\n?",
+        "correctAnswer": "RDBL The RDBL is a very important reDBL, should be even with 0 points(on extreme cases). because that without the reDBL, W that opened 1♣ is forced to bid, while if there is a rDBL, so if he evaluates his hand as 12-15, he could and should Pass, and then i hear from my partner his second long suit, (hoping in this case that it is diamonds)."
+    },
+    {
+        "cards": "♠: J 5 4\n♥: 7 5\n♦: A K Q 6 5\n♣: T 9 2\n10 HCP",
+        "bids": "P 1♣ 1NT DBL\nRDBL P 2♥ DBL\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 9 8 7 6 2\n♥: J T 9 8 3\n♦: \n♣: A J 8\n6 HCP",
+        "bids": "P 1♣ 1NT DBL\nRDBL P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: Q J T 6\n♥: A 9 2\n♦: A K Q J 8\n♣: 4\n17 HCP",
+        "bids": "P 1♣ P 2♣\nP ?",
+        "correctAnswer": "2♦ Opener: Bids one above the last bid."
+    },
+    {
+        "cards": "♠: A K J T 8 7 6 5\n♥: K\n♦: 9 8\n♣: 6 3\n11 HCP",
+        "bids": "P 1♣ P 2♣\nP 2♦ P ?",
+        "correctAnswer": "2♥ If the responder has 12-16 points, they bid one above and then bid their singleton."
+    },
+    {
+        "cards": "♠: A J\n♥: A 8\n♦: A K Q T 9\n♣: 9 8 5 4\n18 HCP",
+        "bids": "2♥ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: K 7 6\n♥: 9 7\n♦: A 7 6 3\n♣: 9 8 5 2\n7 HCP",
+        "bids": "1♥ P 2♦ 2♠\n3♥ P 3♠ P\n4♥ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A T 7 4 3\n♥: \n♦: Q 9 4\n♣: K Q T 7 4\n11 HCP",
+        "bids": "P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A 8 2\n♥: J 8 6\n♦: K 7 6 5\n♣: Q T 5\n10 HCP",
+        "bids": "P P 1♠ 3♣\n3♠ ?",
+        "correctAnswer": "PASS Dont push them, if you push - you must DBL them when they go to 4♠."
+    },
+    {
+        "cards": "♠: Q J 6 4\n♥: 4\n♦: K T 6 4 2\n♣: K Q 3\n11 HCP",
+        "bids": "P P 1♣ P\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: Q J 4 3\n♥: Q 5\n♦: K Q T 6 2\n♣: K 5\n13 HCP",
+        "bids": "2♥ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 4\n♥: J 7 6 5\n♦: Q J T 7 4\n♣: K J 5\n8 HCP",
+        "bids": "1NT P ?",
+        "correctAnswer": "3♣ 3♣: Sign-off if you have an unbalanced hand with a club suit."
+    },
+    {
+        "cards": "♠: 7\n♥: K J 2\n♦: Q 9 7 6 4 3 2\n♣: 8 4\n6 HCP",
+        "bids": "P 1♠ 2♦ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: T 5 4\n♥: 5 4 3 2\n♦: Q 8 7 6 2\n♣: K\n5 HCP",
+        "bids": "1♣ DBL 1NT P\n2♣ 2♦ 2NT 3♠\n4♣ P P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: K J 8 6 3\n♥: 6\n♦: A K 6 5\n♣: 8 6 5\n11 HCP",
+        "bids": "P 2♥ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A 8 2\n♥: J 8 6\n♦: Q T 5\n♣: K 7 6 5\n10 HCP",
+        "bids": "P P 1♠ 3♣\n3♠ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 5 4 3\n♥: K J 8 3\n♦: A 4 3\n♣: Q T 8\n10 HCP",
+        "bids": "P 1♥ 1♠ P\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A J T 7\n♥: 3\n♦: T 9 5 4 2\n♣: J T 7\n6 HCP",
+        "bids": "P 1♦ DBL 1♥\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A T 7 4 3\n♥: \n♦: K Q T 7 4\n♣: Q 9 4\n11 HCP",
+        "bids": "?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: Q T 8\n♥: K Q J 9\n♦: K Q J\n♣: K 9 6\n17 HCP",
+        "bids": "P P 1♣ DBL\nP 1♠ 2♣ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 8 5 4\n♥: J T 7 6 5 4\n♦: Q T 3\n♣: Q\n5 HCP",
+        "bids": "2♣ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: K J 6 4\n♥: K 9 5 4\n♦: 6 4 3\n♣: T 8\n7 HCP",
+        "bids": "1NT P P ?",
+        "correctAnswer": "?"
+    }
+]
