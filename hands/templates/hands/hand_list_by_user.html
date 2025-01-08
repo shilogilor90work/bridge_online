@@ -49,7 +49,21 @@
 		<br>
 		<!--a href="{% url 'manage:delete_hand' hand.id %}">Delete</a-->
 	    <button type="button" onclick="toggleForm({{ hand.id }})">Edit Explanation</button>
-		<div id="form_{{ hand.id }}">
+		<div id="form_{{ hand.id }}" style="display: none;">
+			<form method="post" action="{% url 'manage:update_explanation' hand.id %}">
+				{% csrf_token %}
+				<div>
+					<label for="correct_answer_{{ hand.id }}">Correct Answer:</label>
+					<input type="text" id="correct_answer_{{ hand.id }}" name="correct_answer" value="{{ hand.correct_answer }}">
+				</div>
+				<div>
+					<label for="explanation_{{ hand.id }}">Explanation:</label>
+					<textarea id="explanation_{{ hand.id }}" name="explanation">{{ hand.explanation }}</textarea>
+				</div>
+				<button type="submit">Update</button>
+			</form>
+	    </div>
+		<div id="form_practice_{{ hand.id }}">
 			<form id="form_{{ hand.id }}_form_update" method="post" action="{% url 'hands:update_practice' hand.id %}">
 				{% csrf_token %}
 				<input type="hidden" name="user_name" id="user_name_input_{{ hand.id }}_update">
