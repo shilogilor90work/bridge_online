@@ -14,6 +14,7 @@ def bridge_hand_labels(request):
 
 def hands_by_user(request, user_name):
     hands = list(Hand.objects.all())
+    hands = [hand for hand in hands if '?' in hand.correct_answer]
     filtered_hands = []
     for hand in hands:
         if "users_done_practice" in hand.metadata and user_name in hand.metadata["users_done_practice"]:
