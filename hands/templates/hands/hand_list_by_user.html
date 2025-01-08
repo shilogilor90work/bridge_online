@@ -53,7 +53,7 @@
 			<form id="form_{{ hand.id }}_form_update" method="post" action="{% url 'hands:update_practice' hand.id %}">
 				{% csrf_token %}
 				<input type="hidden" name="user_name" id="user_name_input_{{ hand.id }}_update">
-				<button type="button" onclick="submitForm({{ hand.id }}, 'update')">this is extra hard i want this to show</button>
+				<button type="button" onclick="submitForm({{ hand.id }}, 'update')">Hard, show again</button>
 			</form>
 		</div>
 
@@ -61,7 +61,7 @@
 			<form id="form_{{ hand.id }}_form_done" method="post" action="{% url 'hands:update_done' hand.id %}">
 				{% csrf_token %}
 				<input type="hidden" name="user_name" id="user_name_input_{{ hand.id }}_done">
-				<button type="button" onclick="submitForm({{ hand.id }}, 'done')">This is to easy, dont show again</button>
+				<button type="button" onclick="submitForm({{ hand.id }}, 'done')">Dont show again</button>
 			</form>
 		</div>
 
