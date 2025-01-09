@@ -1,6 +1,6 @@
 from django import forms
 from hands.models import Hand
-
+import json
 
 class HandForm(forms.ModelForm):
     class Meta:
