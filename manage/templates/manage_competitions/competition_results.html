@@ -25,7 +25,7 @@
                   </div>
                   <div>
                       <label for="explanation_{{ hand.id }}">Explanation:</label>
-                      <textarea id="explanation_{{ hand.id }}" name="explanation">{{ hand.explanation }}</textarea>
+                      <textarea id="explanation_{{ hand.id }}" name="explanation" oninput="autoResize(this)">{{ hand.explanation }}</textarea>
                   </div>
                   <button type="submit">Update</button>
               </form>
@@ -56,7 +56,10 @@
       <p>No hands are associated with this competition.</p>
   {% endif %}
 <script>
-
+    function autoResize(textarea) {
+        textarea.style.height = 'auto'; // Reset height to auto before resizing
+        textarea.style.height = (textarea.scrollHeight) + 'px'; // Set height to fit content
+    }
 </script>
 
 <style>
@@ -112,6 +115,10 @@
     .result {
         margin-top: 10px;
         font-weight: bold;
+    }
+    textarea {
+        overflow: hidden; /* Prevent scrolling */
+        resize: none; /* Disable manual resizing */
     }
 </style>
 
