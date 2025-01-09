@@ -240,9 +240,17 @@ class CompetitionDeleteView(DeleteView):
 def competitions_results(request, competition_id):
     # Fetch the competition object or return a 404 if not found
     competition = get_object_or_404(Competition, id=competition_id)
-
-    # Fetch the hands associated with the competition
+    password = request.GET.get('password')
     hands = competition.hands.all()
+    password_hand = "pass"
+    lowest_id = 99999
+    for hand in hands:
+        if hand.metadata.get("password") and hand.id < lowest_id:
+            lowest_id = hand.id
+            password_hand = hand.metadata.get("password")
+    if password != password_hand:
+        # Render the password prompt page if password is incorrect or missing
+        return render(request, 'manage_competitions/password_prompt.html', {'competition_id': competition_id})
 
     # Pass the competition and hands to the template
     context = {
