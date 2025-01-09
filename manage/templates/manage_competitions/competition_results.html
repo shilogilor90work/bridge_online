@@ -60,6 +60,11 @@
         textarea.style.height = 'auto'; // Reset height to auto before resizing
         textarea.style.height = (textarea.scrollHeight) + 'px'; // Set height to fit content
     }
+        window.addEventListener('load', function() {
+        document.querySelectorAll('textarea').forEach(function(textarea) {
+            autoResize(textarea);
+        });
+    });
 </script>
 
 <style>
