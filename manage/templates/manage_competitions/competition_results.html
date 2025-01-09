@@ -16,6 +16,20 @@
               <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
               <h4>Hand ID: {{ hand.id }}</h4>
               <p><strong>Correct Answer:</strong> {{ hand.correct_answer }}</p>
+              <div id="form_{{ hand.id }}">
+              <form method="post" action="{% url 'manage:update_explanation' hand.id %}">
+                  {% csrf_token %}
+                  <div>
+                      <label for="correct_answer_{{ hand.id }}">Correct Answer:</label>
+                      <input type="text" id="correct_answer_{{ hand.id }}" name="correct_answer" value="{{ hand.correct_answer }}">
+                  </div>
+                  <div>
+                      <label for="explanation_{{ hand.id }}">Explanation:</label>
+                      <textarea id="explanation_{{ hand.id }}" name="explanation">{{ hand.explanation }}</textarea>
+                  </div>
+                  <button type="submit">Update</button>
+              </form>
+          </div>
               <ul>
                 {% for user, answers in users_input.items %}
                   {% with hand_id=hand.id|stringformat:"s" %}
