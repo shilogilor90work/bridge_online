@@ -1,10 +1,12 @@
 import random
 import json
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse_lazy
+from django.views.generic import FormView, CreateView, UpdateView, DeleteView, ListView, DetailView
+from .forms import CompetitionForm, HandForm, JSONUploadForm, ExplanationForm
+from hands.models import Hand, Competition
 
 from django.shortcuts import render, get_object_or_404, redirect
-from hands.models import Hand
-from .forms import HandForm, JSONUploadForm, ExplanationForm  # Create a HandForm for handling form data
 
 
 def create_hand(request):
@@ -195,3 +197,66 @@ def to_symbol(answer):
 
 def teaching(request):
     return render(request, 'manage_hands/practice_hands.html', {})
+
+
+class CompetitionListView(ListView):
+    model = Competition
+    template_name = 'manage_competitions/competition_list.html'
+    context_object_name = 'competitions'
+
+
+class CompetitionCreateView(FormView):
+    template_name = 'manage_competitions/competition_form.html'
+    form_class = CompetitionForm
+    success_url = reverse_lazy('manage:competition-list')
+
+    def form_valid(self, form):
+        number_of_hands = form.cleaned_data['number_of_hands']
+
+        # Fetch random hands from the database
+        all_hands = list(Hand.objects.all())
+        random_hands = random.sample(all_hands, min(number_of_hands, len(all_hands)))
+        # Create a new competition with users_input initialized as an empty JSON
+        competition = Competition.objects.create(users_input={})
+        competition.hands.set(random_hands)
+        competition.save()
+
+        return HttpResponseRedirect(self.success_url)
+
+
+class CompetitionUpdateView(UpdateView):
+    model = Competition
+    fields = ['hands', 'users_input']
+    template_name = 'manage_competitions/competition_form.html'
+    success_url = reverse_lazy('manage:competition-list')
+
+
+class CompetitionDeleteView(DeleteView):
+    model = Competition
+    template_name = 'manage_competitions/competition_confirm_delete.html'
+    success_url = reverse_lazy('manage:competition-list')
+
+
+def competitions_results(request, competition_id):
+    # Fetch the competition object or return a 404 if not found
+    competition = get_object_or_404(Competition, id=competition_id)
+    password = request.GET.get('password')
+    hands = competition.hands.all()
+    password_hand = "pass"
+    lowest_id = 99999
+    for hand in hands:
+        if hand.metadata.get("password") and hand.id < lowest_id:
+            lowest_id = hand.id
+            password_hand = hand.metadata.get("password")
+    if password != password_hand:
+        # Render the password prompt page if password is incorrect or missing
+        return render(request, 'manage_competitions/password_prompt.html', {'competition_id': competition_id})
+
+    # Pass the competition and hands to the template
+    context = {
+        'competition': competition,
+        'hands': hands,
+        'users_input': competition.users_input,  # Added the users_input to context
+
+    }
+    return render(request, 'manage_competitions/competition_results.html', context)

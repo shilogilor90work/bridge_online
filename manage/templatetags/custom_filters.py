@@ -2,6 +2,7 @@ from django import template
 
 register = template.Library()
 
+
 @register.filter(name='color_suits')
 def color_suits(text):
     if not text:
@@ -14,3 +15,10 @@ def color_suits(text):
         .replace('\\n', '<br>')
 
     return colored_text
+
+
+@register.filter
+def get_item(dictionary, key):
+    if isinstance(key, int):
+        return dictionary.get(key) or dictionary.get(str(key))
+    return dictionary.get(key)

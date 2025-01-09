@@ -32,3 +32,12 @@ class ExplanationForm(forms.ModelForm):
     class Meta:
         model = Hand
         fields = ['correct_answer', 'explanation']
+
+
+class CompetitionForm(forms.Form):
+    number_of_hands = forms.IntegerField(
+        label="Number of Hands",
+        min_value=1,
+        help_text="Enter the number of random hands to include."
+    )
+

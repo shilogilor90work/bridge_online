@@ -16,4 +16,14 @@ class Hand(models.Model):
     ew_vul = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.subject
+        return str(self.id)
+
+
+class Competition(models.Model):
+    hands = models.ManyToManyField('Hand', related_name='competitions')
+    users_input = models.JSONField(blank=True, null=True)  # JSON field for user input
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(f"{self.id}, {self.hands}")

@@ -17,4 +17,9 @@ urlpatterns = [
     path('update-explanation/<int:hand_id>/', views.update_explanation, name='update_explanation'),
     path('upload-json/', views.upload_json_view, name='upload_json'),
     path('teaching/', views.teaching, name='teaching'),
+    path('competitions/', views.CompetitionListView.as_view(), name='competition-list'),
+    path('competitions/create/', views.CompetitionCreateView.as_view(), name='competition-create'),
+    path('competitions/<int:pk>/update/', views.CompetitionUpdateView.as_view(), name='competition-update'),
+    path('competitions/<int:pk>/delete/', views.CompetitionDeleteView.as_view(), name='competition-delete'),
+    path('competitions/<int:competition_id>/results/', views.competitions_results, name='competitions_results'),
 ]
