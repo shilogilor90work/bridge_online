@@ -1,0 +1,108 @@
+{% extends 'manage_hands/base.html' %}
+
+{% load custom_filters %}
+{% block title %}
+<h2>Hands List</h2>
+{% endblock %}
+{% block content %}
+  <h1>Competition Details</h1>
+  <p><strong>Competition ID:</strong> {{ competition.id }}</p>
+  <div style="margin-bottom: 20px;">
+    <label for="username"><strong>Username:</strong></label>
+    <input type="text" id="username" placeholder="Enter your username" style="padding: 5px; font-size: 18px;">
+  </div>
+  <h2>Hands</h2>
+  {% if hands %}
+      <ul>
+          {% for hand in hands %}
+            <div>
+              <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
+              <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
+              <h4>Hand ID: {{ hand.id }}</h4>
+              <p><strong>Correct Answer:</strong> {{ hand.correct_answer }}</p>
+              <ul>
+                {% for user, answers in users_input.items %}
+                  {% with hand_id=hand.id|stringformat:"s" %}
+                    <li>
+                      User: {{ user }} - Your Answer:
+                      {% if answers|get_item:hand_id %}
+                        {{ answers|get_item:hand_id }}
+                        {% if answers|get_item:hand_id == hand.correct_answer %}
+                          <span style="color: green;">(Correct)</span>
+                        {% else %}
+                          <span style="color: red;">(Incorrect) - Correct Answer: {{ hand.correct_answer }}</span>
+                        {% endif %}
+                      {% else %}
+                        No Answer Provided
+                      {% endif %}
+                    </li>
+                  {% endwith %}
+                {% endfor %}
+              </ul>
+            </div>
+          {% endfor %}
+      </ul>
+  {% else %}
+      <p>No hands are associated with this competition.</p>
+  {% endif %}
+<script>
+
+</script>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        font-size: 20px;
+    }
+    .options button {
+        padding: 10px;
+        margin: 2px;
+        border: none;
+        background-color: lightgray;
+        color: black;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .hand {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
+    }
+    .heart {
+        color: red !important;
+    }
+    .diamond {
+        color: orange !important;
+    }
+    .club {
+        color: green !important;
+    }
+    .spade {
+        color: black !important;
+    }
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    .options div {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: center;
+    }
+
+    .options button:hover {
+        background-color: #0056b3;
+    }
+    .result {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+</style>
+
+{% endblock %}
