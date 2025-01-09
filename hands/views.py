@@ -1,7 +1,10 @@
 from .forms import PracticeForm, DoneForm
-from hands.models import Hand
+from hands.models import Hand, Competition
 from django.shortcuts import render, get_object_or_404, redirect
 import random
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.http import JsonResponse
 
 
 def bridge_hand(request):
@@ -112,3 +115,54 @@ def needs_validation(request, hand_id):
         form = HandForm(instance=hand)
 
     return render(request, 'manage_hands/update_hand.html', {'form': form})
+
+
+def compete(request, competition_id):
+    # Fetch the competition object or return a 404 if not found
+    competition = get_object_or_404(Competition, id=competition_id)
+
+    # Fetch the hands associated with the competition
+    hands = competition.hands.all()
+    hands_without_answers = hands.values('id', 'cards', 'bids', 'optional_bids', 'ns_vul', 'ew_vul')
+
+    # Pass the competition and hands to the template
+    context = {
+        'competition': competition,
+        'hands': hands_without_answers,
+    }
+    return render(request, 'hands/compete.html', context)
+
+
+@csrf_exempt
+def compete_submit(request, competition_id):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            username = data.get('username')
+            answers = data.get('answers')
+
+            if not username or not answers:
+                return JsonResponse({'error': 'Username and answers are required.'}, status=400)
+
+            # Get the competition instance
+            competition = Competition.objects.get(id=competition_id)
+
+            # If user_input exists, update it; if not, initialize as an empty dictionary
+            user_input = competition.users_input or {}
+
+            # Add the user's answers to the user_input dictionary
+            user_input[username] = answers
+
+            # Save the updated user_input back to the competition model
+            competition.users_input = user_input
+            competition.save()
+
+            # Return a success response
+            return JsonResponse({'message': 'Answers submitted successfully!'}, status=200)
+
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON payload.'}, status=400)
+        except Competition.DoesNotExist:
+            return JsonResponse({'error': 'Competition not found.'}, status=404)
+    else:
+        return JsonResponse({'error': 'Invalid request method.'}, status=405)

@@ -11,5 +11,6 @@ urlpatterns = [
         path('update_practice/<int:hand_id>/', views.update_practice, name='update_practice'),
         path('update_done/<int:hand_id>/', views.update_done, name='update_done'),
         path('needs_validation/<int:hand_id>/', views.needs_validation, name='needs_validation'),
-
+        path('compete/<int:competition_id>/', views.compete, name='compete'),
+        path('compete/<int:competition_id>/submit', views.compete_submit, name='compete_submit'),
 ]
