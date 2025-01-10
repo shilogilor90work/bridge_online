@@ -215,7 +215,11 @@ class CompetitionCreateView(FormView):
 
         # Fetch random hands from the database
         all_hands = list(Hand.objects.all())
-        random_hands = random.sample(all_hands, min(number_of_hands, len(all_hands)))
+        possible_hands = []
+        for hand in all_hands:
+            if "all_correct" not in hand.metadata:
+                possible_hands.append(hand)
+        random_hands = random.sample(possible_hands, min(number_of_hands, len(possible_hands)))
         # Create a new competition with users_input initialized as an empty JSON
         competition = Competition.objects.create(users_input={})
         competition.hands.set(random_hands)
