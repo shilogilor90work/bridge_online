@@ -69,7 +69,6 @@
               <ul>
                 {% for user, answers in users_input.items %}
                   {% with hand_id=hand.id|stringformat:"s" %}
-                    <li>
                       {% if answers|get_item:hand_id %}
                           {% if answers|get_item:hand_id == hand.correct_answer %}
                             <span style="color: green;">{{ user }}: {{ answers|get_item:hand_id }}</span>
@@ -77,7 +76,6 @@
                             <span style="color: red;">{{ user }}: {{ answers|get_item:hand_id }}</span>
                           {% endif %}
                         {% endif %}
-                    </li>
                   {% endwith %}
                   		<br>
                 {% endfor %}
