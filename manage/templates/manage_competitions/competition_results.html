@@ -12,16 +12,17 @@
             <thead>
                 <tr>
                     <th>Username</th>
+                    <th>Total Correct</th>
                     {% for hand in hands %}
                         <th>Hand ID: {{ hand.id }}</th>
                     {% endfor %}
-                    <th>Total Correct</th>
                 </tr>
             </thead>
             <tbody>
                 {% for user, answers in users_input.items %}
                     <tr>
                         <td>{{ user }}</td>
+                        <td>{{ correct_count }} / {{ hands|length }}</td>
                         {% with 0 as correct_count %}
                         {% for hand in hands %}
                             {% with hand_id=hand.id|stringformat:"s" %}
@@ -40,7 +41,6 @@
                                 </td>
                             {% endwith %}
                         {% endfor %}
-                        <td>{{ correct_count }} / {{ hands|length }}</td>
                         {% endwith %}
                     </tr>
                 {% endfor %}
