@@ -3,6 +3,8 @@ import json
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import FormView, CreateView, UpdateView, DeleteView, ListView, DetailView
+
+from hands.forms import AllCorrectForm
 from .forms import CompetitionForm, HandForm, JSONUploadForm, ExplanationForm
 from hands.models import Hand, Competition
 
@@ -264,3 +266,31 @@ def competitions_results(request, competition_id):
 
     }
     return render(request, 'manage_competitions/competition_results.html', context)
+
+
+def update_all_correct(request, hand_id):
+    hand = get_object_or_404(Hand, id=hand_id)
+    if request.method == 'POST':
+        # Create a form with only the fields we want to update
+        form = AllCorrectForm(request.POST, instance=hand)
+
+        # Only update the 'correct_answer' and 'explanation' fields
+        if form.is_valid():
+            if "users_done_practice" not in hand.metadata:
+                hand.metadata["users_done_practice"] = [form.cleaned_data.get('user_name', "moshe")]
+            else:
+                hand.metadata["users_done_practice"].append(form.cleaned_data.get('user_name', "moshe"))
+            hand.metadata["all_correct"] = True
+            # Save the updated hand
+            hand.save()
+            # Redirect back to the referring page
+            referer = request.META.get('HTTP_REFERER')
+            if referer:
+                return redirect(referer)
+            else:
+                return redirect('manage:hand_list')  # Fallback if no referer is provided
+
+    else:
+        form = HandForm(instance=hand)
+
+    return render(request, 'manage_hands/update_hand.html', {'form': form})

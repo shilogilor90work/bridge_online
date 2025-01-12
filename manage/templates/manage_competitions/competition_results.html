@@ -11,16 +11,17 @@
 		<thead>
 			<tr>
 				<th>Username</th>
+				<th>Total Correct</th>
 				{% for hand in hands %}
 					<th>Hand ID: {{ hand.id }}</th>
 				{% endfor %}
-				<th>Total Correct</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for user, answers in users_input.items %}
 				<tr>
 					<td>{{ user }}</td>
+					<td>{{ correct_count }} / {{ hands|length }}</td>
 					{% with 0 as correct_count %}
 					{% for hand in hands %}
 						{% with hand_id=hand.id|stringformat:"s" %}
@@ -39,7 +40,6 @@
 							</td>
 						{% endwith %}
 					{% endfor %}
-					<td>{{ correct_count }} / {{ hands|length }}</td>
 					{% endwith %}
 				</tr>
 			{% endfor %}
@@ -65,6 +65,12 @@
 			  </div>
 			  <button type="submit">Update</button>
 		  </form>
+		  <div id="all_correct_{{ hand.id }}">
+			<form id="form_{{ hand.id }}_all_correct" method="post" action="{% url 'manage:update_all_correct' hand.id %}">
+				{% csrf_token %}
+				<button type="submit">Dont show again</button>
+			</form>
+		</div>
 	  </div>
 		  <ul>
 			{% for user, answers in users_input.items %}
@@ -100,14 +106,13 @@
         const rows = Array.from(table.querySelectorAll('tr')).slice(1); // Skip the header row
 
         rows.forEach(row => {
-            // Get all <td> elements except the first and last
-            const tds = Array.from(row.querySelectorAll('td')).slice(1, -1);
+            const tds = Array.from(row.querySelectorAll('td')).slice(2);
 
             // Count the number of green checkmarks
             const greenChecks = tds.filter(td => td.innerHTML.includes('<span style="color: green;">✅</span>')).length;
 
             // Update the last <td> with the count
-            row.lastElementChild.textContent = `${greenChecks} / ${tds.length}`;
+            row.children[1].textContent = `${greenChecks} / ${tds.length}`;
         });
     });
 </script>
