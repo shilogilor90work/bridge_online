@@ -2,22 +2,20 @@
 
 {% load custom_filters %}
 {% block title %}
-<h2>Hands List</h2>
+  <h1>Competition Details</h1>
 {% endblock %}
 {% block content %}
-  <h1>Competition Details</h1>
   <p><strong>Competition ID:</strong> {{ competition.id }}</p>
-  <h2>Hands</h2>
   {% if hands %}
       <ul>
          <table border="1" id="myTable" style="text-align: center; border-collapse: collapse; width: 100%;">
             <thead>
                 <tr>
                     <th>Username</th>
+                    <th>Total Correct</th>
                     {% for hand in hands %}
                         <th>Hand ID: {{ hand.id }}</th>
                     {% endfor %}
-                    <th>Total Correct</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,12 +25,23 @@
                         {% with 0 as correct_count %}
                         {% for hand in hands %}
                             {% with hand_id=hand.id|stringformat:"s" %}
+                                    {% if answers|get_item:hand_id %}
+                                        {% if answers|get_item:hand_id == hand.correct_answer %}
+                                            {% with correct_count|add:1 as correct_count %}
+                                            {% endwith %}
+                                        {% endif %}
+                                    {% endif %}
+                            {% endwith %}
+                        {% endfor %}
+                        <td>{{ correct_count }} / {{ hands|length }}</td>
+                        {% endwith %}
+                        {% with 0 as correct_count %}
+                        {% for hand in hands %}
+                            {% with hand_id=hand.id|stringformat:"s" %}
                                 <td>
                                     {% if answers|get_item:hand_id %}
                                         {% if answers|get_item:hand_id == hand.correct_answer %}
                                             <span style="color: green;">✅</span>
-                                            {% with correct_count|add:1 as correct_count %}
-                                            {% endwith %}
                                         {% else %}
                                             <span style="color: red;">❌</span>
                                         {% endif %}
@@ -42,7 +51,6 @@
                                 </td>
                             {% endwith %}
                         {% endfor %}
-                        <td>{{ correct_count }} / {{ hands|length }}</td>
                         {% endwith %}
                     </tr>
                 {% endfor %}
