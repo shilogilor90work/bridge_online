@@ -45,6 +45,8 @@
 					</div>
 				</div>
 		<div class="result" id="result-{{ hand.id }}"></div>
+		{{ hand.metadata }}
+		<br>
 		<a href="{% url 'manage:update_hand' hand.id %}">Edit</a>
 		<br>
 		<!--a href="{% url 'manage:delete_hand' hand.id %}">Delete</a-->
