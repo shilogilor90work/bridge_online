@@ -50,8 +50,7 @@
 		<a href="{% url 'manage:update_hand' hand.id %}">Edit</a>
 		<br>
 		<!--a href="{% url 'manage:delete_hand' hand.id %}">Delete</a-->
-	    <button type="button" onclick="toggleForm({{ hand.id }})">Edit Explanation</button>
-		<div id="form_{{ hand.id }}" style="display: none;">
+		<div id="form_{{ hand.id }}">
 			<form method="post" action="{% url 'manage:update_explanation' hand.id %}">
 				{% csrf_token %}
 				<div>
@@ -60,7 +59,7 @@
 				</div>
 				<div>
 					<label for="explanation_{{ hand.id }}">Explanation:</label>
-					<textarea id="explanation_{{ hand.id }}" name="explanation">{{ hand.explanation }}</textarea>
+					<textarea id="explanation_{{ hand.id }}"  name="explanation" oninput="autoResize(this)">{{ hand.explanation }}</textarea>
 				</div>
 				<button type="submit">Update</button>
 			</form>
@@ -79,7 +78,15 @@
 
 
 <script>
-
+    function autoResize(textarea) {
+        textarea.style.height = 'auto'; // Reset height to auto before resizing
+        textarea.style.height = (textarea.scrollHeight) + 'px'; // Set height to fit content
+    }
+        window.addEventListener('load', function() {
+        document.querySelectorAll('textarea').forEach(function(textarea) {
+            autoResize(textarea);
+        });
+    });
 	let correctCount = 0;
 	let wrongCount = 0;
 	
@@ -217,16 +224,7 @@
 			interactiveBids(index, bids, correctAnswer)
 		}**/
 	}
-	function toggleForm(handId) {
-        var formElement = document.getElementById("form_" + handId);
 
-        // Toggle visibility of the form
-        if (formElement.style.display === "none") {
-            formElement.style.display = "block";
-        } else {
-            formElement.style.display = "none";
-        }
-    }
 </script>
 
 

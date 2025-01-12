@@ -58,7 +58,7 @@
 				</div>
 				<div>
 					<label for="explanation_{{ hand.id }}">Explanation:</label>
-					<textarea id="explanation_{{ hand.id }}" name="explanation">{{ hand.explanation }}</textarea>
+					<textarea id="explanation_{{ hand.id }}"  name="explanation" oninput="autoResize(this)">{{ hand.explanation }}</textarea>
 				</div>
 				<button type="submit">Update</button>
 			</form>
@@ -93,7 +93,15 @@
 
 
 <script>
-
+    function autoResize(textarea) {
+        textarea.style.height = 'auto'; // Reset height to auto before resizing
+        textarea.style.height = (textarea.scrollHeight) + 'px'; // Set height to fit content
+    }
+        window.addEventListener('load', function() {
+        document.querySelectorAll('textarea').forEach(function(textarea) {
+            autoResize(textarea);
+        });
+    });
 	let correctCount = 0;
 	let wrongCount = 0;
 	
@@ -240,6 +248,9 @@
         } else {
             formElement.style.display = "none";
         }
+        document.querySelectorAll('textarea').forEach(function(textarea) {
+            autoResize(textarea);
+        });
     }
 	function getUserNameFromURL() {
         const url = new URL(window.location.href); // Get the current page URL
