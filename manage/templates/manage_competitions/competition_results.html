@@ -35,7 +35,6 @@
                         {% endfor %}
                         <td>{{ correct_count }} / {{ hands|length }}</td>
                         {% endwith %}
-                        {% with 0 as correct_count %}
                         {% for hand in hands %}
                             {% with hand_id=hand.id|stringformat:"s" %}
                                 <td>
