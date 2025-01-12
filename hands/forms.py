@@ -16,3 +16,10 @@ class DoneForm(forms.ModelForm):
     class Meta:
         model = Hand
         fields = []
+
+
+class AllCorrectForm(forms.ModelForm):
+    class Meta:
+        model = Hand
+        fields = []
+
