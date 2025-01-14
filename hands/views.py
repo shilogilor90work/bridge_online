@@ -181,8 +181,8 @@ def compete_submit(request, competition_id):
             # Save the updated user_input back to the competition model
             competition.users_input = user_input
             competition.save()
-            #None, None #
-            password, hands = generate_password(request, competition_id)
+            #
+            password, hands = None, None #generate_password(request, competition_id)
             if password:  
                 # Pass the competition and hands to the template
                 context = {
