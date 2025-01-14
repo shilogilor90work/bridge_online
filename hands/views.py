@@ -186,6 +186,7 @@ def compete_submit(request, competition_id):
             if password:  
                 # Create a mutable copy of GET parameters
                 query_params = request.GET.copy()
+                hands = competition.hands.all()
 
                 # Add or update the 'username' parameter
                 query_params['password'] = password
@@ -193,7 +194,7 @@ def compete_submit(request, competition_id):
                 # Pass the competition and hands to the template
                 context = {
                     'competition': competition,
-                    'hands': competition.hands,
+                    'hands': hands,
                     'users_input': competition.users_input,  # Added the users_input to context
                     'query_params': query_params,
                 }
