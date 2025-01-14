@@ -214,7 +214,7 @@ def generate_password(request, competition_id):
                 print('password found in lowest {lowest_id} hand: {password_hand}')
     if password_hand:
         print(f'found password hand {password_hand}')
-        return redirect_to_competition_results(request, competition_id, password)
+        return redirect_to_competition_results(request, competition_id, password_hand)
     else:
         new_password = str(random.randint(0, 999))
         print(f'new password {new_password}, updating it for hand {lowest_id}')
