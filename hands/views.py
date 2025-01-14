@@ -182,7 +182,7 @@ def compete_submit(request, competition_id):
             competition.users_input = user_input
             competition.save()
             #
-            redirection = None#generate_password(request, competition_id)
+            redirection = generate_password(request, competition_id)
             print(redirection)
             if redirection: 
                 return redirection
@@ -236,4 +236,4 @@ def redirect_to_competition_results(request, competition, hands, password):
         'users_input': competition.users_input,  # Added the users_input to context
         'password': password,
     }
-    return render(request, 'manage_competitions/competition_results.html', context)
+    return None#render(request, 'manage_competitions/competition_results.html', context)
