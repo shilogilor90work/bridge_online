@@ -182,16 +182,9 @@ def compete_submit(request, competition_id):
             competition.users_input = user_input
             competition.save()
             #
-            password, hands = None, None #generate_password(request, competition_id)
-            if password:  
-                # Pass the competition and hands to the template
-                context = {
-                    'competition': competition,
-                    'hands': hands,
-                    'users_input': competition.users_input,  # Added the users_input to context
-                    'password': password,
-                }
-                return render(request, 'manage_competitions/competition_results.html', context)
+            redirection = generate_password(request, competition_id)
+            if redirection: 
+                return redirection
             # Return a success response
             return JsonResponse({'message': 'Answers submitted successfully!'}, status=200)
 
@@ -216,7 +209,7 @@ def generate_password(request, competition_id):
             lowest_id = hand.id
             password_hand = hand.metadata.get("password")
     if password_hand:
-        return password_hand, hands
+        return redirect_to_competition_results(request, competition_id, password)
     else:
         new_password = str(random.randint(0, 999))
         hand = get_object_or_404(Hand, id=lowest_id)
@@ -224,5 +217,16 @@ def generate_password(request, competition_id):
         hand.metadata["password"] = new_password
         # Save the updated hand
         hand.save()
-        return new_password, hands
-    return None, hands
+        return redirect_to_competition_results(request, competition_id, password)
+    return None
+    
+    
+def redirect_to_competition_results(request, competition_id, password):
+    # Get the URL prefix (scheme + host + port)
+    url_prefix = f"{request.scheme}://{request.get_host()}"
+    
+    # Example usage: construct a full URL
+    target_url = f"{url_prefix}/manage/competitions/{competition_id}/results/{password}"
+    
+    # Redirect to the constructed URL
+    return redirect(target_url)
