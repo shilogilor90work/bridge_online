@@ -226,14 +226,9 @@ def generate_password(request, competition_id):
     else:
         new_password = str(random.randint(0, 999))
         hand = get_object_or_404(Hand, id=lowest_id)
-        
-        # Create a form with only the fields we want to update
-        form = DoneForm(request.POST, instance=hand)
-
-        # Only update the 'correct_answer' and 'explanation' fields
-        if form.is_valid():
-            hand.metadata["password"] = new_password
-            # Save the updated hand
-            hand.save()
-            return new_password, hands
+    
+        hand.metadata["password"] = new_password
+        # Save the updated hand
+        hand.save()
+        return new_password, hands
     return None, hands
