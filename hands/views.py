@@ -224,7 +224,7 @@ def generate_password(request, competition_id):
         # Save the updated hand
         hand.save()
         print(f'password saved to hand {hand.id}')
-        return redirect_to_competition_results(request, competition_id, password)
+        return redirect_to_competition_results(request, competition_id, new_password)
     return None
     
     
