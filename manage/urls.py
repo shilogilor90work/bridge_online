@@ -22,7 +22,6 @@ urlpatterns = [
     path('competitions/<int:pk>/update/', views.CompetitionUpdateView.as_view(), name='competition-update'),
     path('competitions/<int:pk>/delete/', views.CompetitionDeleteView.as_view(), name='competition-delete'),
     path('competitions/<int:competition_id>/results/', views.competitions_results, name='competitions_results'),
-    path('competitions/<int:competition_id>/results/<int:password>', views.competitions_results, name='competitions_results'),
     path('update_all_correct/<int:hand_id>/', views.update_all_correct, name='update_all_correct'),
 
 ]
