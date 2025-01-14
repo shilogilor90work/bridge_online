@@ -193,7 +193,7 @@ def compete_submit(request, competition_id):
                 # Pass the competition and hands to the template
                 context = {
                     'competition': competition,
-                    'hands': hands,
+                    'hands': competition.hands,
                     'users_input': competition.users_input,  # Added the users_input to context
                     'query_params': query_params,
                 }
