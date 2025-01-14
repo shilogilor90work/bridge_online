@@ -206,6 +206,7 @@ def generate_password(request, competition_id):
     password_hand = None
     lowest_id = 99999
     for hand in hands:
+        print(f'checking password for hand {hand.id}')
         if hand.metadata.get("password") and hand.id < lowest_id:
             lowest_id = hand.id
             password_hand = hand.metadata.get("password")
@@ -214,7 +215,7 @@ def generate_password(request, competition_id):
         return redirect_to_competition_results(request, competition_id, password)
     else:
         new_password = str(random.randint(0, 999))
-        print(f'new password {new_password}')
+        print(f'new password {new_password}, updating it for hand {lowest_id}')
         hand = get_object_or_404(Hand, id=lowest_id)
     
         hand.metadata["password"] = new_password
