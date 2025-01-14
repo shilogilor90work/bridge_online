@@ -184,18 +184,12 @@ def compete_submit(request, competition_id):
             #None, None #
             password, hands = generate_password(request, competition_id)
             if password:  
-                # Create a mutable copy of GET parameters
-                query_params = request.GET.copy()
-
-                # Add or update the 'username' parameter
-                query_params['password'] = password
-
                 # Pass the competition and hands to the template
                 context = {
                     'competition': competition,
                     'hands': hands,
                     'users_input': competition.users_input,  # Added the users_input to context
-                    'query_params': query_params,
+                    'password': password,
                 }
                 return render(request, 'manage_competitions/competition_results.html', context)
             # Return a success response
