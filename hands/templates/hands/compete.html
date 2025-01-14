@@ -104,7 +104,7 @@ function submitAnswers() {
           }
       })
       .then(data => {
-          alert('Answers submitted successfully!');
+          alert(data.message);
           console.log('Response:', data);
       })
       .catch(error => {
