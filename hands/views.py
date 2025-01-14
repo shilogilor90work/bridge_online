@@ -182,7 +182,7 @@ def compete_submit(request, competition_id):
             competition.users_input = user_input
             competition.save()
             #
-            redirection = generate_password(request, competition_id)
+            redirection = None#generate_password(request, competition_id)
             print(redirection)
             if redirection: 
                 return redirection
