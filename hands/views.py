@@ -182,9 +182,10 @@ def compete_submit(request, competition_id):
             competition.users_input = user_input
             competition.save()
             #
-            redirection = None #generate_password(request, competition_id)
+            redirection = generate_password(request, competition_id)
+            print(redirection)
             if redirection: 
-                return redirection
+                return JsonResponse({'message': redirection}, status=200)
             # Return a success response
             return JsonResponse({'message': 'Answers submitted successfully!'}, status=200)
 
@@ -226,8 +227,7 @@ def redirect_to_competition_results(request, competition_id, password):
     url_prefix = f"{request.scheme}://{request.get_host()}"
     
     # Example usage: construct a full URL
-    target_url = f"manage:competitions:{competition_id}:results:{password}"
-    print(target_url)
+    target_url = f"{url_prefix}/manage/competitions/{competition_id}/results?password={password}"
     
     # Redirect to the constructed URL
-    return redirect(target_url)
+    return target_url
