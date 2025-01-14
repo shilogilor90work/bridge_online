@@ -2,91 +2,92 @@
 
 {% load custom_filters %}
 {% block title %}
-<h2>Hands List</h2>
+  <h1>Competition Details</h1>
 {% endblock %}
 {% block content %}
-  <h1>Competition Details</h1>
   <p><strong>Competition ID:</strong> {{ competition.id }}</p>
-  <h2>Hands</h2>
   {% if hands %}
-      <ul>
-         <table border="1" id="myTable" style="text-align: center; border-collapse: collapse; width: 100%;">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    {% for hand in hands %}
-                        <th>Hand ID: {{ hand.id }}</th>
-                    {% endfor %}
-                    <th>Total Correct</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user, answers in users_input.items %}
-                    <tr>
-                        <td>{{ user }}</td>
-                        {% with 0 as correct_count %}
-                        {% for hand in hands %}
-                            {% with hand_id=hand.id|stringformat:"s" %}
-                                <td>
-                                    {% if answers|get_item:hand_id %}
-                                        {% if answers|get_item:hand_id == hand.correct_answer %}
-                                            <span style="color: green;">✅</span>
-                                            {% with correct_count|add:1 as correct_count %}
-                                            {% endwith %}
-                                        {% else %}
-                                            <span style="color: red;">❌</span>
-                                        {% endif %}
-                                    {% else %}
-                                        <span style="color: gray;">-</span>
-                                    {% endif %}
-                                </td>
-                            {% endwith %}
-                        {% endfor %}
-                        <td>{{ correct_count }} / {{ hands|length }}</td>
-                        {% endwith %}
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+	 <table border="1" id="myTable" style="text-align: center; border-collapse: collapse; width: 100%;">
+		<thead>
+			<tr>
+				<th>Username</th>
+				<th>Total Correct</th>
+				{% for hand in hands %}
+					<th>Hand ID: {{ hand.id }}</th>
+				{% endfor %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for user, answers in users_input.items %}
+				<tr>
+					<td>{{ user }}</td>
+					<td>{{ correct_count }} / {{ hands|length }}</td>
+					{% with 0 as correct_count %}
+					{% for hand in hands %}
+						{% with hand_id=hand.id|stringformat:"s" %}
+							<td>
+								{% if answers|get_item:hand_id %}
+									{% if answers|get_item:hand_id == hand.correct_answer %}
+										<span style="color: green;">✅</span>
+										{% with correct_count|add:1 as correct_count %}
+										{% endwith %}
+									{% else %}
+										<span style="color: red;">❌</span>
+									{% endif %}
+								{% else %}
+									<span style="color: gray;">-</span>
+								{% endif %}
+							</td>
+						{% endwith %}
+					{% endfor %}
+					{% endwith %}
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
-          {% for hand in hands %}
-            <div>
-              <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
-              <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
-              <h4>Hand ID: {{ hand.id }}</h4>
-              <div id="form_{{ hand.id }}">
-              <form method="post" action="{% url 'manage:update_explanation' hand.id %}">
-                  {% csrf_token %}
-                  <div>
-                      <label for="correct_answer_{{ hand.id }}" style="color: green;">Correct Answer:</label>
-                      <input type="text" id="correct_answer_{{ hand.id }}" name="correct_answer" value="{{ hand.correct_answer }}">
-                  </div>
-                  <div>
-                      <label for="explanation_{{ hand.id }}">Explanation:</label>
-                      <textarea id="explanation_{{ hand.id }}" name="explanation" oninput="autoResize(this)">{{ hand.explanation }}</textarea>
-                  </div>
-                  <button type="submit">Update</button>
-              </form>
-          </div>
-              <ul>
-                {% for user, answers in users_input.items %}
-                  {% with hand_id=hand.id|stringformat:"s" %}
-                    <li>
-                      {% if answers|get_item:hand_id %}
-                          {% if answers|get_item:hand_id == hand.correct_answer %}
-                            <span style="color: green;">{{ user }}: {{ answers|get_item:hand_id }}</span>
-                          {% else %}
-                            <span style="color: red;">{{ user }}: {{ answers|get_item:hand_id }}</span>
-                          {% endif %}
-                        {% endif %}
-                    </li>
-                  {% endwith %}
-                  		<br>
-                {% endfor %}
-              </ul>
-            </div>
-          {% endfor %}
-      </ul>
+	  {% for hand in hands %}
+		<hr>
+		<div>
+		  <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
+		  <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
+		  <h4>Hand ID: {{ hand.id }}</h4>
+		  <div id="form_{{ hand.id }}">
+		  <form method="post" action="{% url 'manage:update_explanation' hand.id %}">
+			  {% csrf_token %}
+			  <div>
+				  <label for="correct_answer_{{ hand.id }}" style="color: green;">Correct Answer:</label>
+				  <input type="text" id="correct_answer_{{ hand.id }}" name="correct_answer" value="{{ hand.correct_answer }}">
+			  </div>
+			  <div>
+				  <label for="explanation_{{ hand.id }}">Explanation:</label>
+				  <textarea id="explanation_{{ hand.id }}" name="explanation" oninput="autoResize(this)">{{ hand.explanation }}</textarea>
+			  </div>
+			  <button type="submit">Update</button>
+		  </form>
+		  <div id="all_correct_{{ hand.id }}">
+			<form id="form_{{ hand.id }}_all_correct" method="post" action="{% url 'manage:update_all_correct' hand.id %}">
+				{% csrf_token %}
+				<button type="submit">Dont show again</button>
+			</form>
+		</div>
+	  </div>
+		  <ul>
+			{% for user, answers in users_input.items %}
+			  {% with hand_id=hand.id|stringformat:"s" %}
+				  {% if answers|get_item:hand_id %}
+					  {% if answers|get_item:hand_id == hand.correct_answer %}
+						<span style="color: green;">{{ user }}: {{ answers|get_item:hand_id }}</span>
+					  {% else %}
+						<span style="color: red;">{{ user }}: {{ answers|get_item:hand_id }}</span>
+					  {% endif %}
+					{% endif %}
+			  {% endwith %}
+					<br>
+			{% endfor %}
+		  </ul>
+		</div>
+	  {% endfor %}
   {% else %}
       <p>No hands are associated with this competition.</p>
   {% endif %}
@@ -105,14 +106,13 @@
         const rows = Array.from(table.querySelectorAll('tr')).slice(1); // Skip the header row
 
         rows.forEach(row => {
-            // Get all <td> elements except the first and last
-            const tds = Array.from(row.querySelectorAll('td')).slice(1, -1);
+            const tds = Array.from(row.querySelectorAll('td')).slice(2);
 
             // Count the number of green checkmarks
             const greenChecks = tds.filter(td => td.innerHTML.includes('<span style="color: green;">✅</span>')).length;
 
             // Update the last <td> with the count
-            row.lastElementChild.textContent = `${greenChecks} / ${tds.length}`;
+            row.children[1].textContent = `${greenChecks} / ${tds.length}`;
         });
     });
 </script>

@@ -1,4 +1,4 @@
-from .forms import PracticeForm, DoneForm
+from .forms import PracticeForm, DoneForm, AllCorrectForm
 from hands.models import Hand, Competition
 from django.shortcuts import render, get_object_or_404, redirect
 import random
@@ -33,7 +33,7 @@ def hands_that_need_validation(request):
     for hand in hands:
         if "needs_validation" in hand.metadata:
             filtered_hands.append(hand)
-    return render(request, 'hands/hand_list_by_user.html', {'hands': filtered_hands[:20]})
+    return render(request, 'hands/hand_list_needs_validation.html', {'hands': filtered_hands[:20]})
 
 
 def update_practice(request, hand_id):
@@ -104,6 +104,31 @@ def needs_validation(request, hand_id):
                 hand.metadata["needs_validation"].append(form.cleaned_data.get('user_name', "moshe"))
             # Save the updated hand
             hand.save()
+            # Redirect back to the referring page
+            referer = request.META.get('HTTP_REFERER')
+            if referer:
+                return redirect(referer)
+            else:
+                return redirect('manage:hand_list')  # Fallback if no referer is provided
+
+    else:
+        form = HandForm(instance=hand)
+
+    return render(request, 'manage_hands/update_hand.html', {'form': form})
+
+
+def remove_needs_validation(request, hand_id):
+    hand = get_object_or_404(Hand, id=hand_id)
+    if request.method == 'POST':
+        # Create a form with only the fields we want to update
+        form = AllCorrectForm(request.POST, instance=hand)
+
+        # Only update the 'correct_answer' and 'explanation' fields
+        if form.is_valid():
+            if "needs_validation" in hand.metadata:
+                del hand.metadata["needs_validation"]
+                # Save the updated hand
+                hand.save()
             # Redirect back to the referring page
             referer = request.META.get('HTTP_REFERER')
             if referer:
