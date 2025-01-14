@@ -207,9 +207,11 @@ def generate_password(request, competition_id):
     lowest_id = 99999
     for hand in hands:
         print(f'checking password for hand {hand.id}')
-        if hand.metadata.get("password") and hand.id < lowest_id:
+        if hand.id < lowest_id:
             lowest_id = hand.id
-            password_hand = hand.metadata.get("password")
+            if hand.metadata.get("password"):
+                password_hand = hand.metadata.get("password")
+                print('password found in lowest {lowest_id} hand: {password_hand}')
     if password_hand:
         print(f'found password hand {password_hand}')
         return redirect_to_competition_results(request, competition_id, password)
