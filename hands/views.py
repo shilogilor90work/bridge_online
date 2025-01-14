@@ -216,16 +216,16 @@ def generate_password(request, competition_id):
     password = request.GET.get('password')
     hands = competition.hands.all()
     password_hand = None
-    lowest_hand = 99999
+    lowest_id = 99999
     for hand in hands:
-        if hand.metadata.get("password") and hand.id < lowest_hand.id:
-            lowest_hand = hand
+        if hand.metadata.get("password") and hand.id < lowest_id:
+            lowest_id = hand.id
             password_hand = hand.metadata.get("password")
     if password_hand:
         return password_hand
     else:
         new_password = str(random.randint(0, 999))
-        hand = get_object_or_404(Hand, id=lowest_hand.id)
+        hand = get_object_or_404(Hand, id=lowest_id)
         
         # Create a form with only the fields we want to update
         form = DoneForm(request.POST, instance=hand)
