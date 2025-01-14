@@ -267,7 +267,7 @@ def competitions_results(request, competition_id):
     }
     return render(request, 'manage_competitions/competition_results.html', context)
 
-def competitions_results(request, competition_id, password):
+def competitions_results_(request, competition_id, password):
     # Fetch the competition object or return a 404 if not found
     competition = get_object_or_404(Competition, id=competition_id)
     #password = request.GET.get('password')
