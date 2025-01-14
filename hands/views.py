@@ -233,6 +233,6 @@ def redirect_to_competition_results(request, competition, hands, password):
     url_prefix = f"{request.scheme}://{request.get_host()}"
     
     # Example usage: construct a full URL
-    target_url = f"{url_prefix}/manage/competitions/{competition.id}/results/{password}"
+    target_url = f"{url_prefix}/manage/competitions/{competition.id}/results?password={password}"
     
     return target_url
