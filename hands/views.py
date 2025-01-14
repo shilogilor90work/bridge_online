@@ -186,6 +186,7 @@ def compete_submit(request, competition_id):
             if password:  
                 # Create a mutable copy of GET parameters
                 query_params = request.GET.copy()
+                hands = competition.hands.all()
 
                 # Add or update the 'username' parameter
                 query_params['password'] = password
