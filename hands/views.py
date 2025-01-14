@@ -182,10 +182,10 @@ def compete_submit(request, competition_id):
             competition.users_input = user_input
             competition.save()
             #
-            redirection = generate_password(request, competition_id)
-            print(redirection)
-            if redirection: 
-                return redirection
+            password = generate_password(request, competition_id)
+            print(password)
+            if password: 
+                return JsonResponse({'message': f'Answers submitted successfully! Password {password}'}, status=200)
             # Return a success response
             return JsonResponse({'message': 'Answers submitted successfully!'}, status=200)
 
@@ -211,9 +211,9 @@ def generate_password(request, competition_id):
             lowest_id = hand.id
             if hand.metadata.get("password"):
                 password_hand = hand.metadata.get("password")
-                print('password found in lowest {lowest_id} hand: {password_hand}')
+                print(f'password found in lowest {lowest_id} hand: {password_hand}')
     if password_hand:
-        print(f'found password hand {password_hand}')
+        print(f'found password {password_hand}')
         return redirect_to_competition_results(request, competition, hands, password_hand)
     else:
         new_password = str(random.randint(0, 999))
@@ -236,4 +236,4 @@ def redirect_to_competition_results(request, competition, hands, password):
         'users_input': competition.users_input,  # Added the users_input to context
         'password': password,
     }
-    return None#render(request, 'manage_competitions/competition_results.html', context)
+    return password#render(request, 'manage_competitions/competition_results.html', context)
