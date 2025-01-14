@@ -198,7 +198,7 @@ def compete_submit(request, competition_id):
 
 
 def generate_password(request, competition_id):
-    
+    print(f'genereting password for {competition_id}')
     # Fetch the competition object or return a 404 if not found
     competition = get_object_or_404(Competition, id=competition_id)
     password = request.GET.get('password')
@@ -210,14 +210,17 @@ def generate_password(request, competition_id):
             lowest_id = hand.id
             password_hand = hand.metadata.get("password")
     if password_hand:
+        print(f'found password hand {password_hand}')
         return redirect_to_competition_results(request, competition_id, password)
     else:
         new_password = str(random.randint(0, 999))
+        print(f'new password {new_password}')
         hand = get_object_or_404(Hand, id=lowest_id)
     
         hand.metadata["password"] = new_password
         # Save the updated hand
         hand.save()
+        print(f'password saved to hand {hand.id}')
         return redirect_to_competition_results(request, competition_id, password)
     return None
     
