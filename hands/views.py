@@ -226,7 +226,8 @@ def redirect_to_competition_results(request, competition_id, password):
     url_prefix = f"{request.scheme}://{request.get_host()}"
     
     # Example usage: construct a full URL
-    target_url = f"{url_prefix}/manage/competitions/{competition_id}/results/{password}"
+    target_url = f"manage:competitions:{competition_id}:results:{password}"
+    print(target_url)
     
     # Redirect to the constructed URL
     return redirect(target_url)
