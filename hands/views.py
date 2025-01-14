@@ -182,6 +182,22 @@ def compete_submit(request, competition_id):
             competition.users_input = user_input
             competition.save()
 
+            password = generate_password(request, competition_id)
+            if password:  
+                # Create a mutable copy of GET parameters
+                query_params = request.GET.copy()
+
+                # Add or update the 'username' parameter
+                query_params['password'] = password
+
+                # Pass the competition and hands to the template
+                context = {
+                    'competition': competition,
+                    'hands': hands,
+                    'users_input': competition.users_input,  # Added the users_input to context
+                    'query_params': query_params,
+                }
+                return render(request, 'manage_competitions/competition_results.html', context)
             # Return a success response
             return JsonResponse({'message': 'Answers submitted successfully!'}, status=200)
 
@@ -191,3 +207,33 @@ def compete_submit(request, competition_id):
             return JsonResponse({'error': 'Competition not found.'}, status=404)
     else:
         return JsonResponse({'error': 'Invalid request method.'}, status=405)
+
+
+def generate_password(request, competition_id):
+    
+    # Fetch the competition object or return a 404 if not found
+    competition = get_object_or_404(Competition, id=competition_id)
+    password = request.GET.get('password')
+    hands = competition.hands.all()
+    password_hand = None
+    lowest_hand = 99999
+    for hand in hands:
+        if hand.metadata.get("password") and hand.id < lowest_hand.id:
+            lowest_hand = hand
+            password_hand = hand.metadata.get("password")
+    if password_hand:
+        return password_hand
+    else:
+        new_password = str(random.randint(0, 999))
+        hand = get_object_or_404(Hand, id=lowest_hand.id)
+        
+        # Create a form with only the fields we want to update
+        form = DoneForm(request.POST, instance=hand)
+
+        # Only update the 'correct_answer' and 'explanation' fields
+        if form.is_valid():
+            hand.metadata["password"] = new_password
+            # Save the updated hand
+            hand.save()
+            return new_password
+    return None
