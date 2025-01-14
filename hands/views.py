@@ -182,11 +182,10 @@ def compete_submit(request, competition_id):
             competition.users_input = user_input
             competition.save()
 
-            password = generate_password(request, competition_id)
+            password, hands = generate_password(request, competition_id)
             if password:  
                 # Create a mutable copy of GET parameters
                 query_params = request.GET.copy()
-                hands = competition.hands.all()
 
                 # Add or update the 'username' parameter
                 query_params['password'] = password
@@ -223,7 +222,7 @@ def generate_password(request, competition_id):
             lowest_id = hand.id
             password_hand = hand.metadata.get("password")
     if password_hand:
-        return password_hand
+        return password_hand, hands
     else:
         new_password = str(random.randint(0, 999))
         hand = get_object_or_404(Hand, id=lowest_id)
@@ -236,5 +235,5 @@ def generate_password(request, competition_id):
             hand.metadata["password"] = new_password
             # Save the updated hand
             hand.save()
-            return new_password
-    return None
+            return new_password, hands
+    return None, hands
