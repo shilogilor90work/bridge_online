@@ -185,7 +185,7 @@ def compete_submit(request, competition_id):
             password = generate_password(request, competition_id)
             print(password)
             if password: 
-                return JsonResponse({'message': f'Answers submitted successfully! Password {password}'}, status=200)
+                return JsonResponse({'message': f'Answers submitted successfully! {password}'}, status=200)
             # Return a success response
             return JsonResponse({'message': 'Answers submitted successfully!'}, status=200)
 
@@ -229,11 +229,10 @@ def generate_password(request, competition_id):
     
     
 def redirect_to_competition_results(request, competition, hands, password):
-    # Pass the competition and hands to the template
-    context = {
-        'competition': competition,
-        'hands': hands,
-        'users_input': competition.users_input,  # Added the users_input to context
-        'password': password,
-    }
-    return password#render(request, 'manage_competitions/competition_results.html', context)
+    # Get the URL prefix (scheme + host + port)
+    url_prefix = f"{request.scheme}://{request.get_host()}"
+    
+    # Example usage: construct a full URL
+    target_url = f"{url_prefix}/manage/competitions/{competition.id}/results/{password}"
+    
+    return target_url
