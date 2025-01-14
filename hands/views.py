@@ -185,7 +185,7 @@ def compete_submit(request, competition_id):
             redirection = generate_password(request, competition_id)
             print(redirection)
             if redirection: 
-                return JsonResponse({'message': redirection}, status=200)
+                return redirection
             # Return a success response
             return JsonResponse({'message': 'Answers submitted successfully!'}, status=200)
 
@@ -214,7 +214,7 @@ def generate_password(request, competition_id):
                 print('password found in lowest {lowest_id} hand: {password_hand}')
     if password_hand:
         print(f'found password hand {password_hand}')
-        return redirect_to_competition_results(request, competition_id, password_hand)
+        return redirect_to_competition_results(request, competition, hands, password_hand)
     else:
         new_password = str(random.randint(0, 999))
         print(f'new password {new_password}, updating it for hand {lowest_id}')
@@ -224,16 +224,16 @@ def generate_password(request, competition_id):
         # Save the updated hand
         hand.save()
         print(f'password saved to hand {hand.id}')
-        return redirect_to_competition_results(request, competition_id, new_password)
+        return redirect_to_competition_results(request, competition, hands, new_password)
     return None
     
     
-def redirect_to_competition_results(request, competition_id, password):
-    # Get the URL prefix (scheme + host + port)
-    url_prefix = f"{request.scheme}://{request.get_host()}"
-    
-    # Example usage: construct a full URL
-    target_url = f"{url_prefix}/manage/competitions/{competition_id}/results?password={password}"
-    
-    # Redirect to the constructed URL
-    return target_url
+def redirect_to_competition_results(request, competition, hands, password):
+    # Pass the competition and hands to the template
+    context = {
+        'competition': competition,
+        'hands': hands,
+        'users_input': competition.users_input,  # Added the users_input to context
+        'password': password,
+    }
+    return render(request, 'manage_competitions/competition_results.html', context)
