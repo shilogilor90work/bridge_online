@@ -34,7 +34,7 @@ def modify_bids(value):
     value = value.replace("DBL", "X  ")
     value = value.replace("RDBL", "XX ")
 
-    # Add a space after each suit (S, H, D, C)
-    value = re.sub(r'([♥♦♣♠])', r'\1 ', value)
-
+    suits = ['♥', '♦', '♣', '♠']
+    for suit in suits:
+        value = value.replace(suit, suit + ' ')
     return value
