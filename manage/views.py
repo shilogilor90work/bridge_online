@@ -159,6 +159,36 @@ def upload_json_view(request):
         form = JSONUploadForm()
 
     return render(request, 'manage_hands/upload_json.html', {'form': form})
+    
+    
+def create_hand_free(request):
+    if request.method == 'POST':
+        json_data = request.POST.get('json_data')
+        if json_data:
+            try:
+                data = json.loads(json_data)
+
+                # Extract information
+                cards = data.get("cards", {})
+                bids = data.get("bids", "")
+                correct_answer_parts = data.get("correctAnswer", "").split(maxsplit=1)
+                correct_answer = correct_answer_parts[0]
+                explanation = correct_answer_parts[1] if len(correct_answer_parts) > 1 else ""
+
+                # Create and save a Hand instance
+                Hand.objects.create(
+                    subject="Default",  # Set a default or get from the form
+                    cards=cards,
+                    bids=bids,
+                    correct_answer=to_symbol(correct_answer),
+                    explanation=explanation,
+                    metadata={"needs_validation": ["new"]},
+                )
+                return HttpResponse("New hand successfully created!")
+            except (json.JSONDecodeError, KeyError) as e:
+                return HttpResponse(f"Error processing input: {e}", status=400)
+
+    return render(request, 'manage_hands/create_hand.html')
 
 
 def display_hand(request, hand_id):

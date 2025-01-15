@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create New Hand</title>
+</head>
+
+<body>
+    <h1>Create a New Hand</h1>
+    <form id="hand-form" method="post">
+        {% csrf_token %}
+        <textarea id="hand-input" name="hand_input" rows="10" cols="50" placeholder="Enter hand details here..."></textarea><br>
+        <button type="button" id="convert-button">Convert to JSON and Submit</button>
+    </form>
+
+    <h2>Converted JSON</h2>
+    <pre id="json-output"></pre>
+
+    <script>
+		function calculateHCP(cards) {
+			const hcpValues = { A: 4, K: 3, Q: 2, J: 1 };
+			let hcp = 0;
+
+			cards.forEach(card => {
+				hcp += hcpValues[card.toUpperCase()] || 0;
+			});
+
+			return hcp;
+		}
+
+		function formatHand(hand) {
+			const suits = ['S', 'H', 'D', 'C'];
+			const suitSymbols = { S: '♠', H: '♥', D: '♦', C: '♣' };
+			let formattedHand = [];
+			let totalHCP = 0;
+
+			suits.forEach(suit => {
+				const cards = hand[suit] || [];
+				formattedHand.push(`${suitSymbols[suit]}: ${cards.join(' ').toUpperCase()}`);
+				totalHCP += calculateHCP(cards);
+			});
+
+			formattedHand.push(`${totalHCP} HCP`);
+			return formattedHand.join("\n");
+		}
+
+        document.getElementById('convert-button').addEventListener('click', function () {
+            const input = document.getElementById('hand-input').value;
+
+            // Simple JavaScript logic to parse input into JSON format
+            const lines = input.trim().split('\n');
+            const hand = { S: [], H: [], D: [], C: [] };
+            const bids = [];
+            let correctAnswer = "?";
+
+			// Assuming `lines` is an array of input lines
+			if (!lines[0].startsWith("S:")) {
+				const groups = lines[0].split(' ').map(group => group.trim());
+				hand.S = groups[0].split('');
+				hand.H = groups[1].split('');
+				hand.D = groups[2].split('');
+				hand.C = groups[3].split('');
+				lines = lines.slice(1);
+			}
+
+
+			lines.forEach(line => {
+				if (line.startsWith("S:")) {
+					hand.S = line.split(':')[1].trim().split('');
+				} else if (line.startsWith("H:")) {
+					hand.H = line.split(':')[1].trim().split('');
+				} else if (line.startsWith("D:")) {
+					hand.D = line.split(':')[1].trim().split('');
+				} else if (line.startsWith("C:")) {
+					hand.C = line.split(':')[1].trim().split('');
+				} else if (line.includes('-')) {
+					const parts = line.split('-');
+					correctAnswer = parts[0].trim()
+						.replace(/nt/g, 'NT')
+						.replace(/c/g, '♣')
+						.replace(/h/g, '♥')
+						.replace(/s/g, '♠')
+						.replace(/d/g, '♦')
+						.toUpperCase() + " " + parts.slice(1).join('-');
+				} else {
+					bids.push(line);
+				}
+			});
+
+			const jsonData = {
+				cards: formatHand(hand),
+				bids: bids.join('\n')
+					.replace(/nt/g, 'NT')
+					.replace(/c/g, '♣')
+					.replace(/h/g, '♥')
+					.replace(/s/g, '♠')
+					.replace(/d/g, '♦')
+					.toUpperCase()
+					.replace("♦BL", "DBL"),
+				correctAnswer: correctAnswer
+			};
+
+            // Display the JSON output
+            document.getElementById('json-output').textContent = JSON.stringify(jsonData, null, 4);
+
+            // Create a hidden input for submission
+            const form = document.getElementById('hand-form');
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'json_data';
+            hiddenInput.value = JSON.stringify(jsonData);
+            form.appendChild(hiddenInput);
+
+            // Submit the form
+            form.submit();
+        });
+    </script>
+</body>
+</html>

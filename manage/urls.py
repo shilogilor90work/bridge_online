@@ -4,6 +4,7 @@ from . import views
 app_name = 'manage'
 
 urlpatterns = [
+    path('create_free_text/', views.create_hand_view, name='create_hand_view'),
     path('create/', views.create_hand, name='create_hand'),
     path('<int:hand_id>/update/', views.update_hand, name='update_hand'),
     path('<int:hand_id>/delete/', views.delete_hand, name='delete_hand'),
