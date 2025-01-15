@@ -9,7 +9,7 @@
 	<hr>
 		<pre>Hand #{{ hand.id }}: <b>{{ hand.subject }}</b></pre>
 		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
-		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
+		<pre id="bids-display" style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
 		<!--div id="bids-{{ hand.id }}" style="font-size: 26px; margin: 0; padding: 0;"></div-->
 		<div class="options">
 					<div>
@@ -93,6 +93,29 @@
 
 
 <script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get the element containing the bids
+    const bidsElement = document.getElementById("bids-display");
+
+    // Get the original text content
+    let bidsText = bidsElement.innerHTML;
+
+    // Replace "P", "DBL", and "RDBL" with the required substitutions
+    bidsText = bidsText.split("P").join("P  ");
+    bidsText = bidsText.split("DBL").join("X  ");
+    bidsText = bidsText.split("RDBL").join("XX ");
+
+    // Add a space after each suit (S, H, D, C)
+    const suits = ["♠", "♥", "♦", "♣"];
+    suits.forEach(suit => {
+      bidsText = bidsText.split(suit).join(suit + " ");
+    });
+
+    // Update the element with the modified text
+    bidsElement.innerHTML = bidsText;
+  });
+  
     function autoResize(textarea) {
         textarea.style.height = 'auto'; // Reset height to auto before resizing
         textarea.style.height = (textarea.scrollHeight) + 'px'; // Set height to fit content

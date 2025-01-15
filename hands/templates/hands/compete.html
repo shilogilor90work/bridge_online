@@ -56,6 +56,8 @@
       <div style="margin-top: 20px;">
         <button onclick="submitAnswers()" style="padding: 10px 20px; font-size: 18px;">Submit</button>
       </div>
+	  <div id="result_url"></div>
+          
     {% else %}
         <p>No hands are associated with this competition.</p>
     {% endif %}
@@ -106,6 +108,7 @@ function submitAnswers() {
       .then(data => {
           alert(data.message);
           console.log('Response:', data);
+		  document.getElementById(`result_url`).innerText = data.message.split("!")[1];
       })
       .catch(error => {
           console.error('Error:', error);
