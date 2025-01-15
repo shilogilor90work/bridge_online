@@ -50,7 +50,7 @@
 		<hr>
 		<div>
 		  <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
-		  <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
+		  <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|modify_bids|color_suits|safe }}</pre>
 		  <h4>Hand ID: {{ hand.id }}</h4>
 		  <div id="form_{{ hand.id }}">
 		  <form method="post" action="{% url 'manage:update_explanation' hand.id %}">

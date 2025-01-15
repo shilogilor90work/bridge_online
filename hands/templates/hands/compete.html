@@ -17,7 +17,7 @@
             {% for hand in hands %}
           <hr>
           <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
-          <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
+          <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|modify_bids|color_suits|safe }}</pre>
           <div class="options">
               <div>
                   <button onclick='addAnswer({{ hand.id }}, "Pass")'>Pass</button>
