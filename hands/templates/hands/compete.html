@@ -17,7 +17,7 @@
             {% for hand in hands %}
           <hr>
           <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
-          <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
+          <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|modify_bids|color_suits|safe }}</pre>
           <div class="options">
               <div>
                   <button onclick='addAnswer({{ hand.id }}, "Pass")'>Pass</button>
@@ -56,6 +56,8 @@
       <div style="margin-top: 20px;">
         <button onclick="submitAnswers()" style="padding: 10px 20px; font-size: 18px;">Submit</button>
       </div>
+	  <div id="result_url"></div>
+          
     {% else %}
         <p>No hands are associated with this competition.</p>
     {% endif %}
@@ -104,8 +106,9 @@ function submitAnswers() {
           }
       })
       .then(data => {
-          alert('Answers submitted successfully!');
+          alert(data.message);
           console.log('Response:', data);
+		  document.getElementById(`result_url`).innerText = data.message.split("!")[1];
       })
       .catch(error => {
           console.error('Error:', error);

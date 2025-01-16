@@ -22,3 +22,19 @@ def get_item(dictionary, key):
     if isinstance(key, int):
         return dictionary.get(key) or dictionary.get(str(key))
     return dictionary.get(key)
+
+
+@register.filter(name='modify_bids')
+def modify_bids(value):
+    if not isinstance(value, str):
+        return value  # Ensure the value is a string before processing
+    
+    # Replace "P", "DBL", and "RDBL"
+    value = value.replace("P", "P  ")
+    value = value.replace("DBL", "X  ")
+    value = value.replace("RDBL", "XX ")
+
+    suits = ['♥', '♦', '♣', '♠']
+    for suit in suits:
+        value = value.replace(suit, suit + ' ')
+    return value

@@ -267,6 +267,30 @@ def competitions_results(request, competition_id):
     }
     return render(request, 'manage_competitions/competition_results.html', context)
 
+def competitions_results_(request, competition_id, password):
+    # Fetch the competition object or return a 404 if not found
+    competition = get_object_or_404(Competition, id=competition_id)
+    #password = request.GET.get('password')
+    hands = competition.hands.all()
+    password_hand = "pass"
+    lowest_id = 99999
+    for hand in hands:
+        if hand.metadata.get("password") and hand.id < lowest_id:
+            lowest_id = hand.id
+            password_hand = hand.metadata.get("password")
+    if password != password_hand:
+        # Render the password prompt page if password is incorrect or missing
+        return render(request, 'manage_competitions/password_prompt.html', {'competition_id': competition_id})
+
+    # Pass the competition and hands to the template
+    context = {
+        'competition': competition,
+        'hands': hands,
+        'users_input': competition.users_input,  # Added the users_input to context
+
+    }
+    return render(request, 'manage_competitions/competition_results.html', context)
+
 
 def update_all_correct(request, hand_id):
     hand = get_object_or_404(Hand, id=hand_id)

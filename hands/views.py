@@ -181,7 +181,11 @@ def compete_submit(request, competition_id):
             # Save the updated user_input back to the competition model
             competition.users_input = user_input
             competition.save()
-
+            #
+            password = generate_password(request, competition_id)
+            print(password)
+            if password: 
+                return JsonResponse({'message': f'Answers submitted successfully! {password}'}, status=200)
             # Return a success response
             return JsonResponse({'message': 'Answers submitted successfully!'}, status=200)
 
@@ -191,3 +195,44 @@ def compete_submit(request, competition_id):
             return JsonResponse({'error': 'Competition not found.'}, status=404)
     else:
         return JsonResponse({'error': 'Invalid request method.'}, status=405)
+
+
+def generate_password(request, competition_id):
+    print(f'genereting password for {competition_id}')
+    # Fetch the competition object or return a 404 if not found
+    competition = get_object_or_404(Competition, id=competition_id)
+    password = request.GET.get('password')
+    hands = competition.hands.all()
+    password_hand = None
+    lowest_id = 99999
+    for hand in hands:
+        print(f'checking password for hand {hand.id}')
+        if hand.id < lowest_id:
+            lowest_id = hand.id
+            if hand.metadata.get("password"):
+                password_hand = hand.metadata.get("password")
+                print(f'password found in lowest {lowest_id} hand: {password_hand}')
+    if password_hand:
+        print(f'found password {password_hand}')
+        return redirect_to_competition_results(request, competition, hands, password_hand)
+    else:
+        new_password = str(random.randint(0, 999))
+        print(f'new password {new_password}, updating it for hand {lowest_id}')
+        hand = get_object_or_404(Hand, id=lowest_id)
+    
+        hand.metadata["password"] = new_password
+        # Save the updated hand
+        hand.save()
+        print(f'password saved to hand {hand.id}')
+        return redirect_to_competition_results(request, competition, hands, new_password)
+    return None
+    
+    
+def redirect_to_competition_results(request, competition, hands, password):
+    # Get the URL prefix (scheme + host + port)
+    url_prefix = f"{request.scheme}://{request.get_host()}"
+    
+    # Example usage: construct a full URL
+    target_url = f"{url_prefix}/manage/competitions/{competition.id}/results?password={password}"
+    
+    return target_url

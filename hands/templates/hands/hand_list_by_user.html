@@ -9,7 +9,7 @@
 	<hr>
 		<pre>Hand #{{ hand.id }}: <b>{{ hand.subject }}</b></pre>
 		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
-		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
+		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|modify_bids|color_suits|safe }}</pre>
 		<!--div id="bids-{{ hand.id }}" style="font-size: 26px; margin: 0; padding: 0;"></div-->
 		<div class="options">
 					<div>
@@ -93,6 +93,7 @@
 
 
 <script>
+
     function autoResize(textarea) {
         textarea.style.height = 'auto'; // Reset height to auto before resizing
         textarea.style.height = (textarea.scrollHeight) + 'px'; // Set height to fit content
