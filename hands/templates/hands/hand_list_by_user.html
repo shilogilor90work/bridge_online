@@ -226,7 +226,7 @@
 			else {
 				wrongCount++;
 			}
-			resultDiv.innerHTML = `Correct Answer: ${colorSuits(correctAnswer)} <br> The Reason: ${explanation}<br> Your Answer: ${colorSuits(answer)} <br> Success Rate: ${(correctCount / (correctCount + wrongCount) * 100).toFixed(1)}%`;
+			resultDiv.innerHTML = `Correct Answer: ${colorSuits(correctAnswer)} <br> The Reason: ${colorSuits(explanation)}<br> Your Answer: ${colorSuits(answer)} <br> Success Rate: ${(correctCount / (correctCount + wrongCount) * 100).toFixed(1)}%`;
 		/**}
 		else {
 			if (answer.toLowerCase().startsWith(currentAnswer.toLowerCase())) {
