@@ -68,7 +68,7 @@
 
   function addAnswer(handId, answer) {
       answers[handId] = answer;
-      document.getElementById(`result-${handId}`).innerText = `Selected: ${colorSuits(coloredAnswer)}`;
+      document.getElementById(`result-${handId}`).innerText = `Selected: ${coloredAnswer}`;
   }
 function submitAnswers() {
       const username = document.getElementById('username').value.trim();
