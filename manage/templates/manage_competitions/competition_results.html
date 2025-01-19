@@ -43,6 +43,14 @@
 					{% endwith %}
 				</tr>
 			{% endfor %}
+			{% for hand in hands %}
+				<div id="all_correct_{{ hand.id }}">
+				<form id="form_{{ hand.id }}_all_correct" method="post" action="{% url 'manage:update_all_correct' hand.id %}">
+					{% csrf_token %}
+					<button type="submit">Dont show again</button>
+				</form>
+				</div>
+			{% endfor %}
 		</tbody>
 	</table>
 
@@ -70,7 +78,7 @@
 				{% csrf_token %}
 				<button type="submit">Dont show again</button>
 			</form>
-		</div>
+			</div>
 	  </div>
 		  <ul>
 			{% for user, answers in users_input.items %}
