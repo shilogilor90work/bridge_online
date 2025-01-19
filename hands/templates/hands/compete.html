@@ -103,9 +103,13 @@ function submitAnswers() {
           }
       })
       .then(data => {
-          alert(data.message);
+          alert(data.message.split("!")[0]);
           console.log('Response:', data);
-		  document.getElementById(`result_url`).innerText = data.message.split("!")[1];
+		  if(data.message.includes("!")){
+			const url = data.message.split("!")[1];
+			document.getElementById('result_url').innerHTML = `<a href="${url}" target="_blank">${url}</a>`;
+			window.open(url, '_blank');
+		  }
       })
       .catch(error => {
           console.error('Error:', error);
