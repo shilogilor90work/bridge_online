@@ -103,10 +103,12 @@ function submitAnswers() {
           }
       })
       .then(data => {
-          alert(data.message);
+          alert(data.message.split("!")[0]);
           console.log('Response:', data);
-		  window.open(data.message.split("!")[1], '_blank');
-		  // document.getElementById(`result_url`).innerText = data.message.split("!")[1];
+		  if(data.message.includes("!")){
+			  window.open(data.message.split("!")[1], '_blank');
+			  // document.getElementById(`result_url`).innerText = data.message.split("!")[1];
+		  }
       })
       .catch(error => {
           console.error('Error:', error);
