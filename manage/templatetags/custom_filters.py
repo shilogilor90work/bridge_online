@@ -38,3 +38,10 @@ def modify_bids(value):
     for suit in suits:
         value = value.replace(suit, suit + ' ')
     return value
+
+
+@register.filter(name='split_newline')
+def split_newline(value):
+    if isinstance(value, str):
+        return value.split('\n')  # Splitting bids by new line
+    return value
