@@ -47,7 +47,7 @@
 				<div id="all_correct_{{ hand.id }}">
 				<form id="form_{{ hand.id }}_all_correct" method="post" action="{% url 'manage:update_all_correct' hand.id %}">
 					{% csrf_token %}
-					<button type="submit">Dont show again</button>
+					<button type="submit">Easy</button>
 				</form>
 				</div>
 			{% endfor %}
