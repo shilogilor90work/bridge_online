@@ -105,7 +105,8 @@ function submitAnswers() {
       .then(data => {
           alert(data.message);
           console.log('Response:', data);
-		  document.getElementById(`result_url`).innerText = data.message.split("!")[1];
+		  window.open(data.message.split("!")[1], '_blank');
+		  // document.getElementById(`result_url`).innerText = data.message.split("!")[1];
       })
       .catch(error => {
           console.error('Error:', error);
