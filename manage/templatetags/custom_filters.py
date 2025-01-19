@@ -43,5 +43,7 @@ def modify_bids(value):
 @register.filter(name='split_newline')
 def split_newline(value):
     if isinstance(value, str):
-        return value.split('\n')  # Splitting bids by new line
+        # Normalize \\n to \n and then split by \n
+        normalized_value = value.replace('\\n', '\n')
+        return normalized_value.split('\n')
     return value
