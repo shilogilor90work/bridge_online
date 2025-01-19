@@ -2,10 +2,9 @@
 
 {% load custom_filters %}
 {% block title %}
-<h2>Hands List</h2>
+<h2>Competition</h2>
 {% endblock %}
 {% block content %}
-  <h1>Competition Details</h1>
     <p><strong>Competition ID:</strong> {{ competition.id }}</p>
 	  <div style="margin-bottom: 20px;">
 		<label for="username"><strong>Username:</strong></label>
@@ -13,7 +12,6 @@
 	  </div>
     <h2>Hands</h2>
     {% if hands %}
-        <ul>
             {% for hand in hands %}
           <hr>
           <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
@@ -52,7 +50,6 @@
           </div>
           <div class="result" id="result-{{ hand.id }}"></div>
           {% endfor %}
-        </ul>
       <div style="margin-top: 20px;">
         <button onclick="submitAnswers()" style="padding: 10px 20px; font-size: 18px;">Submit</button>
       </div>
