@@ -1,11 +1,12 @@
 {% extends 'manage_hands/base.html' %}
 {% block content %}
 <h1>Competitions</h1>
-<a href="{% url 'manage:competition-create' %}">Create New Competition</a>
+<a href="{% url 'manage:competition-create' %}">Create</a>
 <ul>
     {% for competition in competitions %}
         <li>
             {{ competition }}
+            <a href="{% url 'hands:compete' competition.id %}">Play</a>
             <a href="{% url 'manage:competition-update' competition.id %}">Edit</a>
             <a href="{% url 'manage:competition-delete' competition.id %}">Delete</a>
         </li>
