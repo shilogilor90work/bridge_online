@@ -45,6 +45,8 @@
 			{% endfor %}
 			<tr>
 				{% for hand in hands %}
+					<td>Remove</td>
+					<td>Too</td>
 					<td>
 						<div id="all_correct_{{ hand.id }}">
 						<form id="form_{{ hand.id }}_all_correct" method="post" action="{% url 'manage:update_all_correct' hand.id %}">
