@@ -1,0 +1,167 @@
+[
+    {
+        "cards": "♠: 8 3\n♥: 7 3\n♦: K Q 6 3 2\n♣: K Q 6 3\n10 HCP",
+        "bids": "P P 1♣ P\n?",
+        "correctAnswer": "2NT (p-p-1♣-p) 2NT: 8-11 HCP, a 5-card diamond suit, and 5-4-2-2. next bid will be the 4 time suit."
+    },
+    {
+        "cards": "♠: 8 3\n♥: 7 3\n♦: K Q 6 3 2\n♣: K Q 6 3\n10 HCP",
+        "bids": "P P 1♣ P\n2NT P 2♣ P\n?",
+        "correctAnswer": "3NT (p-p-1♣-p) 5-4-2-2. 5 diamonds and 4 clubs."
+    },
+    {
+        "cards": "♠: 8 3\n♥: K Q 7 3\n♦: K Q 6 3 2\n♣: 6 3\n10 HCP",
+        "bids": "P P 1♣ P\n2NT P 2♣ P\n?",
+        "correctAnswer": "3♥ (p-p-1♣-p) 5-4-2-2. 5 diamonds and 4 hearts."
+    },
+    {
+        "cards": "♠: 8 3\n♥: Q 7 3\n♦: K 6 3\n♣: K Q 6 3 2\n10 HCP",
+        "bids": "P P 1♣ P\n?",
+        "correctAnswer": "2♦ 2♦: (p-p-1♣-p) 8-11 HCP and 5-3-3-2 with the 5-card suit in the minors."
+    },
+    {
+        "cards": "♠: 8 3\n♥: Q 7 3\n♦: K 6 3\n♣: K Q 6 3 2\n10 HCP",
+        "bids": "P P 1♣ P\n2♦ P 2♥ P\n?",
+        "correctAnswer": "2♠ (p-p-1♣-p) If the 2 time suit is in majors: bid the 2 times suit (♥ -> NT). Relay and then the 5 time suit."
+    },
+    {
+        "cards": "♠: 8 3\n♥: Q 7 3\n♦: K 6 3\n♣: K Q 6 3 2\n10 HCP",
+        "bids": "P P 1♣ P\n2♦ P 2♥ P\n2♠ P 2NT P\n?",
+        "correctAnswer": "3♣ 5 clubs (8-11 HCP and 5-3-3-2, p-p-1♣-p)."
+    },
+    {
+        "cards": "♠: Q 8 3\n♥: 7 3\n♦: K 6 3\n♣: K Q 6 3 2\n10 HCP",
+        "bids": "P P 1♣ P\n2♦ P 2♥ P\n?",
+        "correctAnswer": "2NT (p-p-1♣-p) If the 2 time suit is in majors: bid the 2 times suit (♥ -> NT). Relay and then the 5 time suit."
+    },
+    {
+        "cards": "♠: Q 8 3\n♥: 7 3\n♦: K Q 6 3 2\n♣: K 6 3\n10 HCP",
+        "bids": "P P 1♣ P\n2♦ P 2♥ P\n2NT P 3♣ P\n?",
+        "correctAnswer": "3♦ 5 diamonds (8-11 HCP and 5-3-3-2, p-p-1♣-p)."
+    },
+    {
+        "cards": "♠: Q 8 3\n♥: K 7 3\n♦: 6 3\n♣: K Q 6 3 2\n10 HCP",
+        "bids": "P P 1♣ P\n2♦ P 2♥ P\n?",
+        "correctAnswer": "3♣ (p-p-1♣-p, 8-11 HCP and 5-3-3-2) If the 2 times suit is in minors: bid the 5 times suit e.g. 3♣/3♦"
+    },
+    {
+        "cards": "♠: Q 8 3\n♥: K 7 3\n♦: K Q 6 3 2\n♣: 6 3\n10 HCP",
+        "bids": "P P 1♣ P\n2♦ P 2♥ P\n?",
+        "correctAnswer": "3♦ (p-p-1♣-p, 8-11 HCP and 5-3-3-2) If the 2 times suit is in minors: bid the 5 times suit e.g. 3♣/3♦"
+    },
+    {
+        "cards": "♠: Q 8\n♥: K 9 7 3\n♦: 6 3\n♣: K Q 6 3 2\n10 HCP",
+        "bids": "P P 1♣ P\n?",
+        "correctAnswer": "3♥ 3♥: (p-p-1♣-p) 8-11 HCP, 5 clubs, 4 hearts, 2 spades, and 2 diamonds."
+    },
+    {
+        "cards": "♠: K 9 7 3\n♥: Q 8\n♦: 6 3\n♣: K Q 6 3 2\n10 HCP",
+        "bids": "P P 1♣ P\n?",
+        "correctAnswer": "3♠ 3♠: (p-p-1♣-p) 8-11 HCP, 5 clubs, 4 spades, 2 hearts, and 2 diamonds."
+    },
+    {
+        "cards": "♠: Q 8\n♥: 6 3\n♦: K 9 7 3\n♣: K Q 6 3 2\n10 HCP",
+        "bids": "P P 1♣ P\n?",
+        "correctAnswer": "3NT 3NT: (p-p-1♣-p) 8-11 HCP, 5 clubs, 4 diamonds, 2 spades, and 2 hearts."
+    },
+    {
+        "cards": "♠: Q 8 2\n♥: 6 3\n♦: K 9 7 3\n♣: K Q 6 3\n10 HCP",
+        "bids": "P P 1♣ P\n?",
+        "correctAnswer": "1NT 1NT: (p-p-1♣-p) 8-11 HCP and specific distributional requirements. The hand cannot have any singletons and cannot contain a 5-card major (4443 or 4432 only)."
+    },
+    {
+        "cards": "♠: A K J\n♥: K J 5\n♦: A K\n♣: Q J 8 6 3\n22 HCP",
+        "bids": "P P 1♣ P\n1NT P ?",
+        "correctAnswer": "2NT 2NT: (p-p-1♣-p) 23-24 (22 with 5 minor)"
+    },
+    {
+        "cards": "♠: A K J\n♥: K J 5\n♦: A K Q\n♣: J 8 6 3\n22 HCP",
+        "bids": "P P 1♣ P\n1NT P ?",
+        "correctAnswer": "3NT 3NT: (p-p-1♣-p) 17-21 (22 with no 5 minor)"
+    },
+    {
+        "cards": "♠: A K 8 4\n♥: A 9 4\n♦: K 6 4\n♣: 9 3 2\n14 HCP",
+        "bids": "P P 3♣ ?",
+        "correctAnswer": "3♠ 3♠: This bid shows interest in game if partner has 8+ points and support in spades. You should have 4+ spades and at least 14+ generously evaluated points."
+    },
+    {
+        "cards": "♠: A 8 4\n♥: A K 9 4\n♦: K 6 4\n♣: 9 3 2\n14 HCP",
+        "bids": "P P 3♣ ?",
+        "correctAnswer": "3♥ 3♥: Similar to 3♠, this bid indicates interest in game if partner has 8+ points and support in hearts. You should have 4+ hearts and at least 14+ generously evaluated points."
+    },
+    {
+        "cards": "♠: A 8 4\n♥: K 9 4\n♦: A K 6 4\n♣: Q 3 2\n16 HCP",
+        "bids": "P P 3♣ ?",
+        "correctAnswer": "3♦ 3♦: This bid expresses interest in playing in no-trump if partner has 8+ points. You should have 4+ diamonds and at least 16+ generously evaluated points, or you should be willing to play in 4♦ as the worst-case scenario."
+    },
+    {
+        "cards": "♠: A K 8\n♥: K Q 9\n♦: A Q 6\n♣: 7 5 3 2\n18 HCP",
+        "bids": "P P 3♣ ?",
+        "correctAnswer": "DBL DBL: This is a penalty double, indicating a desire to punish the opponents for their preemptive bid. You should have a strong hand with values concentrated in the other suits, not the suit they preempted."
+    },
+    {
+        "cards": "♠: A K 8\n♥: K Q 9\n♦: A Q 6\n♣: A K 3 2\n25 HCP",
+        "bids": "P P 3♣ ?",
+        "correctAnswer": "3NT 3NT: This bid is a gamble, indicating a willingness to play game in no-trump without clear support from partner. This bid should only be made with a very strong, well-distributed hand."
+    },
+    {
+        "cards": "♠: A K 8 6 3\n♥: K Q 9 3\n♦: A K 3\n♣: 7\n19 HCP",
+        "bids": "P P 3♣ ?",
+        "correctAnswer": "4♣ 4♣: This bid shows that you have both majors with a gap of one (e.g., 4-5 in hearts and spades) and at least 3+ cards in each suit. You have enough strength to go to 4 in hearts, spades, or diamonds, letting partner decide which suit to play in."
+    },
+    {
+        "cards": "♠: A K 8 4\n♥: A 9 4\n♦: K 6 4\n♣: 9 3 2\n14 HCP",
+        "bids": "P P 3♦ ?",
+        "correctAnswer": "3♠ 3♠: This bid shows interest in game if partner has 8+ points and support in spades. You should have 4+ spades and at least 14+ generously evaluated points."
+    },
+    {
+        "cards": "♠: A 8 4\n♥: A K 9 4\n♦: K 6 4\n♣: 9 3 2\n14 HCP",
+        "bids": "P P 3♦ ?",
+        "correctAnswer": "3♥ 3♥: Similar to 3♠, this bid indicates interest in game if partner has 8+ points and support in hearts. You should have 4+ hearts and at least 14+ generously evaluated points."
+    },
+    {
+        "cards": "♠: A K 8\n♥: K Q 9\n♦: 7 5 3 2\n♣: A Q 6\n18 HCP",
+        "bids": "P P 3♦ ?",
+        "correctAnswer": "DBL DBL: This is a penalty double, indicating a desire to punish the opponents for their preemptive bid. You should have a strong hand with values concentrated in the other suits, not the suit they preempted."
+    },
+    {
+        "cards": "♠: A K 8\n♥: K Q 9\n♦: A Q 6\n♣: A K 3 2\n25 HCP",
+        "bids": "P P 3♦ ?",
+        "correctAnswer": "3NT 3NT: This bid is a gamble, indicating a willingness to play game in no-trump without clear support from partner. This bid should only be made with a very strong, well-distributed hand."
+    },
+    {
+        "cards": "♠: 8 6 3\n♥: 9 3\n♦: 3 2\n♣: A J T 6 5 4\n5 HCP",
+        "bids": "P P 3♦ ?",
+        "correctAnswer": "4♣ 4♣: This bid indicates that you are not interested in game and also do not have strong majors. By bidding 4♣, you deny partner from bidding the same suit."
+    },
+    {
+        "cards": "♠: A K 8 6 3\n♥: K Q 9 3\n♦: A K 3\n♣: 7\n19 HCP",
+        "bids": "P P 3♦ ?",
+        "correctAnswer": "4♦ 4♦: This bid shows that you have both majors with a gap of one (e.g., 4-5 in hearts and spades) and at least 3+ cards in each suit. You have enough strength to go to 4 in hearts, spades, or diamonds, letting partner decide which suit to play in."
+    },
+    {
+        "cards": "♠: A K 8 4\n♥: A 9 4\n♦: K 6 4\n♣: 9 3 2\n14 HCP",
+        "bids": "P P 3♥ ?",
+        "correctAnswer": "3♠ 3♠: This bid shows interest in game if partner has 8+ points and support in spades. You should have 4+ spades and at least 14+ generously evaluated points."
+    },
+    {
+        "cards": "♠: A K 8\n♥: 7 5 3 2\n♦: K Q 9\n♣: A Q 6\n18 HCP",
+        "bids": "P P 3♥ ?",
+        "correctAnswer": "DBL DBL: This is a penalty double, indicating a desire to punish the opponents for their preemptive bid. You should have a strong hand with values concentrated in the other suits, not the suit they preempted."
+    },
+    {
+        "cards": "♠: A K 8\n♥: K Q 9\n♦: A Q 6\n♣: A K 3 2\n25 HCP",
+        "bids": "P P 3♥ ?",
+        "correctAnswer": "3NT 3NT: This bid is a gamble, indicating a willingness to play game in no-trump without clear support from partner. This bid should only be made with a very strong, well-distributed hand."
+    },
+    {
+        "cards": "♠: 8 6 3\n♥: 9 3\n♦: 3 2\n♣: A J T 6 5 4\n5 HCP",
+        "bids": "P P 3♥ ?",
+        "correctAnswer": "4♣ 4♣: This bid indicates that you are not interested in game and also do not have strong majors. By bidding 4♣, you deny partner from bidding the same suit."
+    },
+    {
+        "cards": "♠: 8 6 3\n♥: 9 3\n♦: A J T 6 5 4\n♣: 3 2\n5 HCP",
+        "bids": "P P 3♥ ?",
+        "correctAnswer": "4♦ 4♦: Similar to 4♣, this bid indicates that you are not interested in game and also do not have strong majors. By bidding 4♦, you deny partner from bidding the same suit."
+    }
+]

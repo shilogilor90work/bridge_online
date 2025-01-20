@@ -1,0 +1,77 @@
+[
+    {
+        "cards": "♠: J 5 3 2\n♥: A K\n♦: J T 9\n♣: K Q 8 7\n14 HCP",
+        "bids": "P P 1NT 2♠\nDBL P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A K 9 5 3\n♥: A 9 3\n♦: K 7 2\n♣: K Q\n19 HCP",
+        "bids": "P 1♣ P 1♦\nP 1♠ P 1NT\nP ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: J T 9 5\n♥: K T 9\n♦: A T 8 3\n♣: Q 4\n10 HCP",
+        "bids": "P 1♦ 1♠ P\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 9 6\n♥: K Q\n♦: T 8 5 4 3\n♣: A 7 5 4\n9 HCP",
+        "bids": "P P 1♣ P\n1NT P 2♣ P\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A K Q\n♥: 8\n♦: J T 9 7 6 2\n♣: K Q 6\n15 HCP",
+        "bids": "P 2♣ P 2♥\n2♠ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: T 8 6 5 4\n♥: K Q 4\n♦: \n♣: J 9 8 4 3\n6 HCP",
+        "bids": "P 2♦ P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 9 5 4\n♥: Q J 7 6\n♦: A 8 3\n♣: T 9 8\n7 HCP",
+        "bids": "2♠ 3♣ 3♠ 4♥\nP 4NT P 5♥\nP P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 7 6\n♥: Q J 8 7 6 3 2\n♦: J 9 5\n♣: 8\n4 HCP",
+        "bids": "P 1♦ 1♠ P\n2♠ P P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: T 8 7\n♥: 7 4\n♦: A 9 8 6 4\n♣: 9 6 4\n4 HCP",
+        "bids": "P 1♠ 2♣ P\nP 2♠ DBL P\n3♣ P P 3♦\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: \n♥: Q J 9 8 4\n♦: Q 8 6 5 2\n♣: 6 4 3\n5 HCP",
+        "bids": "P P 1♦ 1♠\nDBL ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: \n♥: Q J 9 8 4\n♦: Q 8 6 5 2\n♣: 6 4 3\n5 HCP",
+        "bids": "P P 1♦ 1♠\nDBL 2♣ P 2♦\nP ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: \n♥: Q J 9 8 4\n♦: Q 8 6 5 2\n♣: 6 4 3\n5 HCP",
+        "bids": "P P 1♦ 1♠\nDBL 2♣ P 2♦\nP 2♥ P 2♠\nP 3♥ P 3NT\nDBL ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A Q T 8 4\n♥: T 6\n♦: A K 3\n♣: J 5 2\n14 HCP",
+        "bids": "P P 1♦ 1♠\nDBL 2♣ P 2♦\nP 2♥ P 2♠\nP 3♥ P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: K T 2\n♥: J 7\n♦: 8 6 3\n♣: K J 9 4 3\n8 HCP",
+        "bids": "1♠ 2♥ DBL 3♥\nP P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: K T 2\n♥: J 7\n♦: 8 6 3\n♣: K J 9 4 3\n8 HCP",
+        "bids": "1♠ 2♥ DBL 3♥\nP P 3♠ P\nP 4♥ ?",
+        "correctAnswer": "?"
+    }
+]
