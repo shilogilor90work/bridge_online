@@ -66,8 +66,31 @@
 		<hr>
 		<div>
 		  <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
-		  <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|modify_bids|color_suits|safe }}</pre>
-		  <h4>Hand ID: {{ hand.id }}</h4>
+{% if not hand.ns_vul and not hand.ew_vul %}
+				<p style="font-size: 26px; margin: 0; padding: 0; color: green;">Vul: None</p>
+			{% elif hand.ns_vul and hand.ew_vul %}
+				<p style="font-size: 26px; margin: 0; padding: 0; color: red;">Vul: All</p>
+			{% elif hand.ns_vul and not hand.ew_vul %}
+				<p style="font-size: 26px; margin: 0; padding: 0; color: red;">Vul: You</p>
+			{% elif not hand.ns_vul and hand.ew_vul %}
+				<p style="font-size: 26px; margin: 0; padding: 0; color: green;">Vul: They</p>
+			{% endif %}
+<!--            <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|modify_bids|color_suits|safe }}</pre>-->
+
+            <table style="width: 100px; border-collapse: collapse;">
+                <tbody>
+                    {% for bid_row in hand.bids|split_newline %}
+                        <tr>
+                            {% with bid_row.split as bid_parts %}
+                                <td>{{ bid_parts.0|color_suits|safe }}</td>
+                                <td>{{ bid_parts.1|color_suits|safe }}</td>
+                                <td>{{ bid_parts.2|color_suits|safe }}</td>
+                                <td>{{ bid_parts.3|color_suits|safe }}</td>
+                            {% endwith %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>		  <h4>Hand ID: {{ hand.id }}</h4>
 		  <div id="form_{{ hand.id }}">
 		  <form method="post" action="{% url 'manage:update_explanation' hand.id %}">
 			  {% csrf_token %}
@@ -191,6 +214,23 @@
         overflow: hidden; /* Prevent scrolling */
         resize: none; /* Disable manual resizing */
     }
+       table {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+th, td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+td {
+    font-size: 18px;
+}
 </style>
 
 {% endblock %}
