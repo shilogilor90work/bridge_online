@@ -38,3 +38,12 @@ def modify_bids(value):
     for suit in suits:
         value = value.replace(suit, suit + ' ')
     return value
+
+
+@register.filter(name='split_newline')
+def split_newline(value):
+    if isinstance(value, str):
+        # Normalize \\n to \n and then split by \n
+        normalized_value = value.replace('\\n', '\n')
+        return normalized_value.split('\n')
+    return value

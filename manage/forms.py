@@ -5,7 +5,7 @@ import json
 class HandForm(forms.ModelForm):
     class Meta:
         model = Hand
-        fields = ['subject', 'cards', 'bids', 'correct_answer', 'user_updated', 'metadata', 'optional_bids', 'explanation']
+        fields = ['subject', 'cards', 'bids', 'correct_answer', 'user_updated', 'metadata', 'optional_bids', 'explanation', 'ew_vul', 'ns_vul']
 
 
 class JSONUploadForm(forms.Form):

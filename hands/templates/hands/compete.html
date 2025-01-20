@@ -6,55 +6,84 @@
 {% endblock %}
 {% block content %}
     <p><strong>Competition ID:</strong> {{ competition.id }}</p>
-	  <div style="margin-bottom: 20px;">
-		<label for="username"><strong>Username:</strong></label>
-		<input type="text" id="username" placeholder="Enter your username" style="padding: 5px; font-size: 18px;">
-	  </div>
+    <div style="margin-bottom: 20px;">
+        <label for="username"><strong>Username:</strong></label>
+        <input type="text" id="username" placeholder="Enter your username" style="padding: 5px; font-size: 18px;">
+    </div>
     <h2>Hands</h2>
     {% if hands %}
-            {% for hand in hands %}
-          <hr>
-          <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
-          <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|modify_bids|color_suits|safe }}</pre>
-          <div class="options">
-              <div>
-                  <button onclick='addAnswer({{ hand.id }}, "Pass")'>Pass</button>
-                  <button onclick='addAnswer({{ hand.id }}, "DBL")'>DBL</button>
-                  <button onclick='addAnswer({{ hand.id }}, "RDBL")'>RDBL</button>
-              </div>
-              <div>
-                 <button onclick="selectNumber({{ hand.id }}, 1)">1</button>
-                 <button onclick="selectNumber({{ hand.id }}, 2)">2</button>
-                 <button onclick="selectNumber({{ hand.id }}, 3)">3</button>
-                 <button onclick="selectNumber({{ hand.id }}, 4)">4</button>
-                 <button onclick="selectNumber({{ hand.id }}, 5)">5</button>
-                 <button onclick="selectNumber({{ hand.id }}, 6)">6</button>
-                 <button onclick="selectNumber({{ hand.id }}, 7)">7</button>
-              </div>
-              <div id="suits-{{ hand.id|escape }}">
-                  <button
-                      onclick='selectSuit({{ hand.id|escape }}, "♣")'
-                      class="club">♣</button>
-                  <button
-                      onclick='selectSuit({{ hand.id|escape }}, "♦")'
-                      class="diamond">♦</button>
-                  <button
-                      onclick='selectSuit({{ hand.id|escape }}, "♥")'
-                      class="heart">♥</button>
-                  <button
-                      onclick='selectSuit({{ hand.id|escape }}, "♠")'
-                      class="spade">♠</button>
-                  <button
-                      onclick='selectSuit({{ hand.id|escape }}, "NT")'>NT</button>
-              </div>
-          </div>
-          <div class="result" id="result-{{ hand.id }}"></div>
-          {% endfor %}
-      <div style="margin-top: 20px;">
-        <button onclick="submitAnswers()" style="padding: 10px 20px; font-size: 18px;">Submit</button>
-      </div>
-	  <div id="result_url"></div>
-          
+        {% for hand in hands %}
+            <hr>
+            <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
+
+            <h3>Bids:</h3>
+            <table style="width: 100px; border-collapse: collapse;">
+        <tbody>
+            {% for bid_row in hand.bids|split_newline %}
+                <tr>
+                    {% with bid_row.split as bid_parts %}
+                        <td
+                            {% if hand.ns_vul %}
+                                style="background-color: red; width: 20px;"
+                            {% else %}
+                                style="background-color: green; width: 20px;"
+                            {% endif %}
+                        >{{ bid_parts.0 }}</td>
+                        <td
+                            {% if hand.ew_vul %}
+                                style="background-color: red; width: 20px;"
+                            {% else %}
+                                style="background-color: green; width: 20px;"
+                            {% endif %}
+                        >{{ bid_parts.1 }}</td>
+                        <td
+                            {% if hand.ns_vul %}
+                                style="background-color: red; width: 20px;"
+                            {% else %}
+                                style="background-color: green; width: 20px;"
+                            {% endif %}
+                        >{{ bid_parts.2 }}</td>
+                        <td
+                            {% if hand.ew_vul %}
+                                style="background-color: red; width: 20px;"
+                            {% else %}
+                                style="background-color: green; width: 20px;"
+                            {% endif %}
+                        >{{ bid_parts.3 }}</td>
+                    {% endwith %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+            <div class="options">
+                <div>
+                    <button onclick='addAnswer({{ hand.id }}, "Pass")'>Pass</button>
+                    <button onclick='addAnswer({{ hand.id }}, "DBL")'>DBL</button>
+                    <button onclick='addAnswer({{ hand.id }}, "RDBL")'>RDBL</button>
+                </div>
+                <div>
+                    <button onclick="selectNumber({{ hand.id }}, 1)">1</button>
+                    <button onclick="selectNumber({{ hand.id }}, 2)">2</button>
+                    <button onclick="selectNumber({{ hand.id }}, 3)">3</button>
+                    <button onclick="selectNumber({{ hand.id }}, 4)">4</button>
+                    <button onclick="selectNumber({{ hand.id }}, 5)">5</button>
+                    <button onclick="selectNumber({{ hand.id }}, 6)">6</button>
+                    <button onclick="selectNumber({{ hand.id }}, 7)">7</button>
+                </div>
+                <div id="suits-{{ hand.id|escape }}">
+                    <button onclick='selectSuit({{ hand.id|escape }}, "♣")' class="club">♣</button>
+                    <button onclick='selectSuit({{ hand.id|escape }}, "♦")' class="diamond">♦</button>
+                    <button onclick='selectSuit({{ hand.id|escape }}, "♥")' class="heart">♥</button>
+                    <button onclick='selectSuit({{ hand.id|escape }}, "♠")' class="spade">♠</button>
+                    <button onclick='selectSuit({{ hand.id|escape }}, "NT")'>NT</button>
+                </div>
+            </div>
+            <div class="result" id="result-{{ hand.id }}"></div>
+        {% endfor %}
+        <div style="margin-top: 20px;">
+            <button onclick="submitAnswers()" style="padding: 10px 20px; font-size: 18px;">Submit</button>
+        </div>
+        <div id="result_url"></div>
     {% else %}
         <p>No hands are associated with this competition.</p>
     {% endif %}
@@ -70,7 +99,8 @@
       answers[handId] = answer;
       document.getElementById(`result-${handId}`).innerText = `Selected: ${answer}`;
   }
-function submitAnswers() {
+
+  function submitAnswers() {
       const username = document.getElementById('username').value.trim();
       if (!username) {
           alert("Please enter your username before submitting.");
@@ -105,17 +135,18 @@ function submitAnswers() {
       .then(data => {
           alert(data.message.split("!")[0]);
           console.log('Response:', data);
-		  if(data.message.includes("!")){
-			const url = data.message.split("!")[1];
-			document.getElementById('result_url').innerHTML = `<a href="${url}" target="_blank">${url}</a>`;
-			window.open(url, '_blank');
-		  }
+          if(data.message.includes("!")){
+            const url = data.message.split("!")[1];
+            document.getElementById('result_url').innerHTML = `<a href="${url}" target="_blank">${url}</a>`;
+            window.open(url, '_blank');
+          }
       })
       .catch(error => {
           console.error('Error:', error);
           alert('There was an issue submitting your answers.');
       });
   }
+
   function selectSuit(handId, suit) {
       const suitDiv = document.getElementById(`suits-${handId}`);
       const number = suitDiv.getAttribute('data-number');
@@ -126,67 +157,84 @@ function submitAnswers() {
           alert("Please select a number before choosing a suit.");
       }
   }
-	function colorSuits(text) {
-		return text.replace(/♠/g, '<span class="spade">♠</span>')
-				   .replace(/♥/g, '<span class="heart">♥</span>')
-				   .replace(/♦/g, '<span class="diamond">♦</span>')
-				   .replace(/♣/g, '<span class="club">♣</span>');
-	}
+
+  function colorSuits(text) {
+    return text.replace(/♠/g, '<span class="spade">♠</span>')
+               .replace(/♥/g, '<span class="heart">♥</span>')
+               .replace(/♦/g, '<span class="diamond">♦</span>')
+               .replace(/♣/g, '<span class="club">♣</span>');
+  }
 </script>
 
 <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            font-size: 20px;
-        }
-        .options button {
-            padding: 10px;
-            margin: 2px;
-            border: none;
-            background-color: lightgray;
-            color: black;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .hand {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 20px;
-            background-color: #f9f9f9;
-        }
-        .heart {
-            color: red !important;
-        }
-        .diamond {
-            color: orange !important;
-        }
-        .club {
-            color: green !important;
-        }
-        .spade {
-            color: black !important;
-        }
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 10px;
-        }
-		.options div {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            justify-content: center;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        font-size: 20px;
+    }
+    .options button {
+        padding: 10px;
+        margin: 2px;
+        border: none;
+        background-color: lightgray;
+        color: black;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .hand {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
+    }
+    .heart {
+        color: red !important;
+    }
+    .diamond {
+        color: orange !important;
+    }
+    .club {
+        color: green !important;
+    }
+    .spade {
+        color: black !important;
+    }
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    .options div {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: center;
+    }
+    .options button:hover {
+        background-color: #0056b3;
+    }
+    .result {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+    table {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+th, td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
 
-        .options button:hover {
-            background-color: #0056b3;
-        }
-        .result {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-    </style>
+th {
+    background-color: #f2f2f2;
+}
+
+td {
+    font-size: 18px;
+}
+</style>
 {% endblock %}
