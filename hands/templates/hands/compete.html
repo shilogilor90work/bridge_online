@@ -16,13 +16,13 @@
             <hr>
             <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
 			{% if not hand.ns_vul and not hand.es_vul %}
-				<p style="font-size: 26px; margin: 0; padding: 0;">Vul: None</p>
+				<p style="font-size: 26px; margin: 0; padding: 0; color: green;">Vul: None</p>
 			{% elif hand.ns_vul and hand.es_vul %}
-				<p style="font-size: 26px; margin: 0; padding: 0;">Vul: All</p>
+				<p style="font-size: 26px; margin: 0; padding: 0; color: red;">Vul: All</p>
 			{% elif hand.ns_vul and not hand.es_vul %}
-				<p style="font-size: 26px; margin: 0; padding: 0;">Vul: You</p>
+				<p style="font-size: 26px; margin: 0; padding: 0; color: red;">Vul: You</p>
 			{% elif not hand.ns_vul and hand.es_vul %}
-				<p style="font-size: 26px; margin: 0; padding: 0;">Vul: They</p>
+				<p style="font-size: 26px; margin: 0; padding: 0; color: green;">Vul: They</p>
 			{% endif %}
             <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|modify_bids|color_suits|safe }}</pre>
 
