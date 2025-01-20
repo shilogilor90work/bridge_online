@@ -15,13 +15,13 @@
         {% for hand in hands %}
             <hr>
             <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
-			{% if not hand.ns_vul and not hand.es_vul %}
+			{% if not hand.ns_vul and not hand.ew_vul %}
 				<p style="font-size: 26px; margin: 0; padding: 0; color: green;">Vul: None</p>
-			{% elif hand.ns_vul and hand.es_vul %}
+			{% elif hand.ns_vul and hand.ew_vul %}
 				<p style="font-size: 26px; margin: 0; padding: 0; color: red;">Vul: All</p>
-			{% elif hand.ns_vul and not hand.es_vul %}
+			{% elif hand.ns_vul and not hand.ew_vul %}
 				<p style="font-size: 26px; margin: 0; padding: 0; color: red;">Vul: You</p>
-			{% elif not hand.ns_vul and hand.es_vul %}
+			{% elif not hand.ns_vul and hand.ew_vul %}
 				<p style="font-size: 26px; margin: 0; padding: 0; color: green;">Vul: They</p>
 			{% endif %}
             <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|modify_bids|color_suits|safe }}</pre>
