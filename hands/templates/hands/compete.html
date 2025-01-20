@@ -24,47 +24,22 @@
 			{% elif not hand.ns_vul and hand.ew_vul %}
 				<p style="font-size: 26px; margin: 0; padding: 0; color: green;">Vul: They</p>
 			{% endif %}
-            <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|modify_bids|color_suits|safe }}</pre>
+<!--            <pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|modify_bids|color_suits|safe }}</pre>-->
 
-            <!--h3>Bids:</h3>
             <table style="width: 100px; border-collapse: collapse;">
-        <tbody>
-            {% for bid_row in hand.bids|split_newline %}
-                <tr>
-                    {% with bid_row.split as bid_parts %}
-                        <td
-                            {% if hand.ns_vul %}
-                                style="background-color: red; width: 20px;"
-                            {% else %}
-                                style="background-color: green; width: 20px;"
-                            {% endif %}
-                        >{{ bid_parts.0 }}</td>
-                        <td
-                            {% if hand.ew_vul %}
-                                style="background-color: red; width: 20px;"
-                            {% else %}
-                                style="background-color: green; width: 20px;"
-                            {% endif %}
-                        >{{ bid_parts.1 }}</td>
-                        <td
-                            {% if hand.ns_vul %}
-                                style="background-color: red; width: 20px;"
-                            {% else %}
-                                style="background-color: green; width: 20px;"
-                            {% endif %}
-                        >{{ bid_parts.2 }}</td>
-                        <td
-                            {% if hand.ew_vul %}
-                                style="background-color: red; width: 20px;"
-                            {% else %}
-                                style="background-color: green; width: 20px;"
-                            {% endif %}
-                        >{{ bid_parts.3 }}</td>
-                    {% endwith %}
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table-->
+                <tbody>
+                    {% for bid_row in hand.bids|split_newline %}
+                        <tr>
+                            {% with bid_row.split as bid_parts %}
+                                <td>{{ bid_parts.0|color_suits|safe }}</td>
+                                <td>{{ bid_parts.1|color_suits|safe }}</td>
+                                <td>{{ bid_parts.2|color_suits|safe }}</td>
+                                <td>{{ bid_parts.3|color_suits|safe }}</td>
+                            {% endwith %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
             <div class="options">
                 <div>
                     <button onclick='addAnswer({{ hand.id }}, "Pass")'>Pass</button>
