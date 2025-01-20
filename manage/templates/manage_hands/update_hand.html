@@ -3,7 +3,7 @@
 <h2>Update Hand</h2>
 {% endblock %}
 {% block content %}
-<form method="post" action="{% url 'hands:update_hand' form.instance.id %}">
+<form method="post">
     {% csrf_token %}
     <p><strong>ID:</strong> {{ form.instance.id }}</p>
     {{ form.as_p }}
