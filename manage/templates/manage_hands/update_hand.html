@@ -3,12 +3,16 @@
 <h2>Update Hand</h2>
 {% endblock %}
 {% block content %}
-<form method="post">
+<form method="post" action="{% url 'hands:update_hand' form.instance.id %}">
     {% csrf_token %}
-        <p><strong>ID:</strong> {{ form.instance.id }}</p>
-
+    <p><strong>ID:</strong> {{ form.instance.id }}</p>
     {{ form.as_p }}
     <button type="submit">Update</button>
 </form>
 
+<form method="post" action="{% url 'hands:create_hand' %}" style="margin-top: 20px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create</button>
+</form>
 {% endblock %}
