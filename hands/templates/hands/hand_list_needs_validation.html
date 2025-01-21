@@ -9,7 +9,7 @@
 	<hr>
 		<pre>Hand #{{ hand.id }}: <b>{{ hand.subject }}</b></pre>
 		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
-		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|color_suits|safe }}</pre>
+		<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.bids|modify_bids|color_suits|safe }}</pre>
 		<!--div id="bids-{{ hand.id }}" style="font-size: 26px; margin: 0; padding: 0;"></div-->
 		<div class="options">
 					<div>
@@ -48,6 +48,7 @@
 		{{ hand.metadata }}
 		<br>
 		<a href="{% url 'manage:update_hand' hand.id %}">Edit</a>
+		<a href="{% url 'manage:clone_hand' hand.id %}">Clone</a>
 		<br>
 		<!--a href="{% url 'manage:delete_hand' hand.id %}">Delete</a-->
 		<div id="form_{{ hand.id }}">
