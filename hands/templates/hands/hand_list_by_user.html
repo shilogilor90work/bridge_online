@@ -46,6 +46,7 @@
 				</div>
 		<div class="result" id="result-{{ hand.id }}"></div>
 		<a href="{% url 'manage:update_hand' hand.id %}">Edit</a>
+		<a href="{% url 'manage:clone_hand' hand.id %}">Clone</a>
 		<br>
 		<!--a href="{% url 'manage:delete_hand' hand.id %}">Delete</a-->
 	    <button type="button" onclick="toggleForm({{ hand.id }})">Edit Explanation</button>
