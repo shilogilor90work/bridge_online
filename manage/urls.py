@@ -6,6 +6,7 @@ app_name = 'manage'
 urlpatterns = [
     path('create/', views.create_hand, name='create_hand'),
     path('<int:hand_id>/update/', views.update_hand, name='update_hand'),
+    path('<int:hand_id>/clone/', views.clone_hand, name='clone_hand'),
     path('<int:hand_id>/delete/', views.delete_hand, name='delete_hand'),
     path('hand_list/', views.hand_list, name='hand_list'),
     path('hand_list/<int:limit>/', views.hand_list_limit, name='hand_list_limit'),

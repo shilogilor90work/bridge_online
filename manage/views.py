@@ -22,6 +22,27 @@ def create_hand(request):
     return render(request, 'manage_hands/create_hand.html', {'form': form})
 
 
+def clone_hand(request, hand_id):
+    if request.method == 'POST':
+        form = HandForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('manage:hand_list')  # Replace with the name of your success page or list view
+    else:
+        hand = get_object_or_404(Hand, id=hand_id)
+        hand.id = None
+        if hand.cards:
+            hand.cards = hand.cards.replace('\n', '\\n')
+        if hand.bids:
+            hand.bids = hand.bids.replace('\n', '\\n')
+        if hand.explanation:
+            hand.explanation = hand.explanation.replace('\n', '\\n')
+        if hand.correct_answer:
+            hand.correct_answer = to_symbol(hand.correct_answer.replace('\n', '\\n'))
+        hand.metadata["needs_validation"] = ["cloned"]
+        form = HandForm(instance=hand)
+    return render(request, 'manage_hands/clone_hand.html', {'form': form})
+
 def update_hand(request, hand_id):
     hand = get_object_or_404(Hand, id=hand_id)
     if request.method == 'POST':
