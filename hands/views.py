@@ -183,8 +183,8 @@ def compete_submit(request, competition_id):
             competition.save()
             #
             password = generate_password(request, competition_id)
-            print(password)
-            if password: 
+
+            if password:
                 return JsonResponse({'message': f'Answers submitted successfully! {password}'}, status=200)
             # Return a success response
             return JsonResponse({'message': 'Answers submitted successfully!'}, status=200)
@@ -198,35 +198,32 @@ def compete_submit(request, competition_id):
 
 
 def generate_password(request, competition_id):
-    print(f'genereting password for {competition_id}')
     # Fetch the competition object or return a 404 if not found
     competition = get_object_or_404(Competition, id=competition_id)
     password = request.GET.get('password')
     hands = competition.hands.all()
     password_hand = None
     lowest_id = 99999
+    lowest_hand = None
     for hand in hands:
-        print(f'checking password for hand {hand.id}')
         if hand.id < lowest_id:
             lowest_id = hand.id
+            lowest_hand = hand
             if hand.metadata.get("password"):
                 password_hand = hand.metadata.get("password")
-                print(f'password found in lowest {lowest_id} hand: {password_hand}')
-    if password_hand:
-        print(f'found password {password_hand}')
-        return redirect_to_competition_results(request, competition, hands, password_hand)
-    else:
-        new_password = str(random.randint(0, 999))
-        print(f'new password {new_password}, updating it for hand {lowest_id}')
+    if lowest_hand and password:
+        lowest_hand.metadata["password"] = password
+        password_hand = password
+        lowest_hand.save()
+    if not password_hand:
+        password = str(random.randint(0, 999))
         hand = get_object_or_404(Hand, id=lowest_id)
     
-        hand.metadata["password"] = new_password
+        hand.metadata["password"] = password
         # Save the updated hand
         hand.save()
-        print(f'password saved to hand {hand.id}')
-        return redirect_to_competition_results(request, competition, hands, new_password)
-    return None
-    
+    return redirect_to_competition_results(request, competition, hands, password)
+
     
 def redirect_to_competition_results(request, competition, hands, password):
     # Get the URL prefix (scheme + host + port)
