@@ -215,14 +215,15 @@ def generate_password(request, competition_id):
         lowest_hand.metadata["password"] = password
         password_hand = password
         lowest_hand.save()
+
     if not password_hand:
-        password = str(random.randint(0, 999))
+        password_hand = str(random.randint(0, 999))
         hand = get_object_or_404(Hand, id=lowest_id)
     
-        hand.metadata["password"] = password
+        hand.metadata["password"] = password_hand
         # Save the updated hand
         hand.save()
-    return redirect_to_competition_results(request, competition, hands, password)
+    return redirect_to_competition_results(request, competition, hands, password_hand)
 
     
 def redirect_to_competition_results(request, competition, hands, password):
