@@ -31,7 +31,12 @@
 										{% if hand.correct_answer|is_dict %}
 											{% with hand.correct_answer|dict_get:answer_key as answer_value %}
 												{% if answer_value is not None %}
-													<span style="color: green;">{{answer_value}}</span>
+													{% if answer_value == 10 %}
+															<span style="color: green;">{{answer_value}}</span>
+														{% else %}
+															<span style="color: orange;">{{answer_value}}</span>
+														{% endif %}
+													{% else %}
 													{% with correct_count|add:answer_value as correct_count %}
 													{% endwith %}
 												{% else %}
