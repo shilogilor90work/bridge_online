@@ -112,7 +112,7 @@ def hand_list(request):
     hands = list(Hand.objects.all())
     hands = [hand for hand in hands if '?' not in hand.correct_answer]
     random.shuffle(hands)
-    return render(request, 'manage_hands/hand_list.html', {'hands': hands})
+    return render(request, 'manage_hands/hand_list.html', {'hands': hands[:15]})
 
 
 def hand_list_limit(request, limit):
