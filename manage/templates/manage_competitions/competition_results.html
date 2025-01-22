@@ -27,13 +27,27 @@
 						{% with hand_id=hand.id|stringformat:"s" %}
 							<td>
 								{% if answers|get_item:hand_id %}
-									{% if answers|get_item:hand_id == hand.correct_answer %}
-										<span style="color: green;">✅</span>
-										{% with correct_count|add:1 as correct_count %}
-										{% endwith %}
-									{% else %}
-										<span style="color: red;">❌</span>
-									{% endif %}
+									{% with answers|get_item:hand_id as answer_key %}
+										{% if hand.correct_answer|is_dict %}
+											{% with hand.correct_answer|dict_get:answer_key as answer_value %}
+												{% if answer_value is not None %}
+													<span style="color: green;">{{answer_value}}</span>
+													{% with correct_count|add:answer_value as correct_count %}
+													{% endwith %}
+												{% else %}
+													<span style="color: red;">0</span>
+												{% endif %}
+											{% endwith %}
+										{% else %}
+											{% if answer_key == hand.correct_answer %}
+												<span style="color: green;">10</span>
+												{% with correct_count|add:10 as correct_count %}
+												{% endwith %}
+											{% else %}
+												<span style="color: red;">0</span>
+											{% endif %}
+										{% endif %}
+									{% endwith %}
 								{% else %}
 									<span style="color: gray;">-</span>
 								{% endif %}
@@ -148,10 +162,14 @@
             const tds = Array.from(row.querySelectorAll('td')).slice(2);
 
             // Count the number of green checkmarks
-            const greenChecks = tds.filter(td => td.innerHTML.includes('<span style="color: green;">✅</span>')).length;
+            const score = tds.map(td => {
+				const match = td.innerHTML.match(/<span style="color: green;">(\d+)<\/span>/); // Match numbers within the green span
+				return match ? parseInt(match[1], 10) : 0; // Extract and convert the number, or default to 0
+			  })
+			  .reduce((sum, value) => sum + value, 0); // Sum up all the values
 
             // Update the last <td> with the count
-            row.children[1].textContent = `${greenChecks} / ${tds.length}`;
+            row.children[1].textContent = `${score}/${tds.length*10}`;
         });
     });
 </script>

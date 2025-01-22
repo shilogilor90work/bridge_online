@@ -1,3 +1,6 @@
+import ast
+import json
+
 from django import template
 
 register = template.Library()
@@ -47,3 +50,35 @@ def split_newline(value):
         normalized_value = value.replace('\\n', '\n')
         return normalized_value.split('\n')
     return value
+
+
+@register.filter
+def is_dict(value):
+    try:
+        parsed_value = ast.literal_eval(value) if isinstance(value, str) else value
+        return isinstance(parsed_value, dict)
+    except (ValueError, SyntaxError):
+        return False
+
+
+@register.filter
+def dict_get(value, key):
+    parsed_value = ast.literal_eval(value) if isinstance(value, str) else value
+    return parsed_value.get(key) if isinstance(parsed_value, dict) else None
+
+
+@register.filter
+def is_convertible_to_dict(value):
+    try:
+        json.loads(value)
+        return True
+    except (ValueError, TypeError):
+        return False
+
+
+@register.filter
+def mul(value, multiplier):
+    try:
+        return value * multiplier
+    except (TypeError, ValueError):
+        return None
