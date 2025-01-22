@@ -1,0 +1,25 @@
+<!-- hand_table.html -->
+{% load custom_filters %}
+<pre style="font-size: 26px; margin: 0; padding: 0;">{{ hand.cards|color_suits|safe }}</pre>
+<table style="width: 100px; border-collapse: collapse; font-size: 26px;">
+    <thead>
+        <tr>
+            <th style="color: {% if hand.ew_vul %}#8B0000{% else %}#4682B4{% endif %};">W</th>
+            <th style="color: {% if hand.ns_vul %}#8B0000{% else %}#4682B4{% endif %};">N</th>
+            <th style="color: {% if hand.ew_vul %}#8B0000{% else %}#4682B4{% endif %};">E</th>
+            <th style="color: {% if hand.ns_vul %}#8B0000{% else %}#4682B4{% endif %};">S</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for bid_row in hand.bids|split_newline %}
+            <tr>
+                {% with bid_row.split as bid_parts %}
+                    <td>{{ bid_parts.0|color_suits|safe }}</td>
+                    <td>{{ bid_parts.1|color_suits|safe }}</td>
+                    <td>{{ bid_parts.2|color_suits|safe }}</td>
+                    <td>{{ bid_parts.3|color_suits|safe }}</td>
+                {% endwith %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
