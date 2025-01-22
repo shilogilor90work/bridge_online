@@ -181,7 +181,7 @@
 
             // Count the number of green checkmarks
             const score = tds.map(td => {
-				const match = td.innerHTML.match(/<span style="color: green;">(\d+)<\/span>/); // Match numbers within the green span
+				const match = td.innerHTML.match(/<span style="color: green;">(-?\d+)<\/span>/); // Match numbers within the green span
 				return match ? parseInt(match[1], 10) : 0; // Extract and convert the number, or default to 0
 			  })
 			  .reduce((sum, value) => sum + value, 0); // Sum up all the values
