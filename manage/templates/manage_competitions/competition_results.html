@@ -152,24 +152,37 @@
             autoResize(textarea);
         });
     });
-        document.addEventListener('DOMContentLoaded', () => {
-        const table = document.getElementById('myTable');
-        const rows = Array.from(table.querySelectorAll('tr')).slice(1); // Skip the header row
+document.addEventListener('DOMContentLoaded', () => {
+    const table = document.getElementById('myTable');
+    const rows = Array.from(table.querySelectorAll('tr')).slice(1); // Skip the header row
 
-        rows.forEach(row => {
-            const tds = Array.from(row.querySelectorAll('td')).slice(2);
+    rows.forEach(row => {
+        const tds = Array.from(row.querySelectorAll('td')).slice(2);
 
-            // Count the number of green checkmarks
-            const score = tds.map(td => {
-				const match = td.innerHTML.match(/<span style="color: (green|orange);">(-?\d+)<\/span>/); // Match numbers within the green span
-				return match ? parseInt(match[2], 10) : 0; // Extract and convert the number, or default to 0
-			  })
-			  .reduce((sum, value) => sum + value, 0); // Sum up all the values
+        // Count the number of green and orange values
+        const score = tds.map(td => {
+            const match = td.innerHTML.match(/<span style="color: (green|orange);">(-?\d+)<\/span>/); // Match numbers within the green or orange span
+            if (match) {
+                const color = match[1];
+                const value = parseInt(match[2], 10);
 
-            // Update the last <td> with the count
-            row.children[1].textContent = `${score}/${tds.length*10}`;
-        });
+                // If color is orange and value is negative, change to very dark red and bold text
+                if (color === 'orange' && value < 0) {
+                    const span = td.querySelector('span');
+                    if (span) {
+                        span.style.color = 'darkred';
+                        span.style.fontWeight = 'bold';
+                    }
+                }
+                return value; // Return the numeric value for summation
+            }
+            return 0; // Default to 0 if no match
+        }).reduce((sum, value) => sum + value, 0); // Sum up all the values
+
+        // Update the last <td> with the count
+        row.children[1].textContent = `${score}/${tds.length * 10}`;
     });
+});
 </script>
 
 <style>
