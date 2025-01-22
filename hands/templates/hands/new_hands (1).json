@@ -1,0 +1,322 @@
+[
+    {
+        "cards": "♠: K J 9 6\n♥: Q T 6\n♦: 5 2\n♣: K 8 7 3\n9 HCP",
+        "bids": "P P 1♥ DBL\nP 2♣ 2♥ DBL\nP ?",
+        "correctAnswer": "2♠ 8+ points, and let the partner to choose."
+    },
+    {
+        "cards": "♠: A K Q\n♥: 8 7 6\n♦: Q T\n♣: 9 8 5 4 3\n11 HCP",
+        "bids": "P P 1♣ P\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A K Q\n♥: 8 7 6\n♦: Q T\n♣: 9 8 5 4 3\n11 HCP",
+        "bids": "P P 1♣ P\n2♦ P 2♥ P\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A K Q\n♥: 8 7 6\n♦: Q T\n♣: 9 8 5 4 3\n11 HCP",
+        "bids": "P P 1♣ P\n2♦ P 2♥ P\n3♣ P 3♦ P\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: J 6\n♥: K J 5 3 2\n♦: A K 4\n♣: A K Q\n21 HCP",
+        "bids": "P P 1♣ P\n2♦ P 2♥ P\n3♣ P 3♦ P\n3♠ P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: K J T 8 3\n♥: Q 4 3\n♦: A J\n♣: 9 7 2\n11 HCP",
+        "bids": "P P 1♣ DBL\n1♦ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A 9 7 5\n♥: K 7 5 2\n♦: 6 3 2\n♣: K 8\n10 HCP",
+        "bids": "P P 1♣ DBL\n1♦ 1♠ 2♣ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A Q 6 4\n♥: J 9 8\n♦: K Q J\n♣: A 3 2\n17 HCP",
+        "bids": "P P 1♣ P\n1♦ 1♠ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A Q 6 4\n♥: J 9 8\n♦: K Q J\n♣: A 3 2\n17 HCP",
+        "bids": "P P 1♣ P\n1♦ 1♠ DBL P\n2♦ P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 9 8 7 6\n♥: J T 8 3\n♦: 8 7 3\n♣: 4 3\n1 HCP",
+        "bids": "P 1♣ 1♥ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 5 3\n♥: K 7\n♦: A K J T 5\n♣: A K 9 6\n18 HCP",
+        "bids": "P 1♣ 1♥ P\n1NT P 2♦ P\n2♥ DBL P 2♠\nP P 3♥ P\nP ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: \n♥: A J 9 6\n♦: A T 6\n♣: Q T 9 8 7 5\n11 HCP",
+        "bids": "P 1♠ 1NT 4♠\nP P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 4\n♥: J 6 4\n♦: 8 7 6 4 3\n♣: T 8 7 4\n1 HCP",
+        "bids": "P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: T 7 6\n♥: K 8\n♦: 9 8 7 6 5 3\n♣: Q J\n6 HCP",
+        "bids": "2♦ P P 2♥\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: \n♥: A T 3 2\n♦: \n♣: T 9 8 6 4\n4 HCP",
+        "bids": "2♦ P P 2♥\nP P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: \n♥: \n♦: J 7 6 3\n♣: A K T 5 3 2\n8 HCP",
+        "bids": "P P 1♥ 2NT\n4♥ P P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: \n♥: \n♦: J 7 6 3\n♣: A K T 5 3 2\n8 HCP",
+        "bids": "P P 1♥ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: T 7 3 2\n♥: J 4 2\n♦: A J T 5 3\n♣: 4\n6 HCP",
+        "bids": "P P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: Q 7\n♥: K Q T 6\n♦: T 9 2\n♣: A K T 8\n14 HCP",
+        "bids": "1NT 2♠ DBL P\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: Q 7\n♥: K Q T 6\n♦: T 9 2\n♣: A K T 8\n14 HCP",
+        "bids": "1NT 2♠ DBL P\n3♦ P P 3♠\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 9 6\n♥: A J\n♦: A J 7 4\n♣: 9 7 6 4 2\n10 HCP",
+        "bids": "1NT 2♠ DBL P\n3♦ P P 3♠\nP P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 9 6\n♥: A J\n♦: A J 7 4\n♣: 9 7 6 4 2\n10 HCP",
+        "bids": "1NT 2♠ DBL P\n3♦ P P 3♠\nP P 4♦ P\nP 4♠ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A 3\n♥: 7 4 2\n♦: 8 5 2\n♣: A Q T 4 3\n10 HCP",
+        "bids": "VUL:T♥EY\nP 1♣ 2♠ 3♥\nP 4♥ P P\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: J\n♥: A K T\n♦: A 9 6 2\n♣: K T 9 4 3\n15 HCP",
+        "bids": "P P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: K 7 6 5 4\n♥: 9 7 6 2\n♦: T 5\n♣: Q J\n6 HCP",
+        "bids": "P P 2NT DBL\n?",
+        "correctAnswer": "Pass After DBL the 3c means a gap of 2 between clubs and diamonds."
+    },
+    {
+        "cards": "♠: 8 7\n♥: J T 5 2\n♦: K T 9 5 4\n♣: Q 2\n6 HCP",
+        "bids": "P 1♦ 1♠ 1NT\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: K J 3\n♥: K\n♦: A Q T\n♣: A J 8 7 6 3\n18 HCP",
+        "bids": "1♥ P 2♥ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: K J 3\n♥: K\n♦: A Q T\n♣: A J 8 7 6 3\n18 HCP",
+        "bids": "1♥ P 2♥ 3♥\nP 3♠ P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: Q T 9 7 6\n♥: 4 3\n♦: K 8 5\n♣: T 4 2\n5 HCP",
+        "bids": "1♥ P 2♥ 3♥\nP ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 8 7 5 2\n♥: 5 4 2\n♦: K 7\n♣: Q J 7 4\n6 HCP",
+        "bids": "1♣ P 1♦ P\n1♠ P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: \n♥: \n♦: K J 9 8 7\n♣: K T 6 5 4 2\n7 HCP",
+        "bids": "P 3♣ P 3♦\nP ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: Q J 8 6\n♥: J T 9 7\n♦: K 5\n♣: Q T 9\n9 HCP",
+        "bids": "P P P 1♠\nDBL P 2♣ 2♥\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 9 3 2\n♥: K 9 8 7\n♦: K J 5\n♣: K 7 2\n10 HCP",
+        "bids": "P P 1♦ DBL\nP 1♥ 2♣ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 9 8 6 2\n♥: K 6\n♦: A 7\n♣: K Q J 6 2\n13 HCP",
+        "bids": "3♣ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: K 2\n♥: T\n♦: Q T 6\n♣: A K Q J 7 5 4\n15 HCP",
+        "bids": "2♠ P 3♣ P\n3♦ P 4♣ P\n4♠ P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 5 4 3 2\n♥: 5 4 3 2\n♦: 5 4 3 2\n♣: 2\n0 HCP",
+        "bids": "1NT 2♣ DBL P\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 5 4 3\n♥: 5 4 3 2\n♦: 6 5 4 3 2\n♣: 2\n0 HCP",
+        "bids": "1NT 2♣ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: \n♥: \n♦: A K Q 9 7 4 3\n♣: A Q 5 2\n15 HCP",
+        "bids": "1♦ P 1♥ P\n2♣ P 2♦ P\n3♦ P 3NT P\n4♣ P 4NT P\n5♥ P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: \n♥: A 8 7 5 3 2\n♦: \n♣: K 6\n7 HCP",
+        "bids": "1♦ P 1♥ P\n2♣ P 2♦ P\n3♦ P 3NT P\n4♣ P 4NT P\n5♥ P 5♠ P\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 7 6 5\n♥: K T 5 4\n♦: Q T 5 4\n♣: Q 6\n7 HCP",
+        "bids": "1♠ P P 2♦\nDBL P 2♠ 3♦\nP P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: K Q 9\n♥: A 8 7 5 4 2\n♦: K Q 4\n♣: 6\n14 HCP",
+        "bids": "1♥ P P 2♦\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: K Q 9\n♥: A 8 7 5 4 2\n♦: K Q 4\n♣: 6\n14 HCP",
+        "bids": "1♥ P P 2♦\n2♥ P P 3♦\nP 3♥ 4♦ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A Q 8\n♥: A K J 7 3\n♦: J 5 2\n♣: 7 3\n15 HCP",
+        "bids": "1♥ P 1♠ 2♦\n?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: \n♥: \n♦: 7 5 2\n♣: J 7 6 3\n1 HCP",
+        "bids": "1♦ 1♥ P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: T\n♥: 7 6 5 2\n♦: Q J T 9 3\n♣: A K 4\n10 HCP",
+        "bids": "1♠ P 2♣ P\n2♠ P ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: \n♥: \n♦: A Q 8 3\n♣: K Q 8 5\n11 HCP",
+        "bids": "P 3♦ 3♥ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 2\n♥: T 9 7 5 2\n♦: A T 2\n♣: A Q 5 4\n10 HCP",
+        "bids": "2♥ P 2♠ P\n?",
+        "correctAnswer": "3♦ Strong balanced (second lowest new suit)."
+    },
+    {
+        "cards": "♠: T 7 5 4\n♥: T 7 4 3\n♦: Q 3\n♣: A K 9\n9 HCP",
+        "bids": "P 1NT P 2♦\nP 2♥ P P\n3♣ 3♥ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: K J\n♥: A J 5\n♦: 6 5 2\n♣: A J 8 4 3\n14 HCP",
+        "bids": "P 1♦ DBL P\n1NT 2♦ P P\n2NT ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: T 7 5 4\n♥: T 7 4 3\n♦: Q 3\n♣: A K 9\n9 HCP",
+        "bids": "P 1NT P 2♦\nP 2♥ P P\n3♣ 3♥ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 9 4 2\n♥: K Q 7 6\n♦: A K J T\n♣: T 2\n13 HCP",
+        "bids": "P 1NT ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: 9 4 2\n♥: K Q 7 6\n♦: A K J T\n♣: T 2\n13 HCP",
+        "bids": "P 1NT DBL 2♥\nDBL 2♠ ?",
+        "correctAnswer": "?"
+    },
+    {
+        "cards": "♠: A 9 5 3\n♥: K 8 4\n♦: Q 8 4\n♣: K 8 4\n12 HCP",
+        "bids": "P 3♣ ?",
+        "correctAnswer": "3♠ 3♠: This bid shows interest in game if partner has 10+ points and support in spades. You should have 4+ spades and at least 12+ generously evaluated points."
+    },
+    {
+        "cards": "♠: A 5 3\n♥: K 9 8 4\n♦: Q 8 4\n♣: K 8 4\n12 HCP",
+        "bids": "P 3♣ ?",
+        "correctAnswer": "3♥ 3♥: Similar to 3♠, this bid indicates interest in game if partner has 10+ points and support in hearts. You should have 4+ hearts and at least 12+ generously evaluated points."
+    },
+    {
+        "cards": "♠: A Q 3\n♥: K 8 4\n♦: Q 9 8 4\n♣: K 8 4\n14 HCP",
+        "bids": "P 3♣ ?",
+        "correctAnswer": "3♦: T♥I♠ BI♦ EXPRE♠♠E♠ INTERE♠T IN PLAYING IN NO trump if partner has 10+ points. You should have 4+ diamonds and at least 14+ generously evaluated points, or you should be willing to play in 4♦ as the worst-case scenario."
+    },
+    {
+        "cards": "♠: A Q 3\n♥: K Q 4\n♦: Q J 8\n♣: 9 8 5 4\n14 HCP",
+        "bids": "P 3♣ ?",
+        "correctAnswer": "DBL DBL: This is a penalty double, indicating a desire to punish the opponents for their preemptive bid. You should have a strong hand with values concentrated in the other suits, not the suit they preempted."
+    },
+    {
+        "cards": "♠: A Q 3\n♥: K Q 4\n♦: Q J 8\n♣: A 8 5 4\n18 HCP",
+        "bids": "P 3♣ ?",
+        "correctAnswer": "3NT 3NT: This bid is a gamble, indicating a willingness to play game in no-trump without clear support from partner. This bid should only be made with a very strong, well-distributed hand."
+    },
+    {
+        "cards": "♠: A Q 3 2\n♥: A K Q 5 4\n♦: 8\n♣: A Q 5\n21 HCP",
+        "bids": "P 3♣ ?",
+        "correctAnswer": "4♣ 4♣: This bid shows that you have both majors with a gap of one (e.g., 4-5 in hearts and spades) and at least 3+ cards in each suit. You have enough strength to go to 4 in hearts, spades, or clubs, letting partner decide which suit to play in."
+    },
+    {
+        "cards": "♠: A 9 5 3\n♥: K 8 4\n♦: Q 8 4\n♣: K 8 4\n12 HCP",
+        "bids": "P 3♦ ?",
+        "correctAnswer": "3♠ 3♠: This bid shows interest in game if partner has 10+ points and support in spades. You should have 4+ spades and at least 12+ generously evaluated points."
+    },
+    {
+        "cards": "♠: A 5 3\n♥: K 9 8 4\n♦: Q 8 4\n♣: K 8 4\n12 HCP",
+        "bids": "P 3♦ ?",
+        "correctAnswer": "3♥ 3♥: Similar to 3♠, this bid indicates interest in game if partner has 10+ points and support in hearts. You should have 4+ hearts and at least 12+ generously evaluated points."
+    },
+    {
+        "cards": "♠: A Q 3\n♥: K Q 4\n♦: 9 8 5 4\n♣: Q J 8\n14 HCP",
+        "bids": "P 3♦ ?",
+        "correctAnswer": "DBL DBL: This is a penalty double, indicating a desire to punish the opponents for their preemptive bid. You should have a strong hand with values concentrated in the other suits, not the suit they preempted."
+    },
+    {
+        "cards": "♠: A Q 3\n♥: K Q 4\n♦: A Q 8\n♣: A 8 5 4\n21 HCP",
+        "bids": "P 3♦ ?",
+        "correctAnswer": "3NT 3NT: This bid is a gamble, indicating a willingness to play game in no-trump without clear support from partner. This bid should only be made with a very strong, well-distributed hand."
+    },
+    {
+        "cards": "♠: 6 4\n♥: 6 4\n♦: 6 4\n♣: A K J 6 4 3 2\n8 HCP",
+        "bids": "P 3♦ ?",
+        "correctAnswer": "4♣ 4♣: This bid indicates that you are not interested in game and also do not have strong majors. By bidding 4♣, you deny partner from bidding the same suit."
+    },
+    {
+        "cards": "♠: A Q 3 2\n♥: A K Q 5 4\n♦: A Q 5\n♣: 8\n21 HCP",
+        "bids": "P 3♦ ?",
+        "correctAnswer": "4♦ 4♦: This bid shows that you have both majors with a gap of one (e.g., 4-5 in hearts and spades) and at least 3+ cards in each suit. You have enough strength to go to 4 in hearts, spades, or clubs, letting partner decide which suit to play in."
+    }
+]
