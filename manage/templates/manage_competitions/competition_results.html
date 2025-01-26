@@ -181,14 +181,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }).reduce((sum, value) => sum + value, 0); // Sum up all the values
 
         // Store the score along with the row index
-        return { score, row, index };
+        return { score, row, username: row.children[0].textContent.trim() }; // Assuming username is in the first column
     });
 
-    // Sort scores in descending order
-    scores.sort((a, b) => b.score - a.score);
+    // Filter out the player "shilo" for ranking
+    const scoresForRanking = scores.filter(entry => entry.username.toLowerCase() !== 'shilo');
 
-    // Assign first, second, and third place symbols
-    scores.forEach((entry, rank) => {
+    // Sort scores for ranking in descending order
+    scoresForRanking.sort((a, b) => b.score - a.score);
+
+    // Assign first, second, and third place symbols to eligible players
+    scoresForRanking.forEach((entry, rank) => {
         const { score, row } = entry;
         const totalPossibleScore = Array.from(row.querySelectorAll('td')).slice(2).length * 10;
         let symbol = '';
@@ -199,6 +202,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update the second column with score and symbol
         row.children[1].textContent = `${score}/${totalPossibleScore}${symbol}`;
+    });
+
+    // Update all rows (including "shilo") with scores but no medal
+    scores.forEach(entry => {
+        const { score, row } = entry;
+        const totalPossibleScore = Array.from(row.querySelectorAll('td')).slice(2).length * 10;
+
+        // If the row wasn't updated during ranking, ensure only score is displayed
+        if (!scoresForRanking.some(rankedEntry => rankedEntry.row === row)) {
+            row.children[1].textContent = `${score}/${totalPossibleScore}`;
+        }
     });
 });
 </script>
