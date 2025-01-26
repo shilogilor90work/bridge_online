@@ -156,7 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const table = document.getElementById('myTable');
     const rows = Array.from(table.querySelectorAll('tr')).slice(1); // Skip the header row
 
-    rows.forEach(row => {
+    // Create an array to store scores and rows
+    const scores = rows.map((row, index) => {
         const tds = Array.from(row.querySelectorAll('td')).slice(2);
 
         // Count the number of green and orange values
@@ -179,8 +180,25 @@ document.addEventListener('DOMContentLoaded', () => {
             return 0; // Default to 0 if no match
         }).reduce((sum, value) => sum + value, 0); // Sum up all the values
 
-        // Update the last <td> with the count
-        row.children[1].textContent = `${score}/${tds.length * 10}`;
+        // Store the score along with the row index
+        return { score, row, index };
+    });
+
+    // Sort scores in descending order
+    scores.sort((a, b) => b.score - a.score);
+
+    // Assign first, second, and third place symbols
+    scores.forEach((entry, rank) => {
+        const { score, row } = entry;
+        const totalPossibleScore = Array.from(row.querySelectorAll('td')).slice(2).length * 10;
+        let symbol = '';
+
+        if (rank === 0) symbol = ' 🥇'; // First place
+        else if (rank === 1) symbol = ' 🥈'; // Second place
+        else if (rank === 2) symbol = ' 🥉'; // Third place
+
+        // Update the second column with score and symbol
+        row.children[1].textContent = `${score}/${totalPossibleScore}${symbol}`;
     });
 });
 </script>
