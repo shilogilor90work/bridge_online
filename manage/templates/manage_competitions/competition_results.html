@@ -201,7 +201,8 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (rank === 2) symbol = ' 🥉'; // Third place
 
         // Update the second column with score and symbol
-        row.children[1].textContent = `${score}/${totalPossibleScore}${symbol}`;
+			row.children[1].textContent = `${Math.ceil((score * 100) / totalPossibleScore)}% ${symbol}`;
+<!--        row.children[1].textContent = `${score}/${totalPossibleScore}${symbol}`;-->
     });
 
     // Update all rows (including "shilo") with scores but no medal
@@ -211,7 +212,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // If the row wasn't updated during ranking, ensure only score is displayed
         if (!scoresForRanking.some(rankedEntry => rankedEntry.row === row)) {
-            row.children[1].textContent = `${score}/${totalPossibleScore}`;
+<!--            row.children[1].textContent = `${score}/${totalPossibleScore}`;-->
+			row.children[1].textContent = `${Math.ceil((score * 100) / totalPossibleScore)}%`;
         }
     });
 });
