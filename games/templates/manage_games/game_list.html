@@ -1,0 +1,15 @@
+{% extends 'manage_hands/base.html' %}
+{% block content %}
+<h1>Games</h1>
+<a href="{% url 'games:game-create' %}">Create</a>
+<ul>
+    {% for game in games %}
+        <li>
+            {{ game }}
+            <a href="{% url 'games:game-update' game.id %}">Edit</a>
+            <a href="{% url 'games:game-delete' game.id %}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
