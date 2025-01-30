@@ -1,4 +1,5 @@
-from .forms import PracticeForm, DoneForm, AllCorrectForm
+from manage.forms import HandForm
+from .forms import PracticeForm, DoneForm, AllCorrectForm, AddBeforeGameForm, RemoveBeforeGameForm
 from hands.models import Hand, Competition
 from django.shortcuts import render, get_object_or_404, redirect
 import random
@@ -34,6 +35,15 @@ def hands_that_need_validation(request):
         if "needs_validation" in hand.metadata:
             filtered_hands.append(hand)
     return render(request, 'hands/hand_list_needs_validation.html', {'hands': filtered_hands[:20]})
+
+
+def before_game(request, user_name):
+    hands = list(Hand.objects.all())
+    filtered_hands = []
+    for hand in hands:
+        if "before_game_practice" in hand.metadata and user_name in hand.metadata["before_game_practice"]:
+            filtered_hands.append(hand)
+    return render(request, 'hands/hand_list_by_user.html', {'hands': filtered_hands[:50]})
 
 
 def update_practice(request, hand_id):
@@ -77,6 +87,58 @@ def update_done(request, hand_id):
                 hand.metadata["users_done_practice"].append(form.cleaned_data.get('user_name', "moshe"))
             # Save the updated hand
             hand.save()
+            # Redirect back to the referring page
+            referer = request.META.get('HTTP_REFERER')
+            if referer:
+                return redirect(referer)
+            else:
+                return redirect('manage:hand_list')  # Fallback if no referer is provided
+
+    else:
+        form = HandForm(instance=hand)
+
+    return render(request, 'manage_hands/update_hand.html', {'form': form})
+
+
+def add_before_game(request, hand_id):
+    hand = get_object_or_404(Hand, id=hand_id)
+    if request.method == 'POST':
+        # Create a form with only the fields we want to update
+        form = AddBeforeGameForm(request.POST, instance=hand)
+
+        # Only update the 'correct_answer' and 'explanation' fields
+        if form.is_valid():
+            if "before_game_practice" not in hand.metadata:
+                hand.metadata["before_game_practice"] = [form.cleaned_data.get('user_name', "moshe")]
+            else:
+                hand.metadata["before_game_practice"].append(form.cleaned_data.get('user_name', "moshe"))
+            # Save the updated hand
+            hand.save()
+            # Redirect back to the referring page
+            referer = request.META.get('HTTP_REFERER')
+            if referer:
+                return redirect(referer)
+            else:
+                return redirect('manage:hand_list')  # Fallback if no referer is provided
+
+    else:
+        form = HandForm(instance=hand)
+
+    return render(request, 'manage_hands/update_hand.html', {'form': form})
+
+
+def remove_before_game(request, hand_id):
+    hand = get_object_or_404(Hand, id=hand_id)
+    if request.method == 'POST':
+        # Create a form with only the fields we want to update
+        form = RemoveBeforeGameForm(request.POST, instance=hand)
+
+        # Only update the 'correct_answer' and 'explanation' fields
+        if form.is_valid():
+            if "before_game_practice" in hand.metadata:
+                hand.metadata["before_game_practice"].remove(form.cleaned_data.get('user_name', "moshe"))
+                # Save the updated hand
+                hand.save()
             # Redirect back to the referring page
             referer = request.META.get('HTTP_REFERER')
             if referer:

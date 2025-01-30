@@ -78,6 +78,22 @@
 			</form>
 		</div>
 
+		<div id="form_add_before_game_{{ hand.id }}">
+			<form id="form_{{ hand.id }}_form_add_before_game" method="post" action="{% url 'hands:add_before_game' hand.id %}">
+				{% csrf_token %}
+				<input type="hidden" name="user_name" id="user_name_input_{{ hand.id }}_add_before_game">
+				<button type="button" onclick="submitForm({{ hand.id }}, 'add_before_game')">add_before_game</button>
+			</form>
+		</div>
+
+		<div id="form_remove_before_game_{{ hand.id }}">
+			<form id="form_{{ hand.id }}_form_remove_before_game" method="post" action="{% url 'hands:remove_before_game' hand.id %}">
+				{% csrf_token %}
+				<input type="hidden" name="user_name" id="user_name_input_{{ hand.id }}_remove_before_game">
+				<button type="button" onclick="submitForm({{ hand.id }}, 'remove_before_game')">remove_before_game</button>
+			</form>
+		</div>
+
 		<div id="form_needs_validation_{{ hand.id }}">
 			<form id="form_{{ hand.id }}_form_needs_validation" method="post" action="{% url 'hands:needs_validation' hand.id %}">
 				{% csrf_token %}
@@ -256,7 +272,7 @@
         const url = new URL(window.location.href); // Get the current page URL
         const pathParts = url.pathname.split('/'); // Split the path into parts
         // Look for "play" and return the segment after it
-        const playIndex = pathParts.indexOf("play");
+		const playIndex = Math.max(pathParts.indexOf("play"), pathParts.indexOf("before_game"));
         return playIndex !== -1 && pathParts.length > playIndex + 1
             ? pathParts[playIndex + 1]
             : null;
