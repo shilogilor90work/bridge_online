@@ -23,3 +23,19 @@ class AllCorrectForm(forms.ModelForm):
         model = Hand
         fields = []
 
+
+class AddBeforeGameForm(forms.ModelForm):
+    user_name = forms.CharField(max_length=100, required=True)  # Custom field for the username
+
+    class Meta:
+        model = Hand
+        fields = []
+
+
+class RemoveBeforeGameForm(forms.ModelForm):
+    user_name = forms.CharField(max_length=100, required=True)  # Custom field for the username
+
+    class Meta:
+        model = Hand
+        fields = []
+
