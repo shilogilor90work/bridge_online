@@ -1,4 +1,9 @@
 from django.shortcuts import redirect
+from django.shortcuts import render
 
-def index(request):
-    return redirect('/hands')
+def home(request):
+    return redirect('/home')
+
+
+def home_page(request):
+    return render(request, 'manage_hands/home.html')
